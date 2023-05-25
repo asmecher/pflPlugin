@@ -1,0 +1,76 @@
+/* Styling -- this probably all needs to be redone */
+.publication_facts_label table {
+  border: 4px solid;
+  border-collapse: collapse;
+}
+
+.publication_facts_label table th {
+  border-bottom: 4px solid;
+}
+
+.publication_facts_label table tbody {
+  border-top: 4px solid;
+}
+
+.publication_facts_label table tfoot {
+  border-top: 4px solid;
+}
+
+.publication_facts_label table td {
+  border-bottom: 2px solid;
+  padding: 0.5em;
+}
+
+.publication_facts_label h3 {
+  font-size: 20pt;
+}
+
+
+/* WIP: This is used to indicate where real data or links still need to be added */
+.publication_facts_label .fake {
+  color: #ff0000;
+}
+
+/* Hide the Publication Facts Label until it is opened */
+.publication_facts_label table {
+  display: none;
+}
+
+.publication_facts_label input:checked ~ table {
+  display: table;
+}
+
+.publication_facts_label input:checked ~ label {
+  display: none;
+}
+
+/* Hide the modals until they are opened */
+.publication_facts_label .pfl_popover .pfl_popover_content {
+  display: none;
+}
+
+/* Hide the checkbox used to capture modal status */
+.publication_facts_label input {
+  display: none;
+}
+
+/* Simple pure-CSS modal */
+.publication_facts_label input:checked ~ .pfl_popover_content {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  padding: 10px;
+  background-color: #ffffff;
+  padding: 1.5em;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Make all labels (PFL open/close and modal open/close) use a cursor mouse pointer */
+.publication_facts_label label {
+  cursor: pointer;
+}
+
+/* Float the "close" modal label to the right */
+.publication_facts_label .pfl_popover .pfl_close_label {
+  float: right;
+}
