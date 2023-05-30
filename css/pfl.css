@@ -1,29 +1,110 @@
 /* Styling -- this probably all needs to be redone */
-.publication_facts_label table {
-  border: 4px solid;
-  border-collapse: collapse;
+
+.publication_facts_label {
+  font-size: 14px;
+  font-family: "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
 }
+
+.publication_facts_label p {
+  text-align: center;
+  margin: 0px;
+  padding-top: 0.8em;
+
+}
+
+.publication_facts_label a {
+  color: #0D0DF5;
+}
+
+.publication_facts_label button {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  padding: 0px;
+  margin: 0px;
+}
+
+.publication_facts_label .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.publication_facts_label .info_icon {
+  margin-bottom: -0.3em;
+}
+
+
+.publication_facts_label .pflContainer {
+  display: inline-block;
+  border-width: 7px;
+  border-style: solid;
+  padding: 0.8em;
+  
+}
+
+.publication_facts_label table caption {
+  font-size: 2.3em;
+  font-weight: 800; 
+  padding-bottom: 12px;
+
+}
+
+.publication_facts_label table {
+  border: 0px solid;
+  border-collapse: collapse;
+  width: 100%;
+  /*font-size: 14px;*/
+}
+
+.publication_facts_label table thead {
+  border-top: 3px solid;
+}
+
+.publication_facts_label table td:last-of-type {
+  color: #616161;
+}
+
+.publication_facts_label table th:last-of-type {
+  color: #616161;
+}
+
+
+.publication_facts_label table:first-of-type thead {
+  border-top: 10px solid;
+}
+
+.publication_facts_label table th:first-of-type {
+  width: 60%;
+}
+
+.publication_facts_label table tbody tr {
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+}
+
+.publication_facts_label table:last-of-type tbody {
+  border-bottom: 5px solid;
+}
+
 
 .publication_facts_label table th {
-  border-bottom: 4px solid;
-}
-
-.publication_facts_label table tbody {
-  border-top: 4px solid;
-}
-
-.publication_facts_label table tfoot {
-  border-top: 4px solid;
+  font-size: 1.2em;
+  text-align: left;
+  padding: 0.7em;
 }
 
 .publication_facts_label table td {
-  border-bottom: 2px solid;
-  padding: 0.5em;
+  padding: 0.7em;
 }
 
-.publication_facts_label h3 {
-  font-size: 20pt;
-}
 
 
 /* WIP: This is used to indicate where real data or links still need to be added */
@@ -32,17 +113,17 @@
 }
 
 /* Hide the Publication Facts Label until it is opened */
-.publication_facts_label table {
+/*.publication_facts_label table {
   display: none;
-}
+}*/
 
 .publication_facts_label input:checked ~ table {
   display: table;
 }
 
-.publication_facts_label input:checked ~ label {
+/*.publication_facts_label input:checked ~ label {
   display: none;
-}
+}*/
 
 /* Hide the modals until they are opened */
 .publication_facts_label .pfl_popover .pfl_popover_content {
@@ -54,23 +135,102 @@
   display: none;
 }
 
-/* Simple pure-CSS modal */
-.publication_facts_label input:checked ~ .pfl_popover_content {
-  display: inline-block;
-  position: absolute;
-  z-index: 1;
-  padding: 10px;
-  background-color: #ffffff;
-  padding: 1.5em;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-}
+/**
+ * 1. Make the dialog container, and its child overlay spread across
+ *    the entire window.
+ */
+ .pfl-dialog-container,
+ .pfl-dialog-overlay {
+   position: fixed; /* 1 */
+   top: 0; /* 1 */
+   right: 0; /* 1 */
+   bottom: 0; /* 1 */
+   left: 0; /* 1 */
+ }
+ 
+ /**
+  * 1. Make sure the dialog container and all its descendants sits on
+  *    top of the rest of the page.
+  * 2. Make the dialog container a flex container to easily center the
+  *    dialog.
+  */
+ .pfl-dialog-container {
+   z-index: 2; /* 1 */
+   display: flex; /* 2 */
 
-/* Make all labels (PFL open/close and modal open/close) use a cursor mouse pointer */
-.publication_facts_label label {
-  cursor: pointer;
-}
+ }
+ 
+ /**
+  * 1. Make sure the dialog container and all its descendants are not
+  *    visible and not focusable when it is hidden.
+  */
+ .pfl-dialog-container[aria-hidden='true'] {
+   display: none; /* 1 */
+ }
+ 
+ /**
+  * 1. Make the overlay look like an overlay.
+  */
+ .pfl-dialog-overlay {
+   background-color:  rgb(43 46 56 / 0.4); /* 1 */
+ }
+ 
+ /**
+  * 1. Vertically and horizontally center the dialog in the page.
+  * 2. Make sure the dialog sits on top of the overlay.
+  * 3. Make sure the dialog has an opaque background.
+  */
+ .pfl-dialog-content {
+   margin: auto; /* 1 */
+   z-index: 2; /* 2 */
+   position: relative; /* 2 */
+   background-color: white; /* 3 */
+   overflow: auto;
+   max-height: 90vh; 
+   padding: 1.8em;
+   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+   border-radius: 15px;
 
-/* Float the "close" modal label to the right */
-.publication_facts_label .pfl_popover .pfl_close_label {
+ }
+ 
+ .pfl-dialog-content hr {
+  margin-left: -1.8em;
+  margin-right: -1.8em;
+ }
+
+ .pfl-dialog-content h1 {
+  font-size: 1.7em;
+  margin-top: 0.8em;
+ }
+
+ .pfl-dialog-content h2 {
+  font-size: 1.4em;
+  margin-top: 0.8em;
+ }
+
+ .pfl-dialog-content ul  {
+  margin-top: 0.8em;
+  color: #616161
+ }
+
+
+.pfl-dialog-close-button {
+  color: #0D0DF5;
   float: right;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  padding: 0.6em;
+  margin: 0px;
+
 }
+
+.pfl-dialog-close-button img {
+  margin-bottom: -0.4em;
+}
+
+ .pfl-modal-footer  {
+  text-align: right;
+ }
+
