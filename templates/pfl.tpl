@@ -7,143 +7,195 @@
  *
  * Journal Integrity Initiative Publication Facts Label template
  *}
+
+ <!-- Moving font-face definition inside tpl, because baseUrl is not available in css -->
+<style>
+@font-face {
+  font-family: 'Barlow-Bold';
+  src:  url('{$baseUrl}/plugins/generic/pflPlugin/font/Barlow-Bold.woff2') format('woff2'),
+        url('{$baseUrl}/plugins/generic/pflPlugin/font/Barlow-Bold.woff') format('woff');
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'ArchivoNarrow-Variable';
+  src:  url('{$baseUrl}/plugins/generic/pflPlugin/font/ArchivoNarrow-Variable.woff2') format('woff2'),
+        url('{$baseUrl}/plugins/generic/pflPlugin/font/ArchivoNarrow-Variable.woff') format('woff');
+}
+</style>
+
 <link rel="stylesheet" href="{$baseUrl}/plugins/generic/pflPlugin/css/pfl.css" type="text/css">
+<!-- https://github.com/KittyGiraudel/a11y-dialog -->
 <script
   defer
-  src="https://cdn.jsdelivr.net/npm/a11y-dialog@7/dist/a11y-dialog.min.js"
+  src="{$baseUrl}/plugins/generic/pflPlugin/js/a11y-dialog.min.js"
 ></script>
 
+<script>
+    function pflShowHideFactsLabel() {
 
-<div class="publication_facts_label">
+        var toggleButton = document.getElementById("pfl-button-open-facts");
+        var ariaExpandedAttr = toggleButton.getAttribute("aria-expanded");
+        if (ariaExpandedAttr == "false") {
+            toggleButton.setAttribute("aria-expanded", "true")
+            var toggleButton = document.getElementById("pfl-button-open-facts");
+            var pflFactTable = document.getElementById("pfl-fact-table");
+            pflFactTable.style.display = "block";
+            pflFactTable.focus();
+        }
+        else {
+            toggleButton.setAttribute("aria-expanded","false")
+            var pflFactTable = document.getElementById("pfl-fact-table");
+            pflFactTable.style.display = "none";
 
-<input type="checkbox" id="pflCheckbox">
-<label for="pflCheckbox" id="pflToggle">Publication Facts</label>
-    <div class="pflContainer">
-        <table>
-            <caption>Publication Facts <span class="sr-only">for journal</span></caption>
-            <thead class="forThisJournal">
-                <tr class="forJournals">
-                    <th class="forThisJournal">For This Journal</th>
-                    <th class="forOtherJournals"><button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button> For Other Journals</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="publisherInfo">
-                    <td>
-                        <span class="publisherLabel">
-                        <button data-a11y-dialog-show="pfl-modal-publisher"><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button> 
-                            Publisher:</span>
-                        <span class="publisherName">{$currentJournal->getData('publisherInstitution')|escape|default:"—"}</span>
-                    </td>
-                    <td>—</td>
-                </tr>
-                <tr class="editorialTeam">
-                    <td>
-                        <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-                        <a href="{url page="about" op="editorialTeam"}">Editorial Team</a> <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid_16x16.gif" alt="ORCiD logo"> profiles</td>
-                    <td><span class="fake">83%</span> offer profiles</td>
-                </tr>
-                <tr class="acceptance">
-                    <td>
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
+        }
+    }
+</script>
+<div class="publication-facts-label">
 
-                        Articles accepted: {$pflAcceptedPercent|escape}%
-                    </td>
-                    <td><span class="fake">55%</span> accepted</td>
-                </tr>
-                <tr class="indexing">
-                    <td>
-                        <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        Indexed in <span class="fake">D DO GS</span>
-                    </td>
-                    <td><span class="fake">2.1</span> indexes average</td>
-                </tr>
-            </tbody>
-        </table>
-        <table>
-            <caption class="sr-only">Publication Facts for article</caption>
-            <thead class="forThisResearchArticle">
-                <tr class="researchArticle">
-                    <th>For this research article</th>
-                    <th>
-                        <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        For other articles
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="reviewers">
-                    <td>
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-                        <span class="fake">Peer reviewers</span>: {$pflReviewerCount|escape}
-                    </td>
-                    <td><span class="fake">2.4</span> average</td>
-                </tr>
-                <tr class="competingInterests">
-                    <td>
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-                        Competing interests: <span class="fake">Yes</span>
-                    </td>
-                    <td><span class="fake">11%</span> yes</td>
-                </tr>
-                <tr class="dataAvailability">
-                    <td>
-                        <!-- Modal markup not added until the patterns are worked out -->
-                        <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> <!-- Modal markup not added until the patterns are worked out -->
-
-                        Data availability: <span class="fake">Yes</span>
-                    </td>
-                    <td><span class="fake">32%</span> yes</td>
-                </tr>
-                <tr class="funders">
-                    <td>
-                        <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                    <!-- Modal markup not added until the patterns are worked out -->
-                        Funders: <span class="fake">NSF NIH WDP</span>
-                    </td>
-                    <td><span class="fake">68%</span> have funders</td>
-                </tr>
-            </tbody>
+    <div class="pfl-container">
+        <!-- following Example1 from https://www.w3.org/WAI/GL/wiki/Using_the_WAI-ARIA_aria-expanded_state_to_mark_expandable_and_collapsible_regions#Example_1:_Using_a_button_to_collapse_and_expand_a_region -->
+        <button id="pfl-button-open-facts" onclick="pflShowHideFactsLabel()" aria-controls="pfl-fact-table" aria-expanded="false">Publication Facts</button>
+        <div id="pfl-fact-table" class="pfl-tables" role="region" tabindex="-1">
+            <table>
+                <caption class="sr-only">Publication Facts for journal</caption>
+                <thead>
+                    <tr>
+                        <th>For This Journal</th>
+                        <th>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button>
+                                <span>For other journals</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button data-a11y-dialog-show="pfl-modal-publisher"><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button> 
+                                <span>Publisher:
+                                    <span class="publisherName">{$currentJournal->getData('publisherInstitution')|escape|default:"—"}</span>
+                                </span>
+                            </div>
+                        </td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>
+                                    <a href="{url page="about" op="editorialTeam"}">Editorial Team</a> <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid_16x16.gif" alt="ORCiD logo"> profiles
+                                </span>
+                            </div>
+                        </td>
+                        <td><span class="fake">83%</span> offer profiles</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>Articles accepted: {$pflAcceptedPercent|escape}%</span>
+                            </div>
+                        </td>
+                        <td><span class="fake">55%</span> accepted</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>Indexed in <span class="fake">D DO GS</span></span>
+                            </div>
+                        </td>
+                        <td><span class="fake">2.1</span> indexes average</td>
+                    </tr>
+                </tbody>
             </table>
-            <p>To learn more about a publication fact, click <a href=""><img class="info_icon" alt="Learn more about a publication fact." src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></a></p>
+            <table>
+                <caption class="sr-only">Publication Facts for article</caption>
+                <thead>
+                    <tr>
+                        <th>For this research article</th>
+                        <th>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>For other articles</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span><span class="fake">Peer reviewers</span>: {$pflReviewerCount|escape}</span>
+                            </div>
+                        </td>
+                        <td><span class="fake">2.4</span> average</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>Competing interests: <span class="fake">Yes</span></span>
+                            </div>
+                        </td>
+                        <td><span class="fake">11%</span> yes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>Data availability: <span class="fake">Yes</span></span>
+                            </div>
+                        </td>
+                        <td><span class="fake">32%</span> yes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pfl-flex">
+                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <span>Funders: <span class="fake">NSF NIH WDP</span></span>
+                            </div>
+                        </td>
+                        <td><span class="fake">68%</span> have funders</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="pfl-table-footer">To learn more about a publication fact, click <a href=""><img class="info_icon" alt="Learn more about a publication fact." src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></a></p>
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <!-- 1. Publication facts information-->
+    <div
+        id="pfl-modal-publisher"
+        class="pfl-dialog-container"
+        aria-labelledby="pfl-modal-title-publisher"
+        aria-hidden="true"
+        data-a11y-dialog="pfl-modal-publisher"
+        >
+        <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
+        <div class="pfl-dialog-content" role="document">
+            <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="Close dialog">
+            <span>Close</span> <img class="info_icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            </button>
+            <h1 id="pfl-modal-title-publisher">Publication Facts Information</h1>
+            <hr/>
+            <h2>For other journals</h2>
+            <ul>
+                <li>This column compiles data drawn from other journals that employ the Publication Facts Label.</li>
+                <li>Currently limited to journals using Open Journal Systems as a publishing platform.</li>
+                <li><span class="fake">List</span> of participating journals.</li>
+                <li>Test.</li>
+                <li>Test.</li>
+            </ul>
+            <p class="pfl-modal-footer">Learn more about the <span class="fake">Publication Facts Label</span>.</p>
+        </div>
     </div>
 </div>
 
-
-<!-- Modals -->
-<!-- 1. The dialog container -->
-<div
-  id="pfl-modal-title-publisher"
-  class="pfl-dialog-container"
-  aria-labelledby="your-dialog-title-id"
-  aria-hidden="true"
-  data-a11y-dialog="pfl-modal-publisher"
->
-  <!-- 2. The dialog overlay -->
-  <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
-  <!-- 3. The actual dialog -->
-  <div class="pfl-dialog-content" role="document">
-    <!-- 4. The close button -->
-    <button type="button" "dialog-close" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="Close dialog">
-      Close <img class="info_icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
-    </button>
-    <!-- 5. The dialog title -->
-    <h1 id="pfl-modal-title-publisher">Publication Facts Information</h1>
-    <!-- 6. Dialog content -->
-    <hr/>
-
-    <h2>For other journals</h2>
-    <ul>
-        <li>This column compiles data drawn from other journals that employ the Publication Facts Label.</li>
-        <li>Currently limited to journals using Open Journal Systems as a publishing platform.</li>
-        <li><span class="fake">List</span> of participating journals.</li>
-    </ul>
-    <p class="pfl-modal-footer">Learn more about the <span class="fake">Publication Facts Label</span>.</p>
-  </div>
-</div>
 

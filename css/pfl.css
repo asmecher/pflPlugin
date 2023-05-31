@@ -1,31 +1,71 @@
-/* Styling -- this probably all needs to be redone */
 
-.publication_facts_label {
-  font-size: 14px;
-  font-family: "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+
+.publication-facts-label {
+  font-size: 16px;
+  font-family: "ArchivoNarrow-Variable", "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
 }
 
-.publication_facts_label p {
-  text-align: center;
-  margin: 0px;
-  padding-top: 0.8em;
-
+.publication-facts-label .pfl-flex {
+  display:flex;
 }
 
-.publication_facts_label a {
-  color: #0D0DF5;
+.publication-facts-label .pfl-flex button {
+  align-self: flex-start;
+  margin-right: 0.3em;
 }
 
-.publication_facts_label button {
+.publication-facts-label .pfl-flex button img {
+  width: 20px;
+  height: 20px;
+  max-width: none; /* fighting theme css*/
+}
+
+
+.publication-facts-label .pfl-container {
+  display: inline-block;
+  border-width: 0.31em;
+  border-style: solid;
+  width: 460px;
+  padding: 0em 0.75em 0.4em 0.75em;
+}
+
+.publication-facts-label button {
   border: none;
   cursor: pointer;
   appearance: none;
   background-color: inherit;
   padding: 0px;
   margin: 0px;
+  color: #000000;
 }
 
-.publication_facts_label .sr-only {
+.publication-facts-label #pfl-button-open-facts {
+  font-family: Barlow-Bold;
+  font-size: 3em;
+  font-weight: 700; 
+  width:100%;
+}
+
+.publication-facts-label .pfl-tables {
+  display: none;
+}
+
+.publication-facts-label p.pfl-table-footer {
+  text-align: center;
+  margin-bottom: 0.4em;
+  margin-top: 0.4em;
+
+}
+
+.publication-facts-label a {
+  color: #0D0DF5;
+}
+
+
+.publication-facts-label .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -37,110 +77,111 @@
   border-width: 0;
 }
 
-.publication_facts_label .info_icon {
-  margin-bottom: -0.3em;
+.publication-facts-label .info_icon {
+  margin-bottom: -0.25em;
 }
 
 
-.publication_facts_label .pflContainer {
-  display: inline-block;
-  border-width: 7px;
-  border-style: solid;
-  padding: 0.8em;
-  
-}
 
-.publication_facts_label table caption {
-  font-size: 2.3em;
-  font-weight: 800; 
-  padding-bottom: 12px;
-
-}
-
-.publication_facts_label table {
+.publication-facts-label table {
   border: 0px solid;
   border-collapse: collapse;
   width: 100%;
   /*font-size: 14px;*/
 }
 
-.publication_facts_label table thead {
-  border-top: 3px solid;
+.publication-facts-label table thead {
+  border-top: 0.125em solid;
 }
 
-.publication_facts_label table td:last-of-type {
+.publication-facts-label table th:last-of-type {
+  color: #848484;
+  font-weight: 600;
+}
+
+.publication-facts-label table td:last-of-type {
   color: #616161;
 }
 
-.publication_facts_label table th:last-of-type {
-  color: #616161;
+
+.publication-facts-label table:first-of-type thead {
+  border-top: 0.375em solid;
+}
+
+.publication-facts-label table th:first-of-type {
+  width: 58%;
 }
 
 
-.publication_facts_label table:first-of-type thead {
-  border-top: 10px solid;
-}
 
-.publication_facts_label table th:first-of-type {
-  width: 60%;
-}
 
-.publication_facts_label table tbody tr {
+.publication-facts-label table tbody tr {
   border-bottom: 1px solid;
   border-top: 1px solid;
 }
 
-.publication_facts_label table:last-of-type tbody {
-  border-bottom: 5px solid;
+.publication-facts-label table:last-of-type tbody {
+  border-bottom: 0.25em solid;
 }
 
 
-.publication_facts_label table th {
-  font-size: 1.2em;
+.publication-facts-label table th {
+  font-family: "ArchivoNarrow-Variable";
+  font-weight: 700;
+  font-size: 1.125em;
   text-align: left;
-  padding: 0.7em;
+  color: #222222;
+  padding-left: 0.3em; 
+  padding-right: 0em; 
+  padding-top: 0.4em;
+  padding-bottom: 0.3em;
 }
 
-.publication_facts_label table td {
-  padding: 0.7em;
+.publication-facts-label table td {
+  padding-left: 0.3em; 
+  padding-right: 0.3em; 
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  vertical-align: top;
 }
-
-
 
 /* WIP: This is used to indicate where real data or links still need to be added */
-.publication_facts_label .fake {
+.publication-facts-label .fake {
   color: #ff0000;
 }
 
-/* Hide the Publication Facts Label until it is opened */
-/*.publication_facts_label table {
-  display: none;
-}*/
+@media only screen and (max-width: 550px) {
+  .publication-facts-label {
+    font-size: 14px;
+  }
 
-.publication_facts_label input:checked ~ table {
-  display: table;
+  .publication-facts-label table th {
+    font-size: 1.07em;
+    text-align: left;
+  }
+
+  .publication-facts-label #pfl-button-open-facts {
+    font-size: 2.5em;
+  }
+
+  .publication-facts-label table th:first-of-type {
+    width: 53%;
+  }
+
+  .publication-facts-label .pfl-container {
+    padding: 0em 0.35em 0.4em 0.35em;
+  }
+  
 }
 
-/*.publication_facts_label input:checked ~ label {
-  display: none;
-}*/
 
-/* Hide the modals until they are opened */
-.publication_facts_label .pfl_popover .pfl_popover_content {
-  display: none;
-}
-
-/* Hide the checkbox used to capture modal status */
-.publication_facts_label input {
-  display: none;
-}
 
 /**
  * 1. Make the dialog container, and its child overlay spread across
  *    the entire window.
  */
- .pfl-dialog-container,
- .pfl-dialog-overlay {
+ .publication-facts-label .pfl-dialog-container,
+ .publication-facts-label .pfl-dialog-overlay {
    position: fixed; /* 1 */
    top: 0; /* 1 */
    right: 0; /* 1 */
@@ -154,7 +195,7 @@
   * 2. Make the dialog container a flex container to easily center the
   *    dialog.
   */
- .pfl-dialog-container {
+  .publication-facts-label .pfl-dialog-container {
    z-index: 2; /* 1 */
    display: flex; /* 2 */
 
@@ -164,14 +205,14 @@
   * 1. Make sure the dialog container and all its descendants are not
   *    visible and not focusable when it is hidden.
   */
- .pfl-dialog-container[aria-hidden='true'] {
+.publication-facts-label .pfl-dialog-container[aria-hidden='true'] {
    display: none; /* 1 */
  }
  
  /**
   * 1. Make the overlay look like an overlay.
   */
- .pfl-dialog-overlay {
+ .publication-facts-label .pfl-dialog-overlay {
    background-color:  rgb(43 46 56 / 0.4); /* 1 */
  }
  
@@ -180,57 +221,70 @@
   * 2. Make sure the dialog sits on top of the overlay.
   * 3. Make sure the dialog has an opaque background.
   */
- .pfl-dialog-content {
+.publication-facts-label .pfl-dialog-content {
    margin: auto; /* 1 */
    z-index: 2; /* 2 */
    position: relative; /* 2 */
    background-color: white; /* 3 */
-   overflow: auto;
+   overflow-y: auto;
    max-height: 90vh; 
-   padding: 1.8em;
+   padding-left: 1.6em;
+   padding-right: 1.6em;
+   padding-top: 1.4em;
+   padding-bottom: 1em;
+
    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
    border-radius: 15px;
 
  }
  
- .pfl-dialog-content hr {
-  margin-left: -1.8em;
-  margin-right: -1.8em;
+ .publication-facts-label .pfl-dialog-content hr {
+  margin-left: -1.6em;
+  margin-right: -1.6em;
  }
 
- .pfl-dialog-content h1 {
-  font-size: 1.7em;
-  margin-top: 0.8em;
+ .publication-facts-label .pfl-dialog-content h1 {
+  font-family: Barlow-Bold;
+  font-size: 1.125em;
+  font-weight: 700; 
+
  }
 
- .pfl-dialog-content h2 {
-  font-size: 1.4em;
-  margin-top: 0.8em;
+ .publication-facts-label .pfl-dialog-content h2 {
+  font-family: "ArchivoNarrow-Variable";
+  font-weight: 700;
+  font-size: 1em;
+  margin-top: 1.2em;
  }
 
- .pfl-dialog-content ul  {
+ .publication-facts-label .pfl-dialog-content ul  {
   margin-top: 0.8em;
   color: #616161
  }
 
 
-.pfl-dialog-close-button {
+ .publication-facts-label .pfl-dialog-close-button {
   color: #0D0DF5;
   float: right;
   border: none;
   cursor: pointer;
   appearance: none;
   background-color: inherit;
-  padding: 0.6em;
-  margin: 0px;
+  margin-right: 0.6em;
+  margin-top: 0.3em;
 
 }
 
-.pfl-dialog-close-button img {
+.publication-facts-label .pfl-dialog-close-button span {
+  text-decoration: underline;
+}
+
+
+.publication-facts-label .pfl-dialog-close-button img {
   margin-bottom: -0.4em;
 }
 
- .pfl-modal-footer  {
+.publication-facts-label .pfl-modal-footer  {
   text-align: right;
  }
 
