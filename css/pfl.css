@@ -245,7 +245,7 @@
 
  .publication-facts-label .pfl-dialog-content h1 {
   font-family: Barlow-Bold;
-  font-size: 1.125em;
+  font-size: 1.5em;
   font-weight: 700; 
 
  }
@@ -253,12 +253,13 @@
  .publication-facts-label .pfl-dialog-content h2 {
   font-family: "ArchivoNarrow-Variable";
   font-weight: 700;
-  font-size: 1em;
+  font-size: 1.33em;
   margin-top: 1.2em;
  }
 
  .publication-facts-label .pfl-dialog-content ul  {
   margin-top: 0.8em;
+  padding-left: 1.5em;
   color: #616161
  }
 
@@ -272,6 +273,7 @@
   background-color: inherit;
   margin-right: 0.6em;
   margin-top: 0.3em;
+  margin-left: 1em;
 
 }
 
