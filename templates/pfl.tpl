@@ -170,11 +170,15 @@
 
 
     <!-- Modals -->
+    <!-- Every modal needs:
+        1) same unique id and data-a11y-dialog, which is in referenced by button with data-a11y-dialog-show attribute
+        2) unique id for title (h1), which is referenced by aria-labelledby of the modal
+    -->
     <!-- 1. Publication facts information-->
     <div
         id="pfl-modal-publisher"
         class="pfl-dialog-container"
-        aria-labelledby="pfl-modal-title-publisher"
+        aria-labelledby="pfl-modal-publisher-title"
         aria-hidden="true"
         data-a11y-dialog="pfl-modal-publisher"
         >
@@ -183,7 +187,7 @@
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="Close dialog">
             <span>Close</span> <img class="info_icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
-            <h1 id="pfl-modal-title-publisher">Publication Facts Information</h1>
+            <h1 id="pfl-modal-publisher-title">Publication Facts Information</h1>
             <hr/>
             <h2>For other journals</h2>
             <ul>
