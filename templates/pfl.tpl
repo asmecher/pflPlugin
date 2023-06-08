@@ -54,17 +54,17 @@
 
     <div class="pfl-container">
         <!-- following Example1 from https://www.w3.org/WAI/GL/wiki/Using_the_WAI-ARIA_aria-expanded_state_to_mark_expandable_and_collapsible_regions#Example_1:_Using_a_button_to_collapse_and_expand_a_region -->
-        <button id="pfl-button-open-facts" onclick="pflShowHideFactsLabel()" aria-controls="pfl-fact-table" aria-expanded="false">Publication Facts</button>
+        <button id="pfl-button-open-facts" onclick="pflShowHideFactsLabel()" aria-controls="pfl-fact-table" aria-expanded="false">{translate key="plugins.generic.pfl.publicationFacts"}</button>
         <div id="pfl-fact-table" class="pfl-tables" role="region" tabindex="-1">
             <table>
-                <caption class="sr-only">Publication Facts for journal</caption>
+                <caption class="sr-only">{translate key="plugins.generic.pfl.factsForJournal"}</caption>
                 <thead>
                     <tr>
-                        <th>For This Journal</th>
+                        <th>{translate key="plugins.generic.pfl.forThisJournal"}</th>
                         <th>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button>
-                                <span>For other journals</span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button>
+                                <span>{translate key="plugins.generic.pfl.forOtherJournals"}</span>
                             </div>
                         </th>
                     </tr>
@@ -73,8 +73,8 @@
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button data-a11y-dialog-show="pfl-modal-publisher"><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button> 
-                                <span>Publisher:
+                                <button data-a11y-dialog-show="pfl-modal-publisher"><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button>
+                                <span>{translate key="plugins.generic.pfl.publisher"}
                                     <span class="publisherName">{$currentJournal->getData('publisherInstitution')|escape|default:"—"}</span>
                                 </span>
                             </div>
@@ -84,43 +84,44 @@
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
                                 <span>
-                                    <a href="{url page="about" op="editorialTeam"}">Editorial Team</a> <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid_16x16.gif" alt="ORCiD logo"> profiles
+                                    {capture assign="editorialTeamUrl"}{url page="about" op="editorialTeam"}{/capture}
+                                    {translate key="plugins.generic.pfl.editorialTeamProfiles" editorialTeamUrl=$editorialTeamUrl orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid_16x16.gif"}
                                 </span>
                             </div>
                         </td>
-                        <td><span class="fake">83%</span> offer profiles</td>
+                        <td>{translate key="plugins.generic.pfl.numOfferProfiles" num="<span class=\"fake\">83%</span>"}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>Articles accepted: {$pflAcceptedPercent|escape}%</span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                {translate key="plugins.generic.pfl.numArticlesAccepted" num=$pflAcceptedPercent|escape}
                             </div>
                         </td>
-                        <td><span class="fake">55%</span> accepted</td>
+                        <td>{translate key="plugins.generic.pfl.numArticlesAcceptedShort" num="<span class=\"fake\">55%</span>"}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>Indexed in <span class="fake">D DO GS</span></span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span>{translate key="plugins.generic.pfl.indexedIn" indexList="<span class=\"fake\">D DO GS</span>"}</span>
                             </div>
                         </td>
-                        <td><span class="fake">2.1</span> indexes average</td>
+                        <td>{translate key="plugins.generic.pfl.numAverageIndexes" num="<span class=\"fake\">2.1</span>"}</td>
                     </tr>
                 </tbody>
             </table>
             <table>
-                <caption class="sr-only">Publication Facts for article</caption>
+                <caption class="sr-only">{translate key="plugins.generic.pfl.factsForArticle"}</caption>
                 <thead>
                     <tr>
-                        <th>For this research article</th>
+                        <th>{translate key="plugins.generic.pfl.forThisResearchArticle"}</th>
                         <th>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>For other articles</span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span>{translate key="plugins.generic.pfl.forOtherArticles"}</span>
                             </div>
                         </th>
                     </tr>
@@ -129,42 +130,42 @@
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span><span class="fake">Peer reviewers</span>: {$pflReviewerCount|escape}</span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span><span class="fake">{translate key="plugins.generic.pfl.numPeerReviewers" num=$pflReviewerCount|escape}</span></span>
                             </div>
                         </td>
-                        <td><span class="fake">2.4</span> average</td>
+                        <td>{translate key="plugins.generic.pfl.averagePeerReviewers" num="<span class=\"fake\">55%</span>"}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>Competing interests: <span class="fake">Yes</span></span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span><span class="fake">{translate key="plugins.generic.pfl.competingInterests.yes"}</span></span>
                             </div>
                         </td>
-                        <td><span class="fake">11%</span> yes</td>
+                        <td>{translate key="plugins.generic.pfl.numYes" num="<span class=\"fake\">11%</span>"}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text!" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>Data availability: <span class="fake">Yes</span></span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span><span class="fake">{translate key="plugins.generic.pfl.dataAvailability.yes"}</span></span>
                             </div>
                         </td>
-                        <td><span class="fake">32%</span> yes</td>
+                        <td>{translate key="plugins.generic.pfl.numYes" num="<span class=\"fake\">32%</span>"}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
-                                <button><img class="info_icon" alt="UPDATE to desriptive text" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button> 
-                                <span>Funders: <span class="fake">NSF NIH WDP</span></span>
+                                <button><img class="info_icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
+                                <span>{translate key="plugins.generic.pfl.funders" funderList="<span class=\"fake\">NSF NIH WDP</span>"}</span>
                             </div>
                         </td>
-                        <td><span class="fake">68%</span> have funders</td>
+                        <td>{translate key="plugins.generic.pfl.numHaveFunders" num="<span class=\"fake\">68%</span>"}</td>
                     </tr>
                 </tbody>
             </table>
-            <p class="pfl-table-footer">To learn more about a publication fact, click <a href=""><img class="info_icon" alt="Learn more about a publication fact." src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></a></p>
+            <p class="pfl-table-footer">{translate key="plugins.generic.pfl.informationFooter" informationIcon=$baseUrl|concat:"/plugins/generic/pflPlugin/img/info_icon.svg"}</p>
         </div>
     </div>
 
@@ -184,20 +185,13 @@
         >
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
-            <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="Close dialog">
+            <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
             <span>Close</span> <img class="info_icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
-            <h1 id="pfl-modal-publisher-title">Publication Facts Information</h1>
+            <h1 id="pfl-modal-publisher-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
-            <h2>For other journals</h2>
-            <ul>
-                <li>This column compiles data drawn from other journals that employ the Publication Facts Label.</li>
-                <li>Currently limited to journals using Open Journal Systems as a publishing platform.</li>
-                <li><span class="fake">List</span> of participating journals.</li>
-                <li>Test.</li>
-                <li>Test.</li>
-            </ul>
-            <p class="pfl-modal-footer">Learn more about the <span class="fake">Publication Facts Label</span>.</p>
+            {translate key="plugins.generic.pfl.information.forOtherJournals"}
+            <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
         </div>
     </div>
 </div>
