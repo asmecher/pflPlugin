@@ -147,6 +147,7 @@
                     </tr>
                 </tbody>
             </table>
+            {if $article}
             <table>
                 <caption class="sr-only">{translate key="plugins.generic.pfl.factsForArticle"}</caption>
                 <thead>
@@ -199,6 +200,7 @@
                     </tr>
                 </tbody>
             </table>
+            {/if}{* If this is an article-specific page *}
             <p class="pfl-table-footer"><button data-a11y-dialog-show="pfl-modal-publication-facts-label">{translate key="plugins.generic.pfl.informationFooter" informationIcon=$baseUrl|concat:"/plugins/generic/pflPlugin/img/info_icon.svg"}</button></p>
         </div>
     </div>

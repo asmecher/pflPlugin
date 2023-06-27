@@ -19,7 +19,9 @@ class PflPlugin extends GenericPlugin {
     function register($category, $path, $mainContextId = null) {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
-                HookRegistry::register('Templates::Article::Footer::PageFooter', [$this, 'display']);
+                // HACK: We don't have a hook for the appropriate spot in the page presentation, so we watch for
+                // the page footer template to be looked up. When that happens, we output the PFL markup directly.
+                HookRegistry::register('TemplateResource::getFilename', [$this, 'getFilenameHook']);
             }
             return true;
         }
@@ -75,17 +77,27 @@ class PflPlugin extends GenericPlugin {
     /**
      * Hook callback for displaying the publication facts label.
      */
-    function display($hookName, $args) {
-        $templateMgr =& $args[1];
-        $output =& $args[2];
-        $journal = Application::get()->getRequest()->getContext();
-        $submission = $templateMgr->getTemplateVars('article');
+    function getFilenameHook($hookName, $args) {
+        $filePath =& $args[0];
+        $template =& $args[1];
+        if ($template != 'frontend/components/footer.tpl') return false;
 
+        $journal = Application::get()->getRequest()->getContext();
+        if (!$journal) return false;
+
+        $templateMgr = TemplateManager::getManager();
+        if ($templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
+
+        // Fetch journal-wide data
         $templateMgr->assign([
-            'pflAcceptedPercent' => $this->getAcceptedPercent($submission->getContextId()),
-            'pflReviewerCount' => $this->getReviewerCount($submission->getId()),
+            'pflDisplayed' => true,
+            'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
             'pflPublisherName' => $journal->getData('publisherInstitution'),
             'pflPublisherUrl' => null, // FIXME: https://github.com/asmecher/pflPlugin/issues/2
+        ]);
+
+        if ($article = $templateMgr->getTemplateVars('article')) $templateMgr->assign([
+            'pflReviewerCount' => $this->getReviewerCount($article->getId()),
         ]);
 
         // FIXME: Add fake data overrides for testing purposes.
@@ -94,7 +106,7 @@ class PflPlugin extends GenericPlugin {
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
         ]);
 
-        $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
+        $templateMgr->display($this->getTemplateResource('pfl.tpl'));
         return false;
     }
 }
