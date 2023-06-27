@@ -84,7 +84,16 @@ class PflPlugin extends GenericPlugin {
         $templateMgr->assign([
             'pflAcceptedPercent' => $this->getAcceptedPercent($submission->getContextId()),
             'pflReviewerCount' => $this->getReviewerCount($submission->getId()),
+            'pflPublisherName' => $journal->getData('publisherInstitution'),
+            'pflPublisherUrl' => null, // FIXME: https://github.com/asmecher/pflPlugin/issues/2
         ]);
+
+        // FIXME: Add fake data overrides for testing purposes.
+        $templateMgr->assign([
+            'pflPublisherName' => 'Ubiquity Press',
+            'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
+        ]);
+
         $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
         return false;
     }

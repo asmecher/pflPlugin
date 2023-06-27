@@ -107,7 +107,7 @@
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-publisher"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></button>
                                 <span>{translate key="plugins.generic.pfl.publisher"}
-                                    <span class="publisherName"><a href="https://www.ubiquitypress.com/" target="_blank">Ubiquity Press{*{$currentJournal->getData('publisherInstitution')|escape|default:"—"}*}</a></span>
+                                    <span class="publisherName">{if $pflPublisherUrl}<a href="{$pflPublisherUrl|escape}" target="_blank">{/if}{$pflPublisherName|escape|default:"&mdash;"}{if $pflPublisherUrl}</a>{/if}</span>
                                 </span>
                             </div>
                         </td>
