@@ -219,7 +219,7 @@
     <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-publication-facts-label-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -237,7 +237,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-for-other-journals-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -256,7 +256,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-publisher-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -275,7 +275,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-editorial-team-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -294,7 +294,7 @@
     <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
     <div class="pfl-dialog-content" role="document">
         <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-        <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+        <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
         </button>
         <h1 id="pfl-modal-articles-accepted-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
         <hr/>
@@ -313,7 +313,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-indexes-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -332,7 +332,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-for-other-articles-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -351,7 +351,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-peer-reviewers-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -370,7 +370,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-competing-interests-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -389,7 +389,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-data-availability-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
@@ -408,7 +408,7 @@
         <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
         <div class="pfl-dialog-content" role="document">
             <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
-            <span>Close</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
             </button>
             <h1 id="pfl-modal-funders-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>

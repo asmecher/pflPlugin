@@ -95,6 +95,9 @@ msgstr "To learn more about a publication fact, click <img class=\"pfl-info-icon
 msgid "plugins.generic.pfl.closeLabel"
 msgstr "Close dialog"
 
+msgid "plugins.generic.pfl.close"
+msgstr "Close"
+
 msgid "plugins.generic.pfl.modalTitle"
 msgstr "Publication Facts Information"
 
