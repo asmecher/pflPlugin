@@ -137,7 +137,10 @@
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-indexes"><img class="pfl-info-icon"" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span>{translate key="plugins.generic.pfl.indexedIn" indexList="<span class=\"fake\"><a href=\"https://scholar.google.com/\" target=\"_blank\">GS</a> <a href=\"https://www.nlm.nih.gov/medline/medline_overview.html\" target=\"_blank\">M</a> <a href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/\" target=\"_blank\">WS</a> <a href=\"https://www.elsevier.com/solutions/scopus\" target=\"_blank\">S</a></span>"}</span>
+                                {capture assign="fakeIndexList"}
+                                  <span class="fake"><a href="https://scholar.google.com/" target="_blank">GS</a> <a href="https://www.nlm.nih.gov/medline/medline_overview.html" target="_blank">M</a> <a href="https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/" target="_blank">WS</a> <a href="https://www.elsevier.com/solutions/scopus" target="_blank">S</a></span>
+                                {/capture}
+                                <span>{translate key="plugins.generic.pfl.indexedIn" indexList=$fakeIndexList}</span>
                             </div>
                         </td>
                         <td class="pfl-right-column">{translate key="plugins.generic.pfl.numAverageIndexes" num="<span class=\"fake\">15.6</span>"}</td>
