@@ -82,9 +82,17 @@ class PflPlugin extends GenericPlugin {
         $template =& $args[1];
         if ($template != 'frontend/components/footer.tpl') return false;
 
+        // Only journal-specific pages get the PFL.
         $request = Application::get()->getRequest();
         $journal = $request->getContext();
         if (!$journal) return false;
+
+        // Only page routers get the PFL.
+        $router = $request->getRouter();
+        if (!$router instanceof PageRouter) return false;
+
+        // Only journal homepages and article landing pages get the PFL.
+        if (!in_array($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request), ['article/view', 'index/index'])) return false;
 
         $templateMgr = TemplateManager::getManager();
         if ($templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
