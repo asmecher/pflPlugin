@@ -1,0 +1,25 @@
+{
+  "name": "pflplugin",
+  "version": "1.0.0",
+  "description": "Publication Facts Label plugin for Open Journal Systems",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite build --watch --minify=false",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asmecher/pflPlugin.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/asmecher/pflPlugin/issues"
+  },
+  "homepage": "https://github.com/asmecher/pflPlugin#readme",
+  "devDependencies": {
+    "a11y-dialog": "^7.5.2",
+    "body-scroll-lock-upgrade": "^1.0.3",
+    "vite": "^4.3.9"
+  }
+}

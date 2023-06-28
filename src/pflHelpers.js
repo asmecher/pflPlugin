@@ -1,4 +1,10 @@
-(function() {
+import A11yDialog from 'a11y-dialog'
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+  } from "body-scroll-lock-upgrade";
+  
+export function initModals() {
 	const pflModals = {};
 
 	const modalIds = [
@@ -30,7 +36,7 @@
 			const scrollableElement = document.querySelector(
 				'#' + openingDialogId + ' .pfl-dialog-content'
 			);
-			bodyScrollLock.disableBodyScroll(scrollableElement);
+			disableBodyScroll(scrollableElement);
 
 			return;
 		});
@@ -41,7 +47,7 @@
 				'#' + closingDialogId + ' .pfl-dialog-content'
 			);
 
-			bodyScrollLock.enableBodyScroll(scrollableElement);
+			enableBodyScroll(scrollableElement);
 
 			if (modalsStack[modalsStack.length - 1] === closingDialogId) {
 				modalsStack.pop();
@@ -51,4 +57,6 @@
 			}
 		});
 	});
-})();
+
+}
+
