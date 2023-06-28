@@ -114,8 +114,11 @@
                                 </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numOfferProfiles" num=$pflNumOfferProfilesClass}</td>
-                    </tr>
+                        <td class="pfl-right-column">
+                            <span class="pfl-orcid-icon">
+                                {translate key="plugins.generic.pfl.numOfferProfiles" num=$pflNumOfferProfilesClass orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}</td>
+                            </span>
+                        </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">

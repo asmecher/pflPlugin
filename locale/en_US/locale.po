@@ -33,10 +33,10 @@ msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher:"
 
 msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Editor</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
+msgstr "<a href=\"{$editorialTeamUrl}\">Editorial team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\">"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
-msgstr "{$num}% offer profiles"
+msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "Articles accepted: {$num}%"
@@ -66,10 +66,10 @@ msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num} average"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interest: <a href=\"{$competingInterestsUrl}\">Yes</a>"
+msgstr "Competing interests: <a href=\"{$competingInterestsUrl}\">Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
-msgstr "Competing interest: No"
+msgstr "Competing interests: No"
 
 msgid "plugins.generic.pfl.percentYes"
 msgstr "{$num}% yes"

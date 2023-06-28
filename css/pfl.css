@@ -114,17 +114,22 @@
 }
 
 .publication-facts-label .pfl-info-icon {
-  margin-bottom: -0.25em;
+  margin-bottom: -0.30em;
 }
 
 .publication-facts-label th .pfl-info-icon {
+  margin-bottom: -0.25em;
+}
+
+.pfl-table-footer .pfl-info-icon {
   margin-bottom: -0.15em;
 }
 
 
+
 .publication-facts-label .pfl-orcid-icon img {
   height: 18px;
-  margin-bottom: -0.18em;
+  margin-bottom: -0.3em;
   margin-left: 0.1em;
   margin-right: 0.1em;
 }
