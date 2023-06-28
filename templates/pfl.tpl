@@ -321,7 +321,7 @@
         <h1 id="pfl-modal-articles-accepted-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
         <hr/>
         {translate key="plugins.generic.pfl.information.articlesAccepted" orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}
-        <p class="pfl-modal-footer"><button data-a11y-dialog-show="pfl-modal-publication-facts-label" >{translate key="plugins.generic.pfl.modalFooter"}</button></p>
+        <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
     </div>
     </div>
 

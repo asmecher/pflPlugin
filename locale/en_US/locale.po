@@ -102,7 +102,7 @@ msgid "plugins.generic.pfl.modalTitle"
 msgstr "Publication Facts Information"
 
 msgid "plugins.generic.pfl.modalFooter"
-msgstr "Learn more about the <button data-a11y-dialog-show="pfl-modal-publication-facts-label">Publication Facts Label</button>."
+msgstr "Learn more about the <button data-a11y-dialog-show=\"pfl-modal-publication-facts-label\">Publication Facts Label</button>."
 
 msgid "plugins.generic.pfl.information.publicationFactsLabel"
 msgstr ""
