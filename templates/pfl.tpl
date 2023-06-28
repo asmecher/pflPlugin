@@ -117,33 +117,34 @@
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-editorial-team"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
                                 <span class="pfl-orcid-icon">
-                                    {capture assign="editorialTeamUrl"}{url page="about" op="editorialTeam"}{/capture}
-                                    {translate key="plugins.generic.pfl.editorialTeamProfiles" editorialTeamUrl=$editorialTeamUrl orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}
+                                    {translate key="plugins.generic.pfl.editorialTeamProfiles" editorialTeamUrl=$pflEditorialTeamUrl orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}
                                 </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numOfferProfiles" num="<span class=\"fake\">65%</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numOfferProfiles" num=$pflNumOfferProfilesClass}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-articles-accepted"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                {translate key="plugins.generic.pfl.numArticlesAccepted" num=8|escape} {*num=$pflAcceptedPercent|escape}*}
+                                {translate key="plugins.generic.pfl.numArticlesAccepted" num=$pflAcceptedPercent|escape} {*num=$pflAcceptedPercent|escape}*}
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numArticlesAcceptedShort" num="<span class=\"fake\">13%</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numArticlesAcceptedShort" num=$pflNumAcceptedClass}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-indexes"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                {capture assign="fakeIndexList"}
-                                  <span class="fake"><a href="https://scholar.google.com/" target="_blank">GS</a> <a href="https://www.nlm.nih.gov/medline/medline_overview.html" target="_blank">M</a> <a href="https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/" target="_blank">WS</a> <a href="https://www.elsevier.com/solutions/scopus" target="_blank">S</a></span>
+                                {capture assign="pflIndexListMarkup"}
+                                  {foreach from=$pflIndexList item=pflIndexListItemName key=pflIndexListItemUrl}
+                                    <a href="{$pflIndexListItemUrl|escape}" target-"_blank">{$pflIndexListItemName|escape}</a>
+                                  {/foreach}
                                 {/capture}
-                                <span>{translate key="plugins.generic.pfl.indexedIn" indexList=$fakeIndexList}</span>
+                                <span>{translate key="plugins.generic.pfl.indexedIn" indexList=$pflIndexListMarkup}</span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numAverageIndexes" num="<span class=\"fake\">15.6</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numAverageIndexes" num=$pflNumIndexesClass}</td>
                     </tr>
                 </tbody>
             </table>
@@ -166,37 +167,56 @@
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-peer-reviewers"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span><span class="fake">{translate key="plugins.generic.pfl.numPeerReviewers" editorialTeamUrl=$editorialTeamUrl num=2}{*$pflReviewerCount|escape*}</span></span>
+                                <span>{translate key="plugins.generic.pfl.numPeerReviewers" peerReviewersUrl=$pflPeerReviewersUrl num=$pflReviewerCount|escape}</span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.averagePeerReviewers" num="<span class=\"fake\">2.4</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.averagePeerReviewers" num=$pflReviewerCountClass}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-competing-interests"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span><span class="fake">{translate key="plugins.generic.pfl.competingInterests.yes" competingInterestsUrl="https://ojs.stanford.edu/ojs/index.php/jii/ci"}</span></span>
+                                <span>
+                                    {if $pflCompetingInterestsUrl}
+                                        {translate key="plugins.generic.pfl.competingInterests.yes" competingInterestsUrl=$pflCompetingInterestsUrl}
+                                    {else}
+                                        {translate key="plugins.generic.pfl.competingInterests.no"}
+                                    {/if}
+                                </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numYes" num="<span class=\"fake\">11%</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.percentYes" num=$pflCompetingInterestsPercentClass|escape}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-data-availability"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span><span class="fake">{translate key="plugins.generic.pfl.dataAvailability.yes" dataAvailabilityUrl="https://ojs.stanford.edu/ojs/index.php/jii/data"}</span></span>
+                                <span>
+                                    {if $pflDataAvailabilityUrl}
+                                        {translate key="plugins.generic.pfl.dataAvailability.yes" dataAvailabilityUrl=$pflDataAvailabilityUrl}
+                                    {else}
+                                        {translate key="plugins.generic.pfl.dataAvailability.no"}
+                                    {/if}
+                                </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numYes" num="<span class=\"fake\">16%</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.percentYes" num=$pflDataAvailabilityPercentClass}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-funders"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
-                                <span>{translate key="plugins.generic.pfl.funders" funderList="<span class=\"fake\"><a href=\"https://www.aamc.org/\" target=\"_blank\">AAMC</a></span>"}</span>
+                                <span>
+                                    {capture assign="pflFunderListMarkup"}
+                                      {foreach from=$pflFunderList item=pflFunderListItemName key=pflFunderListItemUrl}
+                                        <a href="{$pflFunderListItemUrl|escape}" target-"_blank">{$pflFunderListItemName|escape}</a>
+                                      {/foreach}
+                                    {/capture}
+                                    {translate key="plugins.generic.pfl.funders" funderList=$pflFunderListMarkup}
+                                </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numHaveFunders" num="<span class=\"fake\">32%</span>"}</td>
+                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}</td>
                     </tr>
                 </tbody>
             </table>

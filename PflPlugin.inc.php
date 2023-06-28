@@ -82,28 +82,63 @@ class PflPlugin extends GenericPlugin {
         $template =& $args[1];
         if ($template != 'frontend/components/footer.tpl') return false;
 
-        $journal = Application::get()->getRequest()->getContext();
+        $request = Application::get()->getRequest();
+        $journal = $request->getContext();
         if (!$journal) return false;
 
         $templateMgr = TemplateManager::getManager();
         if ($templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
 
-        // Fetch journal-wide data
+        // Journal-specific PFL data
         $templateMgr->assign([
-            'pflDisplayed' => true,
+            'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
             'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
             'pflPublisherName' => $journal->getData('publisherInstitution'),
             'pflPublisherUrl' => null, // FIXME: https://github.com/asmecher/pflPlugin/issues/2
+            'pflNumOfferProfiles' => null, // FIXME: Data not yet available
+            'pflIndexList' => [], // FIXME: Data not yet available
+            'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
+        ]);
+        // Journal class data
+        $templateMgr->assign([
+            'pflNumOfferProfilesClass' => 65,
+            'pflNumAcceptedClass' => 13,
+            'pflNumIndexesClass' => '15.6',
         ]);
 
-        if ($article = $templateMgr->getTemplateVars('article')) $templateMgr->assign([
-            'pflReviewerCount' => $this->getReviewerCount($article->getId()),
-        ]);
+        // If we're viewing an article-specific page...
+        if ($article = $templateMgr->getTemplateVars('article')) {
+            // Article-specific PFL data
+            $templateMgr->assign([
+                'pflReviewerCount' => $this->getReviewerCount($article->getId()),
+                'pflCompetingInterestsUrl' => null, // FIXME: URL not yet available
+                'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
+                'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
+                'pflFunderList' => [], // FIXME: Data not yet available
+            ]);
+            // Article class data
+            $templateMgr->assign([
+                'pflReviewerCountClass' => '2.4',
+                'pflCompetingInterestsPercentClass' => 11,
+                'pflDataAvailabilityPercentClass' => 16,
+                'pflNumHaveFundersClass' => 32,
+            ]);
+        }
 
         // FIXME: Add fake data overrides for testing purposes.
         $templateMgr->assign([
+            // Journal-wide
             'pflPublisherName' => 'Ubiquity Press',
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
+            'pflAcceptedPercent' => 8,
+            'pflIndexList' => ["https://scholar.google.com/" => 'GS', "https://www.nlm.nih.gov/medline/medline_overview.html" => 'M', "https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/" => 'WS', "https://www.elsevier.com/solutions/scopus" => 'S'],
+            'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
+            // Article-specific
+            'pflReviewerCount' => 2,
+            'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
+            'pflCompetingInterestsUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci',
+            'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
+            'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'],
         ]);
 
         $templateMgr->display($this->getTemplateResource('pfl.tpl'));

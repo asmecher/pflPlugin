@@ -195,11 +195,6 @@
   vertical-align: top;
 }
 
-/* WIP: This is used to indicate where real data or links still need to be added */
-.publication-facts-label .fake {
-  /*color: #ff0000;*/
-}
-
 @media only screen and (max-width: 500px) {
   .publication-facts-label {
     font-size: 14px;

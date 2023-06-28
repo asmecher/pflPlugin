@@ -36,13 +36,13 @@ msgid "plugins.generic.pfl.editorialTeamProfiles"
 msgstr "<a href=\"{$editorialTeamUrl}\">Editorial Team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
-msgstr "{$num} offer profiles"
+msgstr "{$num}% offer profiles"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "Articles accepted: {$num}%"
 
 msgid "plugins.generic.pfl.numArticlesAcceptedShort"
-msgstr "{$num} accepted"
+msgstr "{$num}% accepted"
 
 msgid "plugins.generic.pfl.indexedIn"
 msgstr "Indexed in {$indexList}"
@@ -60,7 +60,7 @@ msgid "plugins.generic.pfl.forOtherArticles"
 msgstr "For other articles"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
-msgstr "<a href=\"{$editorialTeamUrl}\">Peer reviewers</a>: {$num}"
+msgstr "<a href=\"{$peerReviewersUrl}\">Peer reviewers</a>: {$num}"
 
 msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num} average"
@@ -71,8 +71,8 @@ msgstr "Competing interests: <a href=\"{$competingInterestsUrl}\">Yes</a>"
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "Competing interests: No"
 
-msgid "plugins.generic.pfl.numYes"
-msgstr "{$num} yes"
+msgid "plugins.generic.pfl.percentYes"
+msgstr "{$num}% yes"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
 msgstr "Data availability: <a href=\"{$dataAvailabilityUrl}\">Yes</a>"
