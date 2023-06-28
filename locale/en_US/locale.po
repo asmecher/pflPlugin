@@ -24,16 +24,16 @@ msgid "plugins.generic.pfl.factsForJournal"
 msgstr "Publication Facts for journal"
 
 msgid "plugins.generic.pfl.forThisJournal"
-msgstr "For This Journal"
+msgstr "For this journal"
 
 msgid "plugins.generic.pfl.forOtherJournals"
-msgstr "For other journals"
+msgstr "Other journals"
 
 msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher:"
 
 msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Editorial Team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
+msgstr "<a href=\"{$editorialTeamUrl}\">Editor</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% offer profiles"
@@ -45,19 +45,19 @@ msgid "plugins.generic.pfl.numArticlesAcceptedShort"
 msgstr "{$num}% accepted"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexed in {$indexList}"
+msgstr "Indexed: {$indexList}"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
-msgstr "{$num} indexes average"
+msgstr "{$num} indexes"
 
 msgid "plugins.generic.pfl.factsForArticle"
 msgstr "Publication Facts for article"
 
 msgid "plugins.generic.pfl.forThisResearchArticle"
-msgstr "For this research article"
+msgstr "For this article"
 
 msgid "plugins.generic.pfl.forOtherArticles"
-msgstr "For other articles"
+msgstr "Other articles"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
 msgstr "<a href=\"{$peerReviewersUrl}\">Peer reviewers</a>: {$num}"
@@ -66,10 +66,10 @@ msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num} average"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interests: <a href=\"{$competingInterestsUrl}\">Yes</a>"
+msgstr "Competing interest: <a href=\"{$competingInterestsUrl}\">Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
-msgstr "Competing interests: No"
+msgstr "Competing interest: No"
 
 msgid "plugins.generic.pfl.percentYes"
 msgstr "{$num}% yes"
@@ -90,7 +90,7 @@ msgid "plugins.generic.pfl.informationAlt"
 msgstr "Information"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn more about a publication fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
+msgstr "To learn more about a fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
 
 msgid "plugins.generic.pfl.closeLabel"
 msgstr "Close dialog"
