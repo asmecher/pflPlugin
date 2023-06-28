@@ -50,17 +50,7 @@
 <!-- https://github.com/KittyGiraudel/a11y-dialog -->
 <script
   defer
-  src="{$baseUrl}/plugins/generic/pflPlugin/js/lib/a11y-dialog.min.js"
-></script>
-<!-- https://github.com/vercel/body-scroll-lock , discussion here https://github.com/willmcpo/body-scroll-lock/issues/257 -->
-<script
-  defer
-  src="{$baseUrl}/plugins/generic/pflPlugin/js/lib/bodyScrollLock.min.js"
-></script>
-
-<script
-  defer
-  src="{$baseUrl}/plugins/generic/pflPlugin/js/pfl-controller.js"
+  src="{$baseUrl}/plugins/generic/pflPlugin/dist/pflplugin.iife.js"
 ></script>
 
 <script>
