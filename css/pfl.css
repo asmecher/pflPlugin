@@ -1,13 +1,12 @@
 
 
 .publication-facts-label {
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Archivo-Light", "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: 400;
 
   display: flex;
-  justify-content: center;
-  padding-top: 1em;
+  padding-top: 2.6em;
 }
 
 .publication-facts-label .pfl-flex {
@@ -40,11 +39,20 @@
   border-style: solid;
   border-color: #616161;
   max-width: 460px;
+  
+  padding-top: 0.05em;
+  padding-left: 0.2em;
+  padding-right: 0.2em
+}
+
+.publication-facts-label .pfl-container.expanded {
+  width: 335px;
   padding-top: 0.3em;
   padding-bottom: 0em;
-  padding-left: 0.5em;
-  padding-right: 0.5em
+
 }
+
+
 
 .publication-facts-label button {
   border: none;
@@ -57,9 +65,9 @@
 }
 
 .publication-facts-label #pfl-button-open-facts {
-  font-family: Barlow-Black;
+  font-family: Barlow-Bold;
   font-weight: 700; 
-  font-size: 3.25em;
+  font-size: 2.14em;
   color: #616161;
   width:100%;
   padding-left: 3px;
@@ -77,8 +85,8 @@
 
 .publication-facts-label p.pfl-table-footer {
   text-align: center;
-  margin-bottom: 0.4em;
-  margin-top: 0.4em;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
   font-size: 14px;
 }
 .publication-facts-label p.pfl-table-footer .pfl-info-icon {
@@ -105,17 +113,22 @@
 }
 
 .publication-facts-label .pfl-info-icon {
-  margin-bottom: -0.25em;
+  margin-bottom: -0.30em;
 }
 
 .publication-facts-label th .pfl-info-icon {
+  margin-bottom: -0.25em;
+}
+
+.pfl-table-footer .pfl-info-icon {
   margin-bottom: -0.15em;
 }
 
 
+
 .publication-facts-label .pfl-orcid-icon img {
   height: 18px;
-  margin-bottom: -0.18em;
+  margin-bottom: -0.3em;
   margin-left: 0.1em;
   margin-right: 0.1em;
 }
@@ -153,7 +166,7 @@
 }
 
 .publication-facts-label table th:first-of-type {
-  width: 57%;
+  width: 60%;
 }
 
 
@@ -184,17 +197,17 @@
   padding-left: 0.3em; 
   padding-right: 0em; 
   padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.35em;
 }
 
 .publication-facts-label table td {
   padding-left: 0.3em; 
   padding-right: 0.3em; 
-  padding-top: 0.65em;
-  padding-bottom: 0.55em;
+  padding-top: 0.25em;
+  padding-bottom: 0.2em;
   vertical-align: top;
 }
-
+/*
 @media only screen and (max-width: 500px) {
   .publication-facts-label {
     font-size: 14px;
@@ -217,7 +230,7 @@
     padding: 0em 0.35em 0.4em 0.35em;
   } 
 }
-
+*/
 
 
 /**
@@ -294,6 +307,7 @@
   font-weight: 700; 
   color: #222222;
   margin-bottom: 0.9em;
+  margin-top: 0em;
  }
 
  .publication-facts-label .pfl-dialog-content h2 {

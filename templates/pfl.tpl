@@ -62,19 +62,22 @@
             toggleButton.setAttribute("aria-expanded", "true")
             var toggleButton = document.getElementById("pfl-button-open-facts");
             var pflFactTable = document.getElementById("pfl-fact-table");
+            var pflContainer = document.getElementById("pfl-container");
+            pflContainer.classList.add("expanded");
             pflFactTable.style.display = "block";
             pflFactTable.focus();
         }
         else {
-            toggleButton.setAttribute("aria-expanded","false")
+            toggleButton.setAttribute("aria-expanded","false");
             var pflFactTable = document.getElementById("pfl-fact-table");
+            var pflContainer = document.getElementById("pfl-container");
+            pflContainer.classList.remove("expanded");
             pflFactTable.style.display = "none";
-
         }
     }
 </script>
 <div class="publication-facts-label">
-    <div class="pfl-container">
+    <div id="pfl-container" class="pfl-container">
         <!-- following Example1 from https://www.w3.org/WAI/GL/wiki/Using_the_WAI-ARIA_aria-expanded_state_to_mark_expandable_and_collapsible_regions#Example_1:_Using_a_button_to_collapse_and_expand_a_region -->
         <button id="pfl-button-open-facts" onclick="pflShowHideFactsLabel()" aria-controls="pfl-fact-table" aria-expanded="false">{translate key="plugins.generic.pfl.publicationFacts"}</button>
         <div id="pfl-fact-table" class="pfl-tables" role="region" tabindex="-1">
@@ -111,8 +114,11 @@
                                 </span>
                             </div>
                         </td>
-                        <td class="pfl-right-column">{translate key="plugins.generic.pfl.numOfferProfiles" num=$pflNumOfferProfilesClass}</td>
-                    </tr>
+                        <td class="pfl-right-column">
+                            <span class="pfl-orcid-icon">
+                                {translate key="plugins.generic.pfl.numOfferProfiles" num=$pflNumOfferProfilesClass orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}</td>
+                            </span>
+                        </tr>
                     <tr>
                         <td>
                             <div class="pfl-flex">

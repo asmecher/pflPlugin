@@ -24,19 +24,19 @@ msgid "plugins.generic.pfl.factsForJournal"
 msgstr "Publication Facts for journal"
 
 msgid "plugins.generic.pfl.forThisJournal"
-msgstr "For This Journal"
+msgstr "For this journal"
 
 msgid "plugins.generic.pfl.forOtherJournals"
-msgstr "For other journals"
+msgstr "Other journals"
 
 msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher:"
 
 msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Editorial Team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
+msgstr "<a href=\"{$editorialTeamUrl}\">Editorial team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\">"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
-msgstr "{$num}% offer profiles"
+msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "Articles accepted: {$num}%"
@@ -45,19 +45,19 @@ msgid "plugins.generic.pfl.numArticlesAcceptedShort"
 msgstr "{$num}% accepted"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexed in {$indexList}"
+msgstr "Indexed: {$indexList}"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
-msgstr "{$num} indexes average"
+msgstr "{$num} indexes"
 
 msgid "plugins.generic.pfl.factsForArticle"
 msgstr "Publication Facts for article"
 
 msgid "plugins.generic.pfl.forThisResearchArticle"
-msgstr "For this research article"
+msgstr "For this article"
 
 msgid "plugins.generic.pfl.forOtherArticles"
-msgstr "For other articles"
+msgstr "Other articles"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
 msgstr "<a href=\"{$peerReviewersUrl}\">Peer reviewers</a>: {$num}"
@@ -90,7 +90,7 @@ msgid "plugins.generic.pfl.informationAlt"
 msgstr "Information"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn more about a publication fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
+msgstr "To learn more about a fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
 
 msgid "plugins.generic.pfl.closeLabel"
 msgstr "Close dialog"
@@ -117,7 +117,7 @@ msgstr ""
 
 msgid "plugins.generic.pfl.information.forOtherJournals"
 msgstr ""
-"<h2>For other journals</h2>"
+"<h2>Other journals</h2>"
 "<ul>"
 "  <li>This column compiles data drawn from other journals that employ the Publication Facts Label (PFL).</li>"
 "  <li>The PFL is currently limited to journals using Open Journal Systems (3.5) as a publishing platform.</li>"
@@ -172,7 +172,7 @@ msgstr ""
 
 msgid "plugins.generic.pfl.information.forOtherArticles"
 msgstr ""
-"<h2>For other articles</h2>"
+"<h2>Other articles</h2>"
 "<ul>"
 "  <li>This column presents data drawn from articles published in this and other journals that employ the Publication Facts Label (PFL).</li>"
 "  <li>The PFL is currently limited to journals using Open Journal Systems (3.5) as a publishing platform.</li>"
