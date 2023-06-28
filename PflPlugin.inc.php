@@ -111,7 +111,7 @@ class PflPlugin extends GenericPlugin {
         $templateMgr->assign([
             'pflNumOfferProfilesClass' => 65,
             'pflNumAcceptedClass' => 13,
-            'pflNumIndexesClass' => '15.6',
+            'pflNumIndexesClass' => '3.4',
         ]);
 
         // If we're viewing an article-specific page...
@@ -135,19 +135,30 @@ class PflPlugin extends GenericPlugin {
 
         // FIXME: Add fake data overrides for testing purposes.
         $templateMgr->assign([
-            // Journal-wide
+            // Journal-wide fake data
             'pflPublisherName' => 'Ubiquity Press',
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
             'pflAcceptedPercent' => 8,
             'pflIndexList' => ["https://scholar.google.com/" => 'GS', "https://www.nlm.nih.gov/medline/medline_overview.html" => 'M', "https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/" => 'WS', "https://www.elsevier.com/solutions/scopus" => 'S'],
             'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
-            // Article-specific
-            'pflReviewerCount' => 2,
-            'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
-            'pflCompetingInterestsUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci',
-            'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
-            'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'],
         ]);
+        if ($article) {
+            // Article-specific fake data
+            $templateMgr->assign([
+                'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
+                'pflReviewerCount' => 2,
+            ]);
+            if ($article->getId() == 2268) $templateMgr->assign([ // Dog Genomics
+                'pflCompetingInterestsUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci',
+                'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
+                'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'],
+            ]);
+            else $templateMgr->assign([ // Academic Achievement
+                'pflCompetingInterestsUrl' => null,
+                'pflDataAvailabilityUrl' => null,
+                'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'],
+            ]);
+        }
 
         $templateMgr->display($this->getTemplateResource('pfl.tpl'));
         return false;
