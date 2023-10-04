@@ -85,7 +85,7 @@ msgid "plugins.generic.pfl.funders"
 msgstr "Financiadores: {$funderList}"
 
 msgid "plugins.generic.pfl.numHaveFunders"
-msgstr "{$num} con financiadores"
+msgstr "{$num}% con financiadores"
 
 msgid "plugins.generic.pfl.informationAlt"
 msgstr "Información"
