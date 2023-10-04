@@ -107,12 +107,9 @@ class PflPlugin extends GenericPlugin {
             'pflIndexList' => [], // FIXME: Data not yet available
             'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
         ]);
-        // Journal class data
-        $templateMgr->assign([
-            'pflNumOfferProfilesClass' => 65,
-            'pflNumAcceptedClass' => 13,
-            'pflNumIndexesClass' => '3.4',
-        ]);
+
+        // Class data
+        $templateMgr->assign(json_decode(file_get_contents(dirname(__FILE__) . '/classData.json'), JSON_OBJECT_AS_ARRAY));
 
         // If we're viewing an article-specific page...
         if ($article = $templateMgr->getTemplateVars('article')) {
@@ -123,13 +120,6 @@ class PflPlugin extends GenericPlugin {
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
                 'pflFunderList' => [], // FIXME: Data not yet available
-            ]);
-            // Article class data
-            $templateMgr->assign([
-                'pflReviewerCountClass' => '2.4',
-                'pflCompetingInterestsPercentClass' => 11,
-                'pflDataAvailabilityPercentClass' => 16,
-                'pflNumHaveFundersClass' => 32,
             ]);
         }
 
