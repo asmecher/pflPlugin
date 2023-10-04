@@ -102,7 +102,7 @@ class PflPlugin extends GenericPlugin {
             'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
             'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
             'pflPublisherName' => $journal->getData('publisherInstitution'),
-            'pflPublisherUrl' => null, // FIXME: https://github.com/asmecher/pflPlugin/issues/2
+            'pflPublisherUrl' => $journal->getData('publisherUrl'),
             'pflNumOfferProfiles' => null, // FIXME: Data not yet available
             'pflIndexList' => [], // FIXME: Data not yet available
             'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
