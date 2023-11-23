@@ -97,6 +97,14 @@ class PflPlugin extends GenericPlugin {
         $templateMgr = TemplateManager::getManager();
         if ($templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
 
+        $pflIndexList = [];
+        $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
+        if ($this->getSetting($journal->getId(), 'includeDoaj')) $pflIndexList["https://doaj.org/toc/{$onlineIssn}"] = 'DOAJ';
+        if ($this->getSetting($journal->getId(), 'includeScholar')) $pflIndexList["https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={$onlineIssn}&btnG="] = 'GS';
+        if ($this->getSetting($journal->getId(), 'includeMedline')) $pflIndexList["https://www.ncbi.nlm.nih.gov/nlmcatalog/?term=${onlineIssn}[ISSN]"] = 'M';
+        if ($this->getSetting($journal->getId(), 'includeLatindex')) $pflIndexList["https://latindex.org/latindex/Solr/Busqueda?idModBus=0&buscar={$onlineIssn}&submit=Buscar"] = 'L';
+        if ($scopusUrl = $this->getSetting($journal->getId(), 'scopusUrl')) $pflIndexList[$scopusUrl] = 'S';
+
         // Journal-specific PFL data
         $templateMgr->assign([
             'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
@@ -104,7 +112,7 @@ class PflPlugin extends GenericPlugin {
             'pflPublisherName' => $journal->getData('publisherInstitution'),
             'pflPublisherUrl' => $journal->getData('publisherUrl'),
             'pflNumOfferProfiles' => null, // FIXME: Data not yet available
-            'pflIndexList' => [], // FIXME: Data not yet available
+            'pflIndexList' => $pflIndexList,
             'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
         ]);
 
@@ -129,7 +137,7 @@ class PflPlugin extends GenericPlugin {
             'pflPublisherName' => 'Ubiquity Press',
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
             'pflAcceptedPercent' => 8,
-            'pflIndexList' => ["https://scholar.google.com/" => 'GS', "https://www.nlm.nih.gov/medline/medline_overview.html" => 'M', "https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/" => 'WS', "https://www.elsevier.com/solutions/scopus" => 'S'],
+            'pflIndexList' => ['https://scholar.google.com/' => 'GS', 'https://www.nlm.nih.gov/medline/medline_overview.html' => 'M', 'https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/' => 'WS', 'https://www.elsevier.com/solutions/scopus' => 'S'],
             'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
         ]);
         if ($article) {
@@ -153,4 +161,67 @@ class PflPlugin extends GenericPlugin {
         $templateMgr->display($this->getTemplateResource('pfl.tpl'));
         return false;
     }
+
+	/**
+	 * @see Plugin::getActions()
+	 */
+	public function getActions($request, $actionArgs) {
+
+		$actions = parent::getActions($request, $actionArgs);
+
+		if (!$this->getEnabled()) {
+			return $actions;
+		}
+
+		$router = $request->getRouter();
+		import('lib.pkp.classes.linkAction.request.AjaxModal');
+		$linkAction = new LinkAction(
+			'settings',
+			new AjaxModal(
+				$router->url(
+					$request,
+					null,
+					null,
+					'manage',
+					null,
+					array(
+						'verb' => 'settings',
+						'plugin' => $this->getName(),
+						'category' => 'generic'
+					)
+				),
+				$this->getDisplayName()
+			),
+			__('manager.plugins.settings'),
+			null
+		);
+
+		array_unshift($actions, $linkAction);
+
+		return $actions;
+	}
+
+	/**
+	 * @see Plugin::manage()
+	 */
+	public function manage($args, $request) {
+		switch ($request->getUserVar('verb')) {
+			case 'settings':
+				$this->import('PflSettingsForm');
+				$form = new PflSettingsForm($this);
+
+				if ($request->getUserVar('save')) {
+					$form->readInputData();
+					if ($form->validate()) {
+						$form->execute();
+						return new JSONMessage(true);
+					}
+				}
+
+				$form->initData();
+				return new JSONMessage(true, $form->fetch($request));
+		}
+		return parent::manage($args, $request);
+	}
+
 }

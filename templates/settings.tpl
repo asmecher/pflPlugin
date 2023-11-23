@@ -1,0 +1,51 @@
+{**
+ * plugins/generic/pflPlugin/templates/settings.tpl
+ *
+ * Copyright (c) 2023 Simon Fraser University
+ * Copyright (c) 2023 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+ *
+ * Form to configure publication facts label plugin
+ *
+ *}
+<script>
+	$(function() {ldelim}
+		// Attach the form handler.
+		$('#pflPluginSettingsForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
+	{rdelim});
+</script>
+
+<form class="pkp_form" id="pflPluginSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" save=true}">
+	{csrf}
+
+	{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.settings.indexes"}
+		<div id="description">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
+		<br />
+		{fbvFormSection list="true" title="plugins.generic.pflPlugin.settings.indexes.automatic"}
+			{fbvElement type="checkbox" id="includeDoaj" checked=$includeDoaj|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.doaj"}
+			{fbvElement type="checkbox" id="includeScholar" checked=$includeScholar|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.scholar"}
+			{fbvElement type="checkbox" id="includeLatindex" checked=$includeLatindex|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.latindex"}
+			{fbvElement type="checkbox" id="includeMedline" checked=$includeMedline|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.medline"}
+		{/fbvFormSection}
+
+		{fbvFormSection title="plugins.generic.pflPlugin.settings.indexes.manual"}
+			<ol>
+				<li>
+					{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus"}
+					<ol style="list-style-type: lower-alpha;">
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step1"}</li>
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step2"}</li>
+						<li>
+							{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step3"}
+							{fbvElement type="text" id="scopusUrl" value=$scopusUrl label="common.url"}
+						</li>
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"}</li>
+					</ol>
+				</li>
+			</ol>
+		{/fbvFormSection}
+
+	{/fbvFormArea}
+
+	{fbvFormButtons}
+</form>

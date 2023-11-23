@@ -17,6 +17,48 @@ msgstr "Publication Facts Label plugin"
 msgid "plugins.generic.pfl.description"
 msgstr "This plugin adds a sidebar block with statistics to indicate the journal's integrity characteristics to readers."
 
+msgid "plugins.generic.pflPlugin.settings.indexes"
+msgstr "Journal's Index Listings"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.description"
+msgstr "Under the heading \"Indexed\" in the Publication Facts Label (PFL), readers will be presented with up to four indexes in which the journal appears. Four of the indexes below offer broad coverage, while MEDLINE covers the health sciences and Latindex covers Latin America (see Info below). The indexes enable their journal listing to be publicly displayed (even when the index is otherwise closed). While two of the indexes can be automatically checked, the other four require you to search for the journal in the index and, if found, add it to the PFL."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic"
+msgstr "Automated Listing of Indexes in the PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj"
+msgstr "Directory of Open Access Journals"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.scholar"
+msgstr "Google Scholar"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline"
+msgstr "MEDLINE"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex"
+msgstr "Latindex"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual"
+msgstr "Manual Listing of Indexes in the PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus"
+msgstr "<strong>Scopus</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Scopus\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid"
+msgstr "The Scopus URL you entered is not correct. Please read the instructions and try again."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step1"
+msgstr "Go to Scopus' <a href=\"https://www.scopus.com/sources.uri?zone=TopNavBar&origin=\" target=\"_new\">Sources</a> page and select \"Title\" from the pulldown menu."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step2"
+msgstr "Enter the journal title and if indexed, it will appear as a \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step3"
+msgstr "Click on the title and paste the resulting page's URL here:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"
+msgstr "If the journal is not indexed, here is the <a target=\"_new\" href=\"https://www.elsevier.com/solutions/scopus/how-scopus-works/content/content-policy-and-selection\">process</a> for inclusion."
+
 msgid "plugins.generic.pfl.publicationFacts"
 msgstr "Publication Facts"
 

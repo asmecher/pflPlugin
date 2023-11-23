@@ -135,6 +135,8 @@
                                 {capture assign="pflIndexListMarkup"}
                                   {foreach from=$pflIndexList item=pflIndexListItemName key=pflIndexListItemUrl}
                                     <a href="{$pflIndexListItemUrl|escape}" target-"_blank">{$pflIndexListItemName|escape}</a>
+                                  {foreachelse}
+                                    &mdash;
                                   {/foreach}
                                 {/capture}
                                 <span>{translate key="plugins.generic.pfl.indexedIn" indexList=$pflIndexListMarkup}</span>
