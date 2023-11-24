@@ -17,6 +17,7 @@
 
 <form class="pkp_form" id="pflPluginSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" save=true}">
 	{csrf}
+	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="pflPluginSettingsFormNotification"}
 
 	{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.settings.indexes"}
 		<div id="description">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
@@ -25,7 +26,7 @@
 			{fbvElement type="checkbox" id="includeDoaj" checked=$includeDoaj|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.doaj"}
 			{fbvElement type="checkbox" id="includeScholar" checked=$includeScholar|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.scholar"}
 			{fbvElement type="checkbox" id="includeLatindex" checked=$includeLatindex|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.latindex"}
-			{fbvElement type="checkbox" id="includeMedline" checked=$includeMedline|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.medline"}
+			{fbvElement type="checkbox" id="includeMedline" name="includeMedline" checked=$includeMedline|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.medline"}
 		{/fbvFormSection}
 
 		{fbvFormSection title="plugins.generic.pflPlugin.settings.indexes.manual"}
@@ -42,9 +43,20 @@
 						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"}</li>
 					</ol>
 				</li>
+				<li>
+					{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos"}
+					<ol style="list-style-type: lower-alpha;">
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step1"}</li>
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step2"}</li>
+						<li>
+							{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step3"}
+							{fbvElement type="text" id="wosUrl" value=$wosUrl label="common.url"}
+						</li>
+						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step4"}</li>
+					</ol>
+				</li>
 			</ol>
 		{/fbvFormSection}
-
 	{/fbvFormArea}
 
 	{fbvFormButtons}

@@ -104,6 +104,7 @@ class PflPlugin extends GenericPlugin {
         if ($this->getSetting($journal->getId(), 'includeMedline')) $pflIndexList["https://www.ncbi.nlm.nih.gov/nlmcatalog/?term=${onlineIssn}[ISSN]"] = 'M';
         if ($this->getSetting($journal->getId(), 'includeLatindex')) $pflIndexList["https://latindex.org/latindex/Solr/Busqueda?idModBus=0&buscar={$onlineIssn}&submit=Buscar"] = 'L';
         if ($scopusUrl = $this->getSetting($journal->getId(), 'scopusUrl')) $pflIndexList[$scopusUrl] = 'S';
+        if ($wosUrl = $this->getSetting($journal->getId(), 'wosUrl')) $pflIndexList[$wosUrl] = 'WS';
 
         // Journal-specific PFL data
         $templateMgr->assign([

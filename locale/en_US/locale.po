@@ -29,14 +29,23 @@ msgstr "Automated Listing of Indexes in the PFL"
 msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj"
 msgstr "Directory of Open Access Journals"
 
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj.validationFailed"
+msgstr "The journal's indexing in DOAJ could not be verified. Ensure that your journal is indexed and the appropriate ISSN is configured in Journal Settings."
+
 msgid "plugins.generic.pflPlugin.settings.indexes.automatic.scholar"
 msgstr "Google Scholar"
 
 msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline"
 msgstr "MEDLINE"
 
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline.validationFailed"
+msgstr "The journal's indexing in MEDLINE could not be verified. Ensure that your journal is indexed and the appropriate ISSN is configured in Journal Settings."
+
 msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex"
 msgstr "Latindex"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex.validationFailed"
+msgstr "The journal's indexing in Latindex could not be verified. Ensure that your journal is indexed and the appropriate ISSN is configured in Journal Settings."
 
 msgid "plugins.generic.pflPlugin.settings.indexes.manual"
 msgstr "Manual Listing of Indexes in the PFL"
@@ -58,6 +67,24 @@ msgstr "Click on the title and paste the resulting page's URL here:"
 
 msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"
 msgstr "If the journal is not indexed, here is the <a target=\"_new\" href=\"https://www.elsevier.com/solutions/scopus/how-scopus-works/content/content-policy-and-selection\">process</a> for inclusion."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos"
+msgstr "<strong>Web of Science</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Web_of_Science\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.urlInvalid"
+msgstr "The Web of Science URL you entered is not correct. Please read the instructions and try again."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step1"
+msgstr "Go to the <a href=\"https://mjl.clarivate.com/search-results\" target=\"_new\">Web of Science</a> and enter the name of the journal in the search box."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step2"
+msgstr "If indexed in the Web of Science, it will appear as a \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step3"
+msgstr "Copy the URL by \"Share This Journal\" and paste it here:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step4"
+msgstr "If the journal is not indexed, here is the <a target=\"_new\" href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/web-of-science-core-collection/editorial-selection-process/\">process</a> for inclusion."
 
 msgid "plugins.generic.pfl.publicationFacts"
 msgstr "Publication Facts"
