@@ -135,10 +135,16 @@ msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num} average"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interests: <a href=\"{$competingInterestsUrl}\">Yes</a>"
+msgstr "Competing interests: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-competing-interests-data\">Yes</button>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "Competing interests: No"
+
+msgid "plugins.generic.pfl.competingInterests"
+msgstr "Competing Interests"
+
+msgid "plugins.generic.pfl.competingInterests.description"
+msgstr "The following authors have listed Competing Interests:"
 
 msgid "plugins.generic.pfl.percentYes"
 msgstr "{$num}% yes"

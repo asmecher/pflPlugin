@@ -122,10 +122,17 @@ class PflPlugin extends GenericPlugin {
 
         // If we're viewing an article-specific page...
         if ($article = $templateMgr->getTemplateVars('article')) {
+            $publication = $templateMgr->getTemplateVars('publication');
             // Article-specific PFL data
+            if ($journal->getData('requireAuthorCompetingInterests')) {
+                $competingInterests = [];
+                foreach ($publication->getData('authors') as $author) {
+                    $competingInterests[$author->getId()] = $author->getLocalizedCompetingInterests();
+                }
+            } else $competingInterests = null;
             $templateMgr->assign([
                 'pflReviewerCount' => $this->getReviewerCount($article->getId()),
-                'pflCompetingInterestsUrl' => null, // FIXME: URL not yet available
+                'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
                 'pflFunderList' => [], // FIXME: Data not yet available
@@ -148,12 +155,11 @@ class PflPlugin extends GenericPlugin {
                 'pflReviewerCount' => 2,
             ]);
             if ($article->getId() == 2268) $templateMgr->assign([ // Dog Genomics
-                'pflCompetingInterestsUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci',
+                // 'pflCompetingInterests' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci', FIXME: We're not using standalone URLs anymore
                 'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
                 'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'],
             ]);
             else $templateMgr->assign([ // Academic Achievement
-                'pflCompetingInterestsUrl' => null,
                 'pflDataAvailabilityUrl' => null,
                 'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'],
             ]);

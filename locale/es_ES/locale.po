@@ -67,7 +67,7 @@ msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num} promedio"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Conflicto de intereses: <a href=\"{$competingInterestsUrl}\">Yes</a>"
+msgstr "Conflicto de intereses: <button data-a11y-dialog-show="pfl-modal-competing-interests-data">Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "Conflicto de intereses: No"

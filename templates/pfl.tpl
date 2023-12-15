@@ -175,8 +175,8 @@
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-competing-interests"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
                                 <span>
-                                    {if $pflCompetingInterestsUrl}
-                                        {translate key="plugins.generic.pfl.competingInterests.yes" competingInterestsUrl=$pflCompetingInterestsUrl}
+                                    {if $pflCompetingInterests}
+                                        {translate key="plugins.generic.pfl.competingInterests.yes"}
                                     {else}
                                         {translate key="plugins.generic.pfl.competingInterests.no"}
                                     {/if}
@@ -395,6 +395,36 @@
             <h1 id="pfl-modal-competing-interests-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
             {translate key="plugins.generic.pfl.information.competingInterests"}
+            <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
+        </div>
+    </div>
+
+    <!-- Competing interests data -->
+    <div
+        id="pfl-modal-competing-interests-data"
+        class="pfl-dialog-container"
+        aria-labelledby="pfl-modal-competing-interests-data-title"
+        aria-hidden="true"
+    >
+        <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
+        <div class="pfl-dialog-content" role="document">
+            <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            </button>
+            <h1 id="pfl-modal-competing-interests-data-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
+            <hr/>
+            <h2>{translate key="plugins.generic.pfl.competingInterests"}</h2>
+            <p>{translate key="plugins.generic.pfl.competingInterests.description"}</p>
+            <ul>
+              {if $pflCompetingInterests}{foreach from=$pflCompetingInterests item=competingInterest key=authorId}
+                {foreach from=$publication->getData('authors') item=author}
+                  {if $pflCompetingInterests[$author->getId()]}
+                    <li><strong>{$author->getFullName()|escape}</strong>{$pflCompetingInterests[$author->getId()]|strip_unsafe_html}</li>
+                  {/if}
+                {/foreach}
+              {/foreach}{/if}
+              </li>
+            </ul>
             <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
         </div>
     </div>

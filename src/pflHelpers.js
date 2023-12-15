@@ -17,6 +17,7 @@ export function initModals() {
 		'pfl-modal-articles-accepted',
 		'pfl-modal-peer-reviewers',
 		'pfl-modal-competing-interests',
+		'pfl-modal-competing-interests-data',
 		'pfl-modal-data-availability',
 		'pfl-modal-funders'
 	];
