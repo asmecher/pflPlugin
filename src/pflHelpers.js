@@ -19,7 +19,8 @@ export function initModals() {
 		'pfl-modal-competing-interests',
 		'pfl-modal-competing-interests-data',
 		'pfl-modal-data-availability',
-		'pfl-modal-funders'
+		'pfl-modal-funders',
+		'pfl-modal-funders-data'
 	];
 	let modalsStack = [];
 	modalIds.forEach(function(modalId) {

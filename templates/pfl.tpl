@@ -205,12 +205,11 @@
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-funders"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
                                 <span>
-                                    {capture assign="pflFunderListMarkup"}
-                                      {foreach from=$pflFunderList item=pflFunderListItemName key=pflFunderListItemUrl}
-                                        <a href="{$pflFunderListItemUrl|escape}" target-"_blank">{$pflFunderListItemName|escape}</a>
-                                      {/foreach}
-                                    {/capture}
-                                    {translate key="plugins.generic.pfl.funders" funderList=$pflFunderListMarkup}
+                                    {if $pflFunderList}
+                                      {translate key="plugins.generic.pfl.funders.yes"}
+                                    {else}
+                                      {translate key="plugins.generic.pfl.funders.no"}
+                                    {/if}
                                 </span>
                             </div>
                         </td>
@@ -462,13 +461,38 @@
             </button>
             <h1 id="pfl-modal-funders-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
             <hr/>
-            {translate key="plugins.generic.pfl.information.funders" }
+            {translate key="plugins.generic.pfl.information.funders"}
             <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
         </div>
     </div>
 
-
-
+    <!-- Funders data -->
+    <div
+        id="pfl-modal-funders-data"
+        class="pfl-dialog-container"
+        aria-labelledby="pfl-modal-funders-data-title"
+        aria-hidden="true"
+    >
+        <div class="pfl-dialog-overlay" data-a11y-dialog-hide></div>
+        <div class="pfl-dialog-content" role="document">
+            <button type="button" class="pfl-dialog-close-button" data-a11y-dialog-hide aria-label="{translate key="plugins.generic.pfl.closeLabel"}">
+            <span>{translate key="plugins.generic.pfl.close"}</span> <img class="pfl-info-icon" alt="" src="{$baseUrl}/plugins/generic/pflPlugin/img/close_icon.svg" />
+            </button>
+            <h1 id="pfl-modal-funders-data-title">{translate key="plugins.generic.pfl.modalTitle"}</h1>
+            <hr/>
+            <h2>{translate key="plugins.generic.pfl.funders"}</h2>
+            <p>{translate key="plugins.generic.pfl.funders.description"}</p>
+            <ul>
+              {if $pflFunderList}{foreach from=$pflFunderList item=fundData}
+                {assign var="funderSearch" value=$fundData.funderIdentification|explode:"/"}
+                <li><strong><a href="https://search.crossref.org/search/funders?id={$funderSearch[4]|escape}&from_ui=yes">{$fundData.funderName|escape}</a></strong>: {$fundData.funderAwards|escape}
+                </li>
+              {/foreach}{/if}
+              </li>
+            </ul>
+            <p class="pfl-modal-footer">{translate key="plugins.generic.pfl.modalFooter"}</p>
+        </div>
+    </div>
 
 </div>
 

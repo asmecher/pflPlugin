@@ -13,6 +13,8 @@
 import('lib.pkp.classes.plugins.GenericPlugin');
 
 class PflPlugin extends GenericPlugin {
+    var $templateMgr;
+
     /**
      * @copydoc Plugin::register()
      */
@@ -22,10 +24,17 @@ class PflPlugin extends GenericPlugin {
                 // HACK: We don't have a hook for the appropriate spot in the page presentation, so we watch for
                 // the page footer template to be looked up. When that happens, we output the PFL markup directly.
                 HookRegistry::register('TemplateResource::getFilename', [$this, 'getFilenameHook']);
+
+                // HACK: The funding plugin stores data in the TemplateManager but it appears to be a different instance.
+                HookRegistry::register('Templates::Article::Details', [$this, 'stashTemplateManager']);
             }
             return true;
         }
         return false;
+    }
+
+    function stashTemplateManager($hookName, $args) {
+        $this->templateMgr = $args[1];
     }
 
     /**
@@ -94,8 +103,7 @@ class PflPlugin extends GenericPlugin {
         // Only journal homepages and article landing pages get the PFL.
         if (!in_array($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request), ['article/view', 'index/index'])) return false;
 
-        $templateMgr = TemplateManager::getManager();
-        if ($templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
+        if ($this->templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
 
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
@@ -107,7 +115,7 @@ class PflPlugin extends GenericPlugin {
         if ($wosUrl = $this->getSetting($journal->getId(), 'wosUrl')) $pflIndexList[$wosUrl] = 'WS';
 
         // Journal-specific PFL data
-        $templateMgr->assign([
+        $this->templateMgr->assign([
             'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
             'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
             'pflPublisherName' => $journal->getData('publisherInstitution'),
@@ -118,11 +126,11 @@ class PflPlugin extends GenericPlugin {
         ]);
 
         // Class data
-        $templateMgr->assign(json_decode(file_get_contents(dirname(__FILE__) . '/classData.json'), JSON_OBJECT_AS_ARRAY));
+        $this->templateMgr->assign(json_decode(file_get_contents(dirname(__FILE__) . '/classData.json'), JSON_OBJECT_AS_ARRAY));
 
         // If we're viewing an article-specific page...
-        if ($article = $templateMgr->getTemplateVars('article')) {
-            $publication = $templateMgr->getTemplateVars('publication');
+        if ($article = $this->templateMgr->getTemplateVars('article')) {
+            $publication = $this->templateMgr->getTemplateVars('publication');
             // Article-specific PFL data
             if ($journal->getData('requireAuthorCompetingInterests')) {
                 $competingInterests = [];
@@ -130,17 +138,17 @@ class PflPlugin extends GenericPlugin {
                     $competingInterests[$author->getId()] = $author->getLocalizedCompetingInterests();
                 }
             } else $competingInterests = null;
-            $templateMgr->assign([
+            $this->templateMgr->assign([
                 'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                 'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
-                'pflFunderList' => [], // FIXME: Data not yet available
+                'pflFunderList' => $this->templateMgr->getTemplateVars('funderData'),
             ]);
         }
 
         // FIXME: Add fake data overrides for testing purposes.
-        $templateMgr->assign([
+        $this->templateMgr->assign([
             // Journal-wide fake data
             'pflPublisherName' => 'Ubiquity Press',
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
@@ -150,22 +158,22 @@ class PflPlugin extends GenericPlugin {
         ]);
         if ($article) {
             // Article-specific fake data
-            $templateMgr->assign([
+            $this->templateMgr->assign([
                 'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
                 'pflReviewerCount' => 2,
             ]);
-            if ($article->getId() == 2268) $templateMgr->assign([ // Dog Genomics
+            if ($article->getId() == 2268) $this->templateMgr->assign([ // Dog Genomics
                 // 'pflCompetingInterests' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci', FIXME: We're not using standalone URLs anymore
                 'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
-                'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'],
+                // 'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'], // FIXME: We're taking data from the funding plugin
             ]);
-            else $templateMgr->assign([ // Academic Achievement
+            else $this->templateMgr->assign([ // Academic Achievement
                 'pflDataAvailabilityUrl' => null,
-                'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'],
+                // 'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'], // FIXME: We're taking data from the funding plugin
             ]);
         }
 
-        $templateMgr->display($this->getTemplateResource('pfl.tpl'));
+        $this->templateMgr->display($this->getTemplateResource('pfl.tpl'));
         return false;
     }
 

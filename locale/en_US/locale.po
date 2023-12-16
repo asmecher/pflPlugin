@@ -156,7 +156,16 @@ msgid "plugins.generic.pfl.dataAvailability.no"
 msgstr "Data availability: No"
 
 msgid "plugins.generic.pfl.funders"
-msgstr "Funders: {$funderList}"
+msgstr "Funders"
+
+msgid "plugins.generic.pfl.funders.yes"
+msgstr "Funders: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-funders-data\">Yes</button>"
+
+msgid "plugins.generic.pfl.funders.no"
+msgstr "Funders: No"
+
+msgid "plugins.generic.pfl.funders.description"
+msgstr "The following funders have been identified as funders of the research:"
 
 msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}% have funders"
