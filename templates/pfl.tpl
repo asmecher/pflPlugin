@@ -76,6 +76,7 @@
         }
     }
 </script>
+changes
 <div class="publication-facts-label">
     <div id="pfl-container" class="pfl-container">
         <!-- following Example1 from https://www.w3.org/WAI/GL/wiki/Using_the_WAI-ARIA_aria-expanded_state_to_mark_expandable_and_collapsible_regions#Example_1:_Using_a_button_to_collapse_and_expand_a_region -->
