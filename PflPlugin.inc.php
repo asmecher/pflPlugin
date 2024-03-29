@@ -26,6 +26,7 @@ class PflPlugin extends GenericPlugin {
                 HookRegistry::register('TemplateResource::getFilename', [$this, 'getFilenameHook']);
 
                 // HACK: The funding plugin stores data in the TemplateManager but it appears to be a different instance.
+                HookRegistry::register('Templates::Index::journal', [$this, 'stashTemplateManager']);
                 HookRegistry::register('Templates::Article::Details', [$this, 'stashTemplateManager']);
             }
             return true;
