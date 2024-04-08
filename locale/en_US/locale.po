@@ -87,34 +87,40 @@ msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step4"
 msgstr "If the journal is not indexed, here is the <a target=\"_new\" href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/web-of-science-core-collection/editorial-selection-process/\">process</a> for inclusion."
 
 msgid "plugins.generic.pfl.publicationFacts"
-msgstr "Publication Facts"
+msgstr "Publication Facts Label"
 
-msgid "plugins.generic.pfl.factsForJournal"
-msgstr "Publication Facts for journal"
+msgid "plugins.generic.pfl.factsForArticle"
+msgstr "Publication Facts for article"
 
-msgid "plugins.generic.pfl.forThisJournal"
-msgstr "For this journal"
+msgid "plugins.generic.pfl.thisArticle"
+msgstr "This article"
 
-msgid "plugins.generic.pfl.forOtherJournals"
-msgstr "Other journals"
+msgid "plugins.generic.pfl.otherArticles"
+msgstr "Other articles"
 
 msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher:"
 
-msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Editorial team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\">"
+msgid "plugins.generic.pfl.reviewerProfiles"
+msgstr "Reviewer <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> <a href=\"{$editorialTeamUrl}\">profiles</a> "
 
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
+
+msgid "plugins.generic.pfl.editorAndBoardMemberProfiles"
+msgstr "Editor & board member <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> <a href=\"{$editorialTeamUrl}\">profiles</a> "
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "Articles accepted: {$num}%"
 
 msgid "plugins.generic.pfl.numArticlesAcceptedShort"
-msgstr "{$num}% accepted"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.indexedIn"
 msgstr "Indexed: {$indexList}"
+
+msgid "plugins.generic.pfl.academicSociety"
+msgstr "Academic Society: <a href=\"\">FRHS</a>"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
@@ -122,20 +128,20 @@ msgstr "{$num} indexes"
 msgid "plugins.generic.pfl.factsForArticle"
 msgstr "Publication Facts for article"
 
-msgid "plugins.generic.pfl.forThisResearchArticle"
-msgstr "For this article"
+msgid "plugins.generic.pfl.forThisJournal"
+msgstr "This journal"
 
-msgid "plugins.generic.pfl.forOtherArticles"
-msgstr "Other articles"
+msgid "plugins.generic.pfl.otherJournals"
+msgstr "Other journals"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
-msgstr "<a href=\"{$peerReviewersUrl}\">Peer reviewers</a>: {$num}"
+msgstr "Peer reviewers: {$num}"
 
 msgid "plugins.generic.pfl.averagePeerReviewers"
-msgstr "{$num} average"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interests: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-competing-interests-data\">Yes</button>"
+msgstr "Competing interests: <button data-a11y-dialog-show=\"pfl-modal-competing-interests-data\"><a> Yes</a></button>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "Competing interests: No"
@@ -147,7 +153,10 @@ msgid "plugins.generic.pfl.competingInterests.description"
 msgstr "The following authors have listed Competing Interests:"
 
 msgid "plugins.generic.pfl.percentYes"
-msgstr "{$num}% yes"
+msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.authorStatements"
+msgstr "Author statements"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
 msgstr "Data availability: <a href=\"{$dataAvailabilityUrl}\">Yes</a>"
@@ -159,22 +168,25 @@ msgid "plugins.generic.pfl.funders"
 msgstr "Funders"
 
 msgid "plugins.generic.pfl.funders.yes"
-msgstr "Funders: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-funders-data\">Yes</button>"
+msgstr "External Funding: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-funders-data\">Yes</button>"
 
 msgid "plugins.generic.pfl.funders.no"
-msgstr "Funders: No"
+msgstr "External Funding: No"
 
 msgid "plugins.generic.pfl.funders.description"
 msgstr "The following funders have been identified as funders of the research:"
 
 msgid "plugins.generic.pfl.numHaveFunders"
-msgstr "{$num}% have funders"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationAlt"
 msgstr "Information"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn more about a fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
+msgstr "<span>To learn why these facts matter, click</span>"
+
+msgid "plugins.generic.pfl.maintainedByPKP"
+msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"
 
 msgid "plugins.generic.pfl.closeLabel"
 msgstr "Close dialog"

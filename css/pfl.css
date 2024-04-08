@@ -1,60 +1,149 @@
+/* DROPDOWN FIELD */
 
+.dropdown input {
+  width: 316px;
+  height: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 4px 4px 4px 4px;
+  padding: 0.4em 0.85em;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(0,0,0,0.54);
+  font-family: "Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen-Sans","Ubuntu","Cantarell","Helvetica Neue",sans-serif;
+
+}
+
+.dropdown input:focus {
+  outline: none;
+}
+
+.dropdown .textBox input {
+  color: #000 !important
+}
+
+
+#pfl-button-open-facts[aria-expanded="false"] .dropdown::after {
+  display: inline-block;
+  font: normal normal normal 12px / 1 FontAwesome;
+  content: "\f0d7";
+  position: relative;
+  right: 10%;
+}
+
+
+#pfl-button-open-facts[aria-expanded="true"] .dropdown::after {
+  display: inline-block;
+  font: normal normal normal 12px / 1 FontAwesome;
+  content: "\f0d7";
+  position: relative;
+  right: 10%;
+  transform: rotate(180deg);
+}
+
+
+.textBox.expanded {
+  border-top: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #000;
+  border-radius: 4px 4px 0px 0px;
+}
+
+
+/* FPL GENERAL STYLING */
 
 .publication-facts-label {
-  font-size: 14px;
-  font-family: "Archivo-Light", "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-weight: 400;
-
-  display: flex;
+  font-family: "Helvetica", sans-serif;
   padding-top: 2.6em;
+  width: fit-content;
 }
+
 
 .publication-facts-label .pfl-flex {
   display:flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  gap: 6px;
 }
+
+
+.publication-facts-label .pfl-flex-bold {
+  font-weight: 900;
+}
+
+
+.publication-facts-label .pfl-flex-theader {
+  display:flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #000000;
+  font-weight: 600;
+}
+
 
 .publication-facts-label .pfl-flex button {
   align-self: flex-start;
   margin-right: 0.3em;
 }
 
+
 .publication-facts-label a {
   text-decoration: underline;
-  font-family: "Archivo-Regular";
   font-weight: 500;
-
 }
 
 
 .publication-facts-label .pfl-flex button img {
   width: 16px;
   height: 16px;
-  max-width: none; /* fighting theme css*/
+  max-width: none;
 }
 
 
 .publication-facts-label .pfl-container {
-  display: inline-block;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #616161;
-  max-width: 460px;
-  
-  padding-top: 0.05em;
-  padding-left: 0.2em;
-  padding-right: 0.2em
+  color: #000;
 }
+ 
+.pfl-orcid-icon img {
+  width: 16px;
+  height: 16px;
+}
+
 
 .publication-facts-label .pfl-container.expanded {
-  width: 335px;
-  padding-top: 0.3em;
-  padding-bottom: 0em;
-
+  border-width: 2px;
+  border-style: solid;
+  border-color: #000000;
+  width: 316px;
+  padding-top: 0.4em;
+  padding-bottom: 0.2em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  margin-top: -2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+.publication-facts-label #pfl-title {
+  width: 300px;
+  fill: #000;
+  stroke-width: 0px;
+  text-align: center;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+}  
 
+.publication-facts-label p {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  line-height: 1.25rem;
+  margin: 0px 0px 0px 0px;
+}
 
 .publication-facts-label button {
+  height: fit-content;
+  text-align: left;
   border: none;
   cursor: pointer;
   appearance: none;
@@ -62,17 +151,17 @@
   padding: 0px;
   margin: 0px;
   color: #000000;
+  padding-inline: 0px;
+  padding-block: 0px;
 }
 
 .publication-facts-label #pfl-button-open-facts {
-  font-family: Barlow-Bold;
+  text-align: left;
   font-weight: 700; 
   font-size: 2.14em;
   color: #616161;
   width:100%;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-bottom: 0.1em;
+  width: fit-content;
 }
 
 .publication-facts-label #pfl-button-open-facts[aria-expanded="false"] {
@@ -83,20 +172,31 @@
   display: none;
 }
 
-.publication-facts-label p.pfl-table-footer {
-  text-align: center;
-  margin-bottom: 0.1em;
-  margin-top: 0.1em;
-  font-size: 14px;
+.publication-facts-label .pfl-table-footer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 0.3em;
+  font-size: 13px;
 }
-.publication-facts-label p.pfl-table-footer .pfl-info-icon {
-  width: 14px;
-  height: 14px;
+
+.publication-facts-label .pfl-table-subtitle {
+  text-align: center;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+  font-size: 12.75px;
+  font-weight: 400;
+}
+
+.publication-facts-label .pfl-table-footer .pfl-info-icon {
+  max-width: 16px;
+  width: auto;
+  height: auto;
 }
 
 
 .publication-facts-label a {
-  color: #0D0DF5;
+  color: #006798;
 }
 
 
@@ -121,26 +221,27 @@
 }
 
 .pfl-table-footer .pfl-info-icon {
-  margin-bottom: -0.15em;
+  margin-bottom: -0.1em;
 }
 
+.publication-facts-label .pfl-orcid-icon {
+  height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 
-
-.publication-facts-label .pfl-orcid-icon img {
-  height: 18px;
-  margin-bottom: -0.3em;
-  margin-left: 0.1em;
-  margin-right: 0.1em;
 }
 
-
-
+.publication-facts-label hr {
+  margin: 0 0;
+  color: #000000;
+  border: 1px solid #000000;
+}
 
 .publication-facts-label table {
   border: 0px solid;
   border-collapse: collapse;
   width: 100%;
-  /*font-size: 14px;*/
 }
 
 .publication-facts-label table thead {
@@ -165,48 +266,50 @@
 
 }
 
-.publication-facts-label table th:first-of-type {
-  width: 60%;
+.publication-facts-label table tbody tr {
+  border-bottom: 0.1px solid;
+  border-top: 0.1px solid;
+  border-color: #000000;
+  font-size: 18px;
+}
+
+.publication-facts-label table:first-of-type {
+  border-top: 0.7em solid;
+  border-color: #000000;
+}
+
+.publication-facts-label table:nth-of-type(2) {
+  border-top: 0.7em solid;
+  border-color: #000000;
 }
 
 
-.publication-facts-label table tbody tr {
-  border-bottom: 1px solid;
-  border-top: 1px solid;
-  border-color: #CCCCCC;
-
+.publication-facts-label table:last-of-type {
+  border-bottom: 0.4em solid;
 }
 
 .publication-facts-label table tbody tr:last-of-type {
   border-bottom: 0px solid;
-
 }
-
-.publication-facts-label table:last-of-type tbody {
-  border-bottom: 0.25em solid;
-}
-
 
 .publication-facts-label table th {
-  font-family: "Archivo-Medium";
   
-  font-weight: 700;
-  font-size: 1.0625em;
   text-align: left;
-  color: #222222;
-  padding-left: 0.3em; 
-  padding-right: 0em; 
-  padding-top: 0.5em;
-  padding-bottom: 0.35em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
 .publication-facts-label table td {
-  padding-left: 0.3em; 
-  padding-right: 0.3em; 
-  padding-top: 0.25em;
-  padding-bottom: 0.2em;
+  display:flex;
+  justify-content: space-between;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
   vertical-align: top;
 }
+
+
+/* MEDIA QUERIES WEREN'T ACTIVE IN LAST VERSION */
+
 /*
 @media only screen and (max-width: 500px) {
   .publication-facts-label {
@@ -231,134 +334,3 @@
   } 
 }
 */
-
-
-/**
- * 1. Make the dialog container, and its child overlay spread across
- *    the entire window.
- */
- .publication-facts-label .pfl-dialog-container,
- .publication-facts-label .pfl-dialog-overlay {
-   position: fixed; /* 1 */
-   top: 0; /* 1 */
-   right: 0; /* 1 */
-   bottom: 0; /* 1 */
-   left: 0; /* 1 */
- }
- 
- /**
-  * 1. Make sure the dialog container and all its descendants sits on
-  *    top of the rest of the page.
-  * 2. Make the dialog container a flex container to easily center the
-  *    dialog.
-  */
-  .publication-facts-label .pfl-dialog-container {
-   z-index: 2; /* 1 */
-   display: flex; /* 2 */
-
- }
- 
- /**
-  * 1. Make sure the dialog container and all its descendants are not
-  *    visible and not focusable when it is hidden.
-  */
-.publication-facts-label .pfl-dialog-container[aria-hidden='true'] {
-   display: none; /* 1 */
- }
- 
- /**
-  * 1. Make the overlay look like an overlay.
-  */
- .publication-facts-label .pfl-dialog-overlay {
-   background-color:  rgb(43 46 56 / 0.4); /* 1 */
- }
- 
- /**
-  * 1. Vertically and horizontally center the dialog in the page.
-  * 2. Make sure the dialog sits on top of the overlay.
-  * 3. Make sure the dialog has an opaque background.
-  */
-.publication-facts-label .pfl-dialog-content {
-   margin: auto; /* 1 */
-   z-index: 2; /* 2 */
-   position: relative; /* 2 */
-   background-color: white; /* 3 */
-   overflow-y: auto;
-   max-height: 80vh; 
-   max-width: 600px;
-   padding-left: 1.6em;
-   padding-right: 1.6em;
-   padding-top: 1.3em;
-   padding-bottom: 1.3em;
-
-   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-   border-radius: 15px;
-
- }
- 
- .publication-facts-label .pfl-dialog-content hr {
-  margin-left: -1.6em;
-  margin-right: -1.6em;
- }
-
- .publication-facts-label .pfl-dialog-content h1 {
-  font-family: Barlow-Bold;
-  font-size: 18px;
-  font-weight: 700; 
-  color: #222222;
-  margin-bottom: 0.9em;
-  margin-top: 0em;
- }
-
- .publication-facts-label .pfl-dialog-content h2 {
-  font-family: "Archivo-Medium";
-  font-weight: 700;
-  font-size: 16px;
-  color: #222222;
-  margin-top: 1em;
-  margin-bottom: 0em;
- }
-
- .publication-facts-label .pfl-dialog-content ul  {
-  margin-top: 0.2em;
-  padding-left: 1.5em;
-  color: #616161;
-  font-size: 14px;
- }
-
-
- .publication-facts-label .pfl-dialog-close-button {
-  color: #0D0DF5;
-  float: right;
-  border: none;
-  cursor: pointer;
-  appearance: none;
-  background-color: inherit;
-  margin-right: 0.6em;
-  margin-top: 0.3em;
-  margin-left: 1em;
-  font-size: 14px;
-}
-
-.publication-facts-label .pfl-dialog-close-button span {
-  text-decoration: underline;
-}
-
-
-.publication-facts-label .pfl-dialog-close-button img {
-  margin-bottom: -0.4em;
-}
-
-.publication-facts-label .pfl-modal-footer  {
-  text-align: right;
-  color: #222222;
-  font-size: 14px;
-  margin-top: 2em;
- }
-
- .publication-facts-label .pfl-modal-footer button  {
-  color: #0D0DF5;
-  text-decoration: underline;
- }
-
-
