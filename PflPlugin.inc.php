@@ -142,12 +142,16 @@ class PflPlugin extends GenericPlugin {
                     $competingInterests[$author->getId()] = $author->getLocalizedCompetingInterests();
                 }
             } else $competingInterests = null;
+
+            $publicationDate = new DateTime($publication->getData('datePublished'));
+            $submissionDate = new DateTime($article->getDateSubmitted());
             $this->templateMgr->assign([
                 'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                 'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
                 'pflFunderList' => $this->templateMgr->getTemplateVars('funderData'),
+                'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
             ]);
         }
 
