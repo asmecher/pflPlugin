@@ -28,6 +28,9 @@ class PflPlugin extends GenericPlugin {
                 // HACK: The funding plugin stores data in the TemplateManager but it appears to be a different instance.
                 HookRegistry::register('Templates::Index::journal', [$this, 'stashTemplateManager']);
                 HookRegistry::register('Templates::Article::Details', [$this, 'stashTemplateManager']);
+
+                // Present the information apge
+                HookRegistry::register('LoadHandler', [$this, 'callbackHandleContent']);
             }
             return true;
         }
@@ -175,6 +178,29 @@ class PflPlugin extends GenericPlugin {
         }
 
         $this->templateMgr->display($this->getTemplateResource('pfl.tpl'));
+        return false;
+    }
+
+    /**
+     * Declare the handler function to process the actual page
+     * @param $hookName string The name of the invoked hook
+     * @param $args array Hook parameters
+     * @return boolean Hook handling status
+     */
+    function callbackHandleContent($hookName, $args) {
+        $request = Application::get()->getRequest();
+        $templateMgr = TemplateManager::getManager($request);
+
+        $page =& $args[0];
+        $op =& $args[1];
+
+        if ($page == 'publicationFacts' && $op == 'index') {
+            define('HANDLER_CLASS', 'PflPluginHandler');
+            $this->import('PflPluginHandler');
+
+            PflPluginHandler::setPlugin($this);
+            return true;
+        }
         return false;
     }
 

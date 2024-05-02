@@ -17,6 +17,9 @@ msgstr "Publication Facts Label plugin"
 msgid "plugins.generic.pfl.description"
 msgstr "This plugin adds a sidebar block with statistics to indicate the journal's integrity characteristics to readers."
 
+msgid "plugins.generic.pflPlugin.about"
+msgstr "About the Publication Facts Label"
+
 msgid "plugins.generic.pflPlugin.settings.indexes"
 msgstr "Journal's Index Listings"
 
