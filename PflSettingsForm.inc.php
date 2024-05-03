@@ -99,7 +99,7 @@ class PflSettingsForm extends Form {
 		$context = $request->getContext();
 		$contextId = $context ? $context->getId() : 0;
 
-		foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl',] as $settingName) {
+		foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety'] as $settingName) {
 			$this->setData($settingName, $this->plugin->getSetting($contextId, $settingName));
 		}
 	}
@@ -109,7 +109,7 @@ class PflSettingsForm extends Form {
 	 */
 	public function readInputData() {
 		$this->readUserVars([
-			'includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl',
+			'includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety',
 		]);
 	}
 
@@ -139,7 +139,7 @@ class PflSettingsForm extends Form {
 			$this->plugin->updateSetting($context->getId(), $booleanSettingName, (bool) $this->getData($booleanSettingName));
 		}
 
-		foreach (['scopusUrl', 'wosUrl'] as $stringSettingName) {
+		foreach (['scopusUrl', 'wosUrl', 'academicSociety'] as $stringSettingName) {
 			$this->plugin->updateSetting($context->getId(), $stringSettingName, (string) $this->getData($stringSettingName));
 		}
 

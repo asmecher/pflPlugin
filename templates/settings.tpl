@@ -25,6 +25,11 @@
 		{/fbvFormArea}
 	{/if}
 
+	{fbvFormArea title="plugins.generic.pflPlugin.settings.journal"}
+		{fbvElement type="text" id="academicSociety" value=$academicSociety label="plugins.generic.pflPlugin.settings.academicSociety"}
+	{/fbvFormArea}
+
+
 	{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.settings.indexes"}
 		<div id="description">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
 		<br />

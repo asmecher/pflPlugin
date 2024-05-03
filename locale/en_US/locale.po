@@ -17,6 +17,12 @@ msgstr "Publication Facts Label plugin"
 msgid "plugins.generic.pfl.description"
 msgstr "This plugin adds a sidebar block with statistics to indicate the journal's integrity characteristics to readers."
 
+msgid "plugins.generic.pflPlugin.settings.journal"
+msgstr "Journal Information"
+
+msgid "plugins.generic.pflPlugin.settings.academicSociety"
+msgstr "Academic Society"
+
 msgid "plugins.generic.pflPlugin.fundingPluginMissing"
 msgstr "Funding Plugin Not Present"
 

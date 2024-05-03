@@ -124,6 +124,7 @@ class PflPlugin extends GenericPlugin {
             'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
             'pflPublisherName' => $journal->getData('publisherInstitution'),
             'pflPublisherUrl' => $journal->getData('publisherUrl'),
+            'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety'),
             'pflNumOfferProfiles' => null, // FIXME: Data not yet available
             'pflIndexList' => $pflIndexList,
             'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
