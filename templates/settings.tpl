@@ -19,6 +19,12 @@
 	{csrf}
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="pflPluginSettingsFormNotification"}
 
+	{if !$fundingPluginPresent}
+		{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.fundingPluginMissing"}
+			<p><strong>{translate key="plugins.generic.pflPlugin.fundingPluginMissing.description"}</strong></p>
+		{/fbvFormArea}
+	{/if}
+
 	{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.settings.indexes"}
 		<div id="description">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
 		<br />

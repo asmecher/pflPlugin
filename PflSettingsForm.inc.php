@@ -122,6 +122,7 @@ class PflSettingsForm extends Form {
 		$templateMgr = TemplateManager::getManager($request);
 		$templateMgr->assign([
 			'pluginName' => $this->plugin->getName(),
+			'fundingPluginPresent' => PluginRegistry::getPlugin('generic', 'FundingPlugin')?->getEnabled(),
 		]);
 
 		return parent::fetch($request, $template, $display);

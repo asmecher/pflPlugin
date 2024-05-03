@@ -17,6 +17,12 @@ msgstr "Publication Facts Label plugin"
 msgid "plugins.generic.pfl.description"
 msgstr "This plugin adds a sidebar block with statistics to indicate the journal's integrity characteristics to readers."
 
+msgid "plugins.generic.pflPlugin.fundingPluginMissing"
+msgstr "Funding Plugin Not Present"
+
+msgid "plugins.generic.pflPlugin.fundingPluginMissing.description"
+msgstr "The Funding plugin is not present and enabled. In order for funding data to be presented by the Publication Facts Label, this plugin will need to be installed and enabled, and provided with the relevant data for each submission. Check the Plugin Gallery for this plugin."
+
 msgid "plugins.generic.pflPlugin.about"
 msgstr "About the Publication Facts Label"
 
