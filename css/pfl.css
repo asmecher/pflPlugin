@@ -1,104 +1,517 @@
-
+/* GENERAL CONTAINER */
 
 .publication-facts-label {
-  font-size: 14px;
-  font-family: "Archivo-Light", "Noto Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-weight: 400;
-
-  display: flex;
-  padding-top: 2.6em;
+  font-family: "Helvetica", sans-serif;
+  padding-top: 2em;
+  max-width: fit-content;
+  min-width: fit-content;
 }
 
-.publication-facts-label .pfl-flex {
-  display:flex;
-}
-
-.publication-facts-label .pfl-flex button {
-  align-self: flex-start;
-  margin-right: 0.3em;
-}
-
-.publication-facts-label a {
-  text-decoration: underline;
-  font-family: "Archivo-Regular";
-  font-weight: 500;
-
-}
-
-
-.publication-facts-label .pfl-flex button img {
-  width: 16px;
-  height: 16px;
-  max-width: none; /* fighting theme css*/
-}
-
-
-.publication-facts-label .pfl-container {
-  display: inline-block;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #616161;
-  max-width: 460px;
-  
-  padding-top: 0.05em;
-  padding-left: 0.2em;
-  padding-right: 0.2em
-}
 
 .publication-facts-label .pfl-container.expanded {
-  width: 335px;
-  padding-top: 0.3em;
-  padding-bottom: 0em;
-
+  border-width: 0.15rem;
+  border-style: solid;
+  border-color: #000000;
+  width: inherit;
+  padding-top: 0.4em;
+  padding-bottom: 0.2rem;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+  margin-top: -0.05rem;
+  -webkit-box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+  -o-box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);  
 }
 
 
 
+
+
+
+
+/* PFL DROPDOWN BUTTON */
+
+.dropdown {
+  width: 100%;
+  height: 100%;
+  min-width: 308px;
+  position: relative;
+  border: 0.1rem solid rgba(0,0,0,0.4);
+  -webkit-border-radius: 0.2rem;
+  -moz-border-radius: 0.2rem;
+  -ms-border-radius: 0.2rem;
+  -o-border-radius: 0.2rem;
+  border-radius: 0.2rem;
+  padding: 0.35em 0.85em;
+}
+
+.dropdown.expanded {
+  position: relative;
+  width: inherit;
+  height: inherit;
+  border-top: 0.1rem solid #d0d0d0;
+  border-left: 0.1rem solid #d0d0d0;
+  border-right: 0.1rem solid #d0d0d0;
+  background-color: #d8d8d8;
+  -webkit-border-radius: 0.2rem;
+  -moz-border-radius: 0.2rem;
+  -ms-border-radius: 0.2rem;
+  -o-border-radius: 0.2rem;
+  border-radius: 0.2rem;
+}
+
+.publication-facts-label #pfl-button-open-facts {
+  block-size: 100%;
+  height: 100%;
+  width: 100%;
+  text-align: start;
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: rgba(0,0,0,0.45);
+  font-family: "Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen-Sans","Ubuntu","Cantarell","Helvetica Neue",sans-serif;
+}
+
+#buttonText {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+:dir(ltr) #pfl-button-open-facts[aria-expanded="false"]:after {
+  display: block;
+  font: normal normal normal 0.6rem / 1 FontAwesome;
+  content: "\f0d7";
+  position: absolute;
+  top: 1.15rem;
+  right: 1rem;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+:dir(rtl) #pfl-button-open-facts[aria-expanded="false"]:after {
+  display: block;
+  font: normal normal normal 0.6rem / 1 FontAwesome;
+  content: "\f0d7";
+  position: absolute;
+  top: 1.2rem;
+  left: -18rem;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+:dir(ltr) #pfl-button-open-facts[aria-expanded="true"]:after {
+  display: block;
+  font: normal normal normal 0.6rem / 1 FontAwesome;
+  content: "\f0d7";
+  position: absolute;
+  top: 1.1rem;
+  right: 1.15rem;
+  -webkit-transform: translate(-50%, -50%) rotate(180deg);
+  -moz-transform: translate(-50%, -50%) rotate(180deg);
+  -ms-transform: translate(-50%, -50%) rotate(180deg);
+  -o-transform: translate(-50%, -50%) rotate(180deg);
+  transform: translate(-50%, -50%) rotate(180deg);  
+  opacity: 0.4;
+}
+
+:dir(rtl) #pfl-button-open-facts[aria-expanded="true"]:after {
+  display: block;
+  font: normal normal normal 0.6rem / 1 FontAwesome;
+  content: "\f0d7";
+  position: absolute;
+  top: 1.1rem;
+  left: 7.7rem;
+  -webkit-transform: translate(-50%, -50%) rotate(180deg);
+  -moz-transform: translate(-50%, -50%) rotate(180deg);
+  -ms-transform: translate(-50%, -50%) rotate(180deg);
+  -o-transform: translate(-50%, -50%) rotate(180deg);
+  transform: translate(-50%, -50%) rotate(180deg);  
+  opacity: 0.4;
+}
+
 .publication-facts-label button {
+  height: fit-content;
+  width: fit-content;
+  text-align: start;
   border: none;
   cursor: pointer;
   appearance: none;
   background-color: inherit;
-  padding: 0px;
-  margin: 0px;
+  padding: 0rem;
+  margin: 0rem;
   color: #000000;
+  padding-inline: 0rem;
+  padding-block: 0rem;
 }
 
-.publication-facts-label #pfl-button-open-facts {
-  font-family: Barlow-Bold;
-  font-weight: 700; 
-  font-size: 2.14em;
-  color: #616161;
-  width:100%;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-bottom: 0.1em;
+
+
+/* PFL TITLE */
+
+.publication-facts-label #pfl-title {
+  text-align: start;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.05rem;
+  font-family: 'ITCFranklinGothicStd-Hvy';
+  font-size: 2.7rem;
+  white-space: nowrap;
+  line-height: 0.5;
+  letter-spacing: -1px;
+}  
+
+
+
+
+
+/* PFL LEFT-RIGHT ALIGN */
+
+.pfl-left-align:dir(ltr){
+  text-align: start;
 }
 
-.publication-facts-label #pfl-button-open-facts[aria-expanded="false"] {
-  font-size: 2em;
+.pfl-right-align:dir(ltr){
+  text-align: end;
+}
+
+.pfl-left-align:dir(rtl){
+  text-align: end;
+}
+
+.pfl-right-align:dir(rtl){
+  text-align: end;
+}
+
+.publication-facts-label .pfl-left-align p {
+  vertical-align: middle;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+
+
+
+
+
+/* PFL INDENT */
+
+.publication-facts-label .pfl-indent{
+  text-indent: 1.5rem !important;
+}
+
+.publication-facts-label .pfl-indent:dir(ltr){
+  text-align: start;
+}
+
+.publication-facts-label .pfl-indent:dir(rtl){
+  text-align: start;
+}
+
+.publication-facts-label .pfl-container {
+  color: #000;
+}
+ 
+.pfl-orcid-icon img {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+
+
+
+
+
+/* PFL FOOTER */
+
+.publication-facts-label #pfl-table-footer {
+  border-top: 0.5rem solid black;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  padding-top: 0.5rem;
+}
+
+.publication-facts-label #pfl-table-footer p {
+  text-align: start;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.publication-facts-label #pfl-table-footer-info-link {
+  text-align: start;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  padding-bottom: 0rem;
+}
+
+
+
+
+
+
+
+/* PFL H3 ELEMENT */
+
+.publication-facts-label h3 {
+  font-family: "Helvetica", sans-serif;
+  margin: 0 0;
+  font-size: 1.2rem;
+  padding-top: 0.5rem !important;
+}
+
+.publication-facts-label h3:dir(ltr) {
+  text-align: start;
+}
+
+.publication-facts-label h3:dir(rtl) {
+  text-align: end;
+}
+
+
+
+
+
+
+
+/* LIST ELEMENTS */
+
+.publication-facts-label dl {
+  margin-block-start: 0rem !important;
+  margin-block-end: 0rem !important;
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+
+.publication-facts-label dl dd {
+  display: block;
+  margin-inline-start: unset;
+}
+
+.publication-facts-label dl dt {
+  padding-top: 0.25rem !important;
+}
+
+
+.publication-facts-label .pfl-list-item {
+  border-bottom: 0.015rem solid black;
+  vertical-align: middle;
+  padding: 0.175rem 0;
+}
+
+.publication-facts-label dl:dir(ltr) {
+  text-align: start;
+}
+
+.publication-facts-label dl:dir(rtl) {
+  text-align: end;
+}
+
+.publication-facts-label ul {
+  list-style-type: unset !important;
+  margin-block-start: 0rem !important;
+  margin-block-end: 0rem !important;
+  margin-inline-start: 0rem !important;
+  margin-inline-end: 0rem !important;
+  padding-inline-start: 0rem !important;
+  unicode-bidi: unset !important;
+  font-size: 1.2rem !important;
+}
+
+.publication-facts-label .pfl-paragraph-item li {
+  display: inline-block;
+  list-style-type: none;
+}
+
+.pfl-last {
+  border: none;
+  padding: 0.2rem 0;
+}
+
+
+
+
+
+
+
+/* PARAGRAPH ELEMENTS */  
+
+.publication-facts-label p {
+  vertical-align: middle;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  font-size: 1.2rem;
+  line-height: 1.5rem !important;
+  margin-block-start: unset;
+  margin-block-end: unset;
+}
+
+.publication-facts-label p:dir(ltr) {
+  text-align: start;
+}
+
+.publication-facts-label p:dir(rtl) {
+  text-align: start;
+}
+
+.publication-facts-label #pfl-paragraph-item {
+  font-weight: 900;
+  border-bottom: 0.015rem solid black;
+  vertical-align: middle;
+  padding: 0.2rem 0;
+}
+
+.publication-facts-label #pfl-paragraph-item:dir(ltr) {
+  text-align: start;
+}
+
+.publication-facts-label #pfl-paragraph-item:dir(rtl) {
+  text-align: start;
+}
+
+
+
+
+
+
+
+/* TABLES */
+
+.publication-facts-label table {
+  border-collapse: collapse;
+  width: 100%; 
+  text-indent: unset;
+  border-spacing: unset;
+}
+
+.publication-facts-label table tbody {
+  display:contents;
+}
+
+.publication-facts-label table th {
+  border-top: 1em solid black;
+  border-bottom: 0.030rem solid black; 
+  padding: 0.090rem 0;
+}
+
+.publication-facts-label table td {
+  border-bottom: 0.015em solid black; 
+  font-size: 1.2rem;
+  padding: 0.3rem 0;
 }
 
 .publication-facts-label .pfl-tables {
   display: none;
 }
 
-.publication-facts-label p.pfl-table-footer {
-  text-align: center;
-  margin-bottom: 0.1em;
-  margin-top: 0.1em;
-  font-size: 14px;
-}
-.publication-facts-label p.pfl-table-footer .pfl-info-icon {
-  width: 14px;
-  height: 14px;
+
+
+
+
+
+/* PFL TABLE HEADER */
+
+.publication-facts-label .pfl-table-header {
+  font-size: 0.9em !important;
+  color: #000000;
+  font-weight: 600;
 }
 
+.pfl-table-header-left:dir(ltr){
+  text-align: start;
+}
+
+.pfl-table-header-right:dir(ltr){
+  text-align: end;
+}
+
+.pfl-table-header-left:dir(rtl){
+  text-align: start;
+}
+
+.pfl-table-header-right:dir(rtl){
+  text-align: end;
+}
+
+
+
+
+
+
+/* PFL TABLE CELLS */
+
+.publication-facts-label .pfl-table-cells {
+  font-weight: 900;
+}
+
+.pfl-table-cells-left:dir(ltr){
+  text-align: start;
+}
+
+.pfl-table-cells-right:dir(ltr){
+  text-align: end;
+}
+
+.pfl-table-cells-left:dir(rtl){
+  text-align: start;
+}
+
+.pfl-table-cells-right:dir(rtl){
+  text-align: end;
+}
+
+
+
+
+
+/* A ELEMENTS */
 
 .publication-facts-label a {
-  color: #0D0DF5;
+  text-decoration: underline;
+  font-weight: 500;
+  color: #006798;
+  text-indent: 0rem;
 }
 
+
+
+
+
+/* PFL IMG AND ICONS */
+
+.publication-facts-label #pfl-table-footer .pfl-info-icon {
+  max-width: 1.3rem;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.125rem;
+}
+
+.publication-facts-label .pfl-orcid-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+}
+
+
+
+
+
+/* ACCESSIBILITY */
 
 .publication-facts-label .sr-only {
   position: absolute;
@@ -112,253 +525,117 @@
   border-width: 0;
 }
 
-.publication-facts-label .pfl-info-icon {
-  margin-bottom: -0.30em;
+
+
+
+
+
+/* MEDIA QUERIES WEREN'T ACTIVE IN LAST VERSION */
+
+/*
+@media only screen and (max-width: 500px) {
+.publication-facts-label {
+  font-size: 14px;
 }
 
-.publication-facts-label th .pfl-info-icon {
-  margin-bottom: -0.25em;
+.publication-facts-label table th {
+  font-size: 1.07em;
+  text-align: left;
 }
 
-.pfl-table-footer .pfl-info-icon {
-  margin-bottom: -0.15em;
-}
-
-
-
-.publication-facts-label .pfl-orcid-icon img {
-  height: 18px;
-  margin-bottom: -0.3em;
-  margin-left: 0.1em;
-  margin-right: 0.1em;
-}
-
-
-
-
-.publication-facts-label table {
-  border: 0px solid;
-  border-collapse: collapse;
-  width: 100%;
-  /*font-size: 14px;*/
-}
-
-.publication-facts-label table thead {
-  border-top: 1px solid;
-  border-color: #616161;
-}
-
-.publication-facts-label table th:last-of-type {
-  color: #848484;
-  font-weight: 600;
-
-}
-
-.publication-facts-label table .pfl-right-column {
-  color: #616161;
-}
-
-
-.publication-facts-label table:first-of-type thead {
-  border-top: 0.375em solid;
-  border-color: #616161;
-
+.publication-facts-label #pfl-button-open-facts {
+  font-size: 2.3em;
 }
 
 .publication-facts-label table th:first-of-type {
-  width: 60%;
+  width: 55%;
 }
 
-
-.publication-facts-label table tbody tr {
-  border-bottom: 1px solid;
-  border-top: 1px solid;
-  border-color: #CCCCCC;
-
-}
-
-.publication-facts-label table tbody tr:last-of-type {
-  border-bottom: 0px solid;
-
-}
-
-.publication-facts-label table:last-of-type tbody {
-  border-bottom: 0.25em solid;
-}
-
-
-.publication-facts-label table th {
-  font-family: "Archivo-Medium";
-  
-  font-weight: 700;
-  font-size: 1.0625em;
-  text-align: left;
-  color: #222222;
-  padding-left: 0.3em; 
-  padding-right: 0em; 
-  padding-top: 0.5em;
-  padding-bottom: 0.35em;
-}
-
-.publication-facts-label table td {
-  padding-left: 0.3em; 
-  padding-right: 0.3em; 
-  padding-top: 0.25em;
-  padding-bottom: 0.2em;
-  vertical-align: top;
-}
-/*
-@media only screen and (max-width: 500px) {
-  .publication-facts-label {
-    font-size: 14px;
-  }
-
-  .publication-facts-label table th {
-    font-size: 1.07em;
-    text-align: left;
-  }
-
-  .publication-facts-label #pfl-button-open-facts {
-    font-size: 2.3em;
-  }
-
-  .publication-facts-label table th:first-of-type {
-    width: 55%;
-  }
-
-  .publication-facts-label .pfl-container {
-    padding: 0em 0.35em 0.4em 0.35em;
-  } 
+.publication-facts-label .pfl-container {
+  padding: 0em 0.35em 0.4em 0.35em;
+} 
 }
 */
 
 
-/**
- * 1. Make the dialog container, and its child overlay spread across
- *    the entire window.
- */
- .publication-facts-label .pfl-dialog-container,
- .publication-facts-label .pfl-dialog-overlay {
-   position: fixed; /* 1 */
-   top: 0; /* 1 */
-   right: 0; /* 1 */
-   bottom: 0; /* 1 */
-   left: 0; /* 1 */
- }
- 
- /**
-  * 1. Make sure the dialog container and all its descendants sits on
-  *    top of the rest of the page.
-  * 2. Make the dialog container a flex container to easily center the
-  *    dialog.
-  */
-  .publication-facts-label .pfl-dialog-container {
-   z-index: 2; /* 1 */
-   display: flex; /* 2 */
-
- }
- 
- /**
-  * 1. Make sure the dialog container and all its descendants are not
-  *    visible and not focusable when it is hidden.
-  */
-.publication-facts-label .pfl-dialog-container[aria-hidden='true'] {
-   display: none; /* 1 */
- }
- 
- /**
-  * 1. Make the overlay look like an overlay.
-  */
- .publication-facts-label .pfl-dialog-overlay {
-   background-color:  rgb(43 46 56 / 0.4); /* 1 */
- }
- 
- /**
-  * 1. Vertically and horizontally center the dialog in the page.
-  * 2. Make sure the dialog sits on top of the overlay.
-  * 3. Make sure the dialog has an opaque background.
-  */
-.publication-facts-label .pfl-dialog-content {
-   margin: auto; /* 1 */
-   z-index: 2; /* 2 */
-   position: relative; /* 2 */
-   background-color: white; /* 3 */
-   overflow-y: auto;
-   max-height: 80vh; 
-   max-width: 600px;
-   padding-left: 1.6em;
-   padding-right: 1.6em;
-   padding-top: 1.3em;
-   padding-bottom: 1.3em;
-
-   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-   border-radius: 15px;
-
- }
- 
- .publication-facts-label .pfl-dialog-content hr {
-  margin-left: -1.6em;
-  margin-right: -1.6em;
- }
-
- .publication-facts-label .pfl-dialog-content h1 {
-  font-family: Barlow-Bold;
-  font-size: 18px;
-  font-weight: 700; 
-  color: #222222;
-  margin-bottom: 0.9em;
-  margin-top: 0em;
- }
-
- .publication-facts-label .pfl-dialog-content h2 {
-  font-family: "Archivo-Medium";
-  font-weight: 700;
-  font-size: 16px;
-  color: #222222;
-  margin-top: 1em;
-  margin-bottom: 0em;
- }
-
- .publication-facts-label .pfl-dialog-content ul  {
-  margin-top: 0.2em;
-  padding-left: 1.5em;
-  color: #616161;
-  font-size: 14px;
- }
 
 
- .publication-facts-label .pfl-dialog-close-button {
-  color: #0D0DF5;
-  float: right;
-  border: none;
-  cursor: pointer;
-  appearance: none;
-  background-color: inherit;
-  margin-right: 0.6em;
-  margin-top: 0.3em;
-  margin-left: 1em;
-  font-size: 14px;
+
+
+/* PFL INFO PAGE */
+
+#pfl-info-page {
+  font-family: "Helvetica", sans-serif;
 }
 
-.publication-facts-label .pfl-dialog-close-button span {
-  text-decoration: underline;
+#pfl-info-header_01 {
+  font-family: 'ITCFranklinGothicStd-Demi';
+  font-size: 1.9rem;
+  line-height: 3rem;
+  margin-bottom: -3.2rem;
+}
+
+#pfl-info-header_02 {
+  font-family: 'ITCFranklinGothicStd-Hvy';
+  font-size: 2.5rem;
+  line-height: 3rem;
+  margin-bottom: -2rem;
+}
+
+#pfl-info-page-header {
+  width: 100%;
+
+}
+
+#pfl-info-page-intro {
+  font-size: 1.3rem !important;
+  line-height: 2.2rem !important;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
 }
 
 
-.publication-facts-label .pfl-dialog-close-button img {
-  margin-bottom: -0.4em;
+#pfl-info-page-intro:before {
+  content: "";
+  display: block;
+  height: 0.5rem;
+  background-color: #000;
+  margin-bottom: 1.5rem;
 }
 
-.publication-facts-label .pfl-modal-footer  {
-  text-align: right;
-  color: #222222;
-  font-size: 14px;
-  margin-top: 2em;
- }
+#pfl-info-page h3 {
+  font-size: 1.7rem;
+  font-family: "Helvetica", sans-serif;
+  font-weight: 900;
+  margin-top: 2.5rem;
+  margin-bottom: -1.5rem;
+}
 
- .publication-facts-label .pfl-modal-footer button  {
-  color: #0D0DF5;
-  text-decoration: underline;
- }
+#pfl-info-page ul {
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.2rem;
+  margin: 3rem auto;
+}
 
+#pfl-info-page li {
+  margin: 1rem auto;
+  line-height: 1.5rem;
+}
 
+#pfl-info-page-ul-sub-list {
+  margin-top: 0rem !important;
+  margin-bottom: 3rem !important;
+}
+
+#pfl-info-page p {
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  margin-top: 2rem;
+}
+
+#pfl-info-page section {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 0.1px solid #b2b2b2;
+}
