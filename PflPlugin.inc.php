@@ -89,6 +89,7 @@ class PflPlugin extends GenericPlugin {
         )->current();
         return $row->reviewer_count;
     }
+    
 
     /**
      * Hook callback for displaying the publication facts label.
@@ -114,12 +115,30 @@ class PflPlugin extends GenericPlugin {
 
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
-        if ($this->getSetting($journal->getId(), 'includeDoaj')) $pflIndexList["https://doaj.org/toc/{$onlineIssn}"] = 'DOAJ';
-        if ($this->getSetting($journal->getId(), 'includeScholar')) $pflIndexList["https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={$onlineIssn}&btnG="] = 'GS';
-        if ($this->getSetting($journal->getId(), 'includeMedline')) $pflIndexList["https://www.ncbi.nlm.nih.gov/nlmcatalog/?term=${onlineIssn}[ISSN]"] = 'M';
-        if ($this->getSetting($journal->getId(), 'includeLatindex')) $pflIndexList["https://latindex.org/latindex/Solr/Busqueda?idModBus=0&buscar={$onlineIssn}&submit=Buscar"] = 'L';
-        if ($scopusUrl = $this->getSetting($journal->getId(), 'scopusUrl')) $pflIndexList[$scopusUrl] = 'S';
-        if ($wosUrl = $this->getSetting($journal->getId(), 'wosUrl')) $pflIndexList[$wosUrl] = 'WS';
+
+        if ($this->getSetting($journal->getId(), 'includeDoaj')) {
+            $pflIndexList["https://doaj.org/toc/{$onlineIssn}"] = ['name' => 'DOAJ', 'description' => 'Directory of Open Access Journals'];
+        }
+
+        if ($this->getSetting($journal->getId(), 'includeScholar')) {
+            $pflIndexList["https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={$onlineIssn}&btnG="] = ['name' => 'GS', 'description' => 'Google Scholar'];
+        }
+
+        if ($this->getSetting($journal->getId(), 'includeMedline')) {
+            $pflIndexList["https://www.ncbi.nlm.nih.gov/nlmcatalog/?term=${onlineIssn}[ISSN]"] = ['name' => 'M', 'description' => 'Medline'];
+        }
+
+        if ($this->getSetting($journal->getId(), 'includeLatindex')) {
+            $pflIndexList["https://latindex.org/latindex/Solr/Busqueda?idModBus=0&buscar={$onlineIssn}&submit=Buscar"] = ['name' => 'L', 'description' => 'Latindex'];
+        }
+
+        if ($scopusUrl = $this->getSetting($journal->getId(), 'scopusUrl')) {
+            $pflIndexList[$scopusUrl] = ['name' => 'S', 'description' => 'Scopus'];
+        }
+
+        if ($wosUrl = $this->getSetting($journal->getId(), 'wosUrl')) {
+            $pflIndexList[$wosUrl] = ['name' => 'WS', 'description' => 'Web of Science'];
+        }
 
         // Journal-specific PFL data
         $this->templateMgr->assign([
@@ -154,6 +173,38 @@ class PflPlugin extends GenericPlugin {
                 'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
+            ]);
+        }
+
+        // FIXME: Add fake data overrides for testing purposes.
+        $this->templateMgr->assign([
+            // Journal-wide fake data
+            'pflPublisherName' => 'Ubiquity Press',
+            'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
+            'pflAcceptedPercent' => 8,
+            'pflIndexList' => [
+                'https://scholar.google.com/' => ['name' => 'GS', 'description' => 'Google Scholar'],
+                'https://www.nlm.nih.gov/medline/medline_overview.html' => ['name' => 'M', 'description' => 'Medline'],
+                'https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/' => ['name' => 'WS', 'description' => 'Web of Science'],
+                'https://www.elsevier.com/solutions/scopus' => ['name' => 'S', 'description' => 'Scopus']
+            ],
+            'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
+        ]);
+
+        if ($article) {
+            // Article-specific fake data
+            $this->templateMgr->assign([
+                'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
+                'pflReviewerCount' => 2,
+            ]);
+            if ($article->getId() == 2268) $this->templateMgr->assign([ // Dog Genomics
+                // 'pflCompetingInterests' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci', FIXME: We're not using standalone URLs anymore
+                'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
+                // 'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'], // FIXME: We're taking data from the funding plugin
+            ]);
+            else $this->templateMgr->assign([ // Academic Achievement
+                'pflDataAvailabilityUrl' => null,
+                // 'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'], // FIXME: We're taking data from the funding plugin
             ]);
         }
 
