@@ -138,7 +138,7 @@ msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.editorAndBoardMembers"
-msgstr "Editor & board members' "
+msgstr "Editor & board member "
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "Articles accepted&nbsp;&nbsp;{$num}%"
@@ -150,13 +150,13 @@ msgid "plugins.generic.pfl.daysToPublication"
 msgstr "Days to publication&nbsp;"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexed&nbsp;&nbsp;{$indexList}"
+msgstr "Indexed in&nbsp;{$indexList}"
 
 msgid "plugins.generic.pfl.journalIndexedIn"
 msgstr "showcasing where this journal is indexed:"
 
 msgid "plugins.generic.pfl.academicSociety"
-msgstr "Academic Society&nbsp;&nbsp;"
+msgstr "Academic society&nbsp;"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
