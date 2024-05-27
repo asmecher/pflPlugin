@@ -227,7 +227,7 @@
                 {translate key="plugins.generic.pfl.indexedIn" indexList=$pflIndexListMarkup}
             </ul>
 
-            <dl role="presentation">
+            <dl>
                 <dt class="pfl-list-item pfl-paragraph-item">
                     <p class="pfl-orcid-icon" aria-label="{translate key="plugins.generic.pfl.editorAndBoardMembers"}"> {translate key="plugins.generic.pfl.editorAndBoardMembers"}
 
