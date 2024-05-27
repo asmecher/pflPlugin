@@ -34,7 +34,7 @@
 
 /* PFL DROPDOWN BUTTON */
 
-.dropdown {
+.pfl-dropdown {
   width: 100%;
   height: 100%;
   min-width: 308px;
@@ -48,7 +48,7 @@
   padding: 0.35em 0.85em;
 }
 
-.dropdown.expanded {
+.pfl-dropdown.expanded {
   position: relative;
   width: inherit;
   height: inherit;
@@ -572,14 +572,14 @@
 
 #pfl-info-header_01 {
   font-family: 'ITCFranklinGothicStd-Demi';
-  font-size: 1.9rem;
-  line-height: 3rem;
-  margin-bottom: -3.2rem;
+  font-size: 1.55rem;
+  line-height: 2.7rem;
+  margin-bottom: -3.3rem;
 }
 
 #pfl-info-header_02 {
-  font-family: 'ITCFranklinGothicStd-Hvy';
-  font-size: 2.5rem;
+  font-family: 'ITCFranklinGothicStd-Demi';
+  font-size: 2.1rem;
   line-height: 3rem;
   margin-bottom: -2rem;
 }
@@ -589,24 +589,24 @@
 
 }
 
-#pfl-info-page-intro {
-  font-size: 1.3rem !important;
-  line-height: 2.2rem !important;
-  margin-bottom: 4rem;
+.pfl-info-page-intro {
+  font-size: 1.1rem !important;
+  line-height: 1.7rem !important;
+  margin-bottom: 2rem;
   margin-top: 1rem;
 }
 
 
-#pfl-info-page-intro:before {
+.pfl-info-page-intro.black-bar:before {
   content: "";
   display: block;
-  height: 0.5rem;
+  height: 0.08rem;
   background-color: #000;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 
 #pfl-info-page h3 {
-  font-size: 1.65rem;
+  font-size: 1.4rem;
   font-family: "Helvetica", sans-serif;
   font-weight: 900;
   margin-top: 2.5rem;
@@ -615,13 +615,13 @@
 
 #pfl-info-page ul {
   font-family: "Helvetica", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 3rem auto;
 }
 
 #pfl-info-page li {
   margin: 1rem auto;
-  line-height: 1.5rem;
+  line-height: 1.7rem;
 }
 
 #pfl-info-page-ul-sub-list {
@@ -631,9 +631,20 @@
 
 #pfl-info-page p {
   font-family: "Helvetica", sans-serif;
-  font-size: 1.2rem;
-  line-height: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
   margin-top: 2rem;
+  margin-bottom: -1.2rem;
+}
+
+#pfl-info-page p:last-child {
+  margin-bottom: 3.2rem;
+
+}
+
+#pfl-info-page p:first-child {
+  margin-top: 2rem;
+
 }
 
 #pfl-info-page section {

@@ -360,10 +360,14 @@ msgstr "Information on each fact on"
 msgid "plugins.generic.pflPlugin.aboutHeader_02"
 msgstr "Publication Facts Label (PFL)"
 
-msgid "plugins.generic.pflPlugin.aboutDescription"
+msgid "plugins.generic.pflPlugin.aboutDescription_01"
 msgstr ""
-"The PFL, developed by the Public Knowledge Project at Simon Fraser University, seeks to help readers learn about an article's and journal's adherence to scholarly standards. 	<br />"
+"The PFL, developed by the Public Knowledge Project at Simon Fraser University, seeks to help readers learn about an article's and journal's adherence to scholarly standards."
+
+msgid "plugins.generic.pflPlugin.aboutDescription_02"
+msgstr ""
 "The journal operates on a software publishing platform that provides the label with the data you see, while the publishing organization <a href=\"https://orcid.org/\" target=\"_blank\" rel=\"noopener\">ORCID</a> verifies the personnel identities of those working on the journal (more about that <a href=\"https://doi.org/10.1002/leap.1599\" target=\"_blank\" rel=\"noopener\">here</a>)."
+
 
 msgid "plugins.generic.pflPlugin.aboutOtherArticles"
 msgstr ""

@@ -14,72 +14,73 @@
 
 <div id="pfl-info-page">
 
-    <div id="pfl-info-page-header" tabindex="0">
+    <div id="pfl-info-page-header">
         <h1 id="pfl-info-header_01">{translate key="plugins.generic.pflPlugin.aboutHeader_01"}</h1>
         <h2 id="pfl-info-header_02">{translate key="plugins.generic.pflPlugin.aboutHeader_02"}</h2>
     </div>
         
-    <section tabindex="0">
-        <p id="pfl-info-page-intro"> {translate key="plugins.generic.pflPlugin.aboutDescription"}</p>
+    <section>
+        <p class="pfl-info-page-intro black-bar"> {translate key="plugins.generic.pflPlugin.aboutDescription_01"}</p>
+        <p class="pfl-info-page-intro"> {translate key="plugins.generic.pflPlugin.aboutDescription_02"}</p>
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutOtherArticles"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutOtherJournals"}
     </section>
         
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutPeerReviewers"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutReviewerProfiles" orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutAuthorStatements"}
     </section>
         
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutCompetingInterests"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutDataAvailability"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutExternalFunding"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutArticlesAccepted"}
     </section>
         
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutDaysToPublication"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutIndexing"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutEditorAndBoardMemberProfiles" orcidIconUrl=$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutAcademicSociety"}
     </section>
 
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutPublisher"}
     </section>
         
-    <section tabindex="0">
+    <section>
         {translate key="plugins.generic.pflPlugin.aboutListOfJournals"}	
     </section>
 
