@@ -150,7 +150,7 @@ msgid "plugins.generic.pfl.daysToPublication"
 msgstr "Days to publication&nbsp;"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexed in&nbsp;{$indexList}"
+msgstr "{$indexList}"
 
 msgid "plugins.generic.pfl.journalIndexedIn"
 msgstr "showcasing where this journal is indexed:"

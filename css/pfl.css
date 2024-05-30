@@ -399,9 +399,6 @@
   border-spacing: unset;
 }
 
-.publication-facts-label table tbody {
-  display:contents;
-}
 
 .publication-facts-label table th {
   border-top: 1em solid black;
@@ -515,7 +512,7 @@
 
 /* ACCESSIBILITY */
 
-.publication-facts-label .sr-only {
+.pfl-sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
