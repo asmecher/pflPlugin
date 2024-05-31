@@ -156,31 +156,6 @@ class PflPlugin extends GenericPlugin {
             ]);
         }
 
-        // FIXME: Add fake data overrides for testing purposes.
-        $this->templateMgr->assign([
-            // Journal-wide fake data
-            'pflPublisherName' => 'Ubiquity Press',
-            'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
-            'pflAcceptedPercent' => 8,
-            'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
-        ]);
-        if ($article) {
-            // Article-specific fake data
-            $this->templateMgr->assign([
-                'pflPeerReviewersUrl' => $request->url(null, 'about', 'editorialTeam'),
-                'pflReviewerCount' => 2,
-            ]);
-            if ($article->getId() == 2268) $this->templateMgr->assign([ // Dog Genomics
-                // 'pflCompetingInterests' => 'https://ojs.stanford.edu/ojs/index.php/jii/ci', FIXME: We're not using standalone URLs anymore
-                'pflDataAvailabilityUrl' => 'https://ojs.stanford.edu/ojs/index.php/jii/data',
-                // 'pflFunderList' => ['https://darwinsark.org/' => 'DAF', 'https://www.nih.gov/' => 'NIH', 'https://www.nsf.gov/' => 'NSF'], // FIXME: We're taking data from the funding plugin
-            ]);
-            else $this->templateMgr->assign([ // Academic Achievement
-                'pflDataAvailabilityUrl' => null,
-                // 'pflFunderList' => ['https://www.aamc.org/' => 'AAMC'], // FIXME: We're taking data from the funding plugin
-            ]);
-        }
-
         $this->templateMgr->display($this->getTemplateResource('pfl.tpl'));
         return false;
     }
