@@ -162,7 +162,6 @@ class PflPlugin extends GenericPlugin {
             'pflPublisherName' => 'Ubiquity Press',
             'pflPublisherUrl' => 'https://www.ubiquitypress.com/',
             'pflAcceptedPercent' => 8,
-            'pflIndexList' => ['https://scholar.google.com/' => 'GS', 'https://www.nlm.nih.gov/medline/medline_overview.html' => 'M', 'https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/' => 'WS', 'https://www.elsevier.com/solutions/scopus' => 'S'],
             'pflEditorialTeamUrl' => $request->url(null, 'about', 'editorialTeam'),
         ]);
         if ($article) {

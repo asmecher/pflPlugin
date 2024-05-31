@@ -23,6 +23,12 @@ msgstr "Journal Information"
 msgid "plugins.generic.pflPlugin.settings.academicSociety"
 msgstr "Academic Society"
 
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
+msgstr "URL"
+
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl.invalid"
+msgstr "The academic society URL is not valid. Make sure the URL is complete and properly formatted."
+
 msgid "plugins.generic.pflPlugin.fundingPluginMissing"
 msgstr "Funding Plugin Not Present"
 

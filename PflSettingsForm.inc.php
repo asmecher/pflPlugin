@@ -83,6 +83,7 @@ class PflSettingsForm extends Form {
 			}
 		}));
 
+		$this->addCheck(new FormValidatorUrl($this, 'academicSocietyUrl', 'optional', 'plugins.generic.pflPlugin.settings.academicSocietyUrl.invalid'));
 		$this->addCheck(new FormValidatorUrl($this, 'scopusUrl', 'optional', 'plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid'));
 		$this->addCheck(new FormValidatorRegExp($this, 'scopusUrl', 'optional', 'plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid', '/^https:\/\/www\.scopus\.com\/sourceid\/[0-9]+$/'));
 
@@ -99,7 +100,7 @@ class PflSettingsForm extends Form {
 		$context = $request->getContext();
 		$contextId = $context ? $context->getId() : 0;
 
-		foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety'] as $settingName) {
+		foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl'] as $settingName) {
 			$this->setData($settingName, $this->plugin->getSetting($contextId, $settingName));
 		}
 	}
