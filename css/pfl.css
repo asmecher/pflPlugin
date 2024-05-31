@@ -361,4 +361,18 @@
   text-decoration: underline;
  }
 
+ #funding-data:target {
+  animation:pflflash 1s 1;
+  -webkit-animation:pflflash 1s 1; /* Safari and Chrome */
+ }
+
+ @keyframes pflflash
+ {
+    0%      {background:yellow;}
+ }
+
+ @-webkit-keyframes pflflash /* Safari and Chrome */
+ {
+    0%      {background:yellow;}
+ }
 

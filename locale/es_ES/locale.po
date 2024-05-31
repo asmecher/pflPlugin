@@ -81,9 +81,6 @@ msgstr "Disponibilidad de datos: <a href=\"{$dataAvailabilityUrl}\">Yes</a>"
 msgid "plugins.generic.pfl.dataAvailability.no"
 msgstr "Disponibilidad de datos: No"
 
-msgid "plugins.generic.pfl.funders"
-msgstr "Financiadores: {$funderList}"
-
 msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}% con financiadores"
 

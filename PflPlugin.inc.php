@@ -151,7 +151,6 @@ class PflPlugin extends GenericPlugin {
                 'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
-                'pflFunderList' => $this->templateMgr->getTemplateVars('funderData'),
                 'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
             ]);
         }
