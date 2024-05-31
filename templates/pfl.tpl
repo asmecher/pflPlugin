@@ -190,11 +190,7 @@
                             <div class="pfl-flex">
                                 <button data-a11y-dialog-show="pfl-modal-data-availability"><img class="pfl-info-icon" alt="{translate key="plugins.generic.pfl.informationAlt"}" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" ></button>
                                 <span>
-                                    {if $pflDataAvailabilityUrl}
-                                        {translate key="plugins.generic.pfl.dataAvailability.yes" dataAvailabilityUrl=$pflDataAvailabilityUrl}
-                                    {else}
-                                        {translate key="plugins.generic.pfl.dataAvailability.no"}
-                                    {/if}
+                                        {translate key="plugins.generic.pfl.dataAvailability.unsupported"}
                                 </span>
                             </div>
                         </td>

@@ -150,7 +150,6 @@ class PflPlugin extends GenericPlugin {
                 'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                 'pflCompetingInterests' => $competingInterests,
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
-                'pflDataAvailabilityUrl' => '', // FIXME: URL not yet available
                 'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
             ]);
         }

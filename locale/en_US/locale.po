@@ -170,11 +170,8 @@ msgstr "The following authors have listed Competing Interests:"
 msgid "plugins.generic.pfl.percentYes"
 msgstr "{$num}% yes"
 
-msgid "plugins.generic.pfl.dataAvailability.yes"
-msgstr "Data availability: <a href=\"{$dataAvailabilityUrl}\">Yes</a>"
-
-msgid "plugins.generic.pfl.dataAvailability.no"
-msgstr "Data availability: No"
+msgid "plugins.generic.pfl.dataAvailability.unsupported"
+msgstr "Data availability: Unsupported by Platform"
 
 msgid "plugins.generic.pfl.funders.yes"
 msgstr "Funders: <a href="#funding-data">Yes</a>"
