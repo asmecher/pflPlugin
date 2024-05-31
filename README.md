@@ -3,7 +3,7 @@ Publication Facts Label plugin for Open Journal Systems
 
 ## Class Data
 
-The Publication Facts Label presents data about other journals in its class. These are taken from a JSON file included with the plugin called `classData.json`. It includes the following data:
+The Publication Facts Label presents data about other journals in its class. These are taken from a JSON file hosted at https://pkp.sfu.ca/ojs/pflStatistics.json. It should include the following data:
 
 | Key                               | Example | Description                                                          |
 | --------------------------------- | ------- | -------------------------------------------------------------------- |

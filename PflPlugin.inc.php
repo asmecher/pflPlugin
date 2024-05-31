@@ -131,7 +131,7 @@ class PflPlugin extends GenericPlugin {
         ]);
 
         // Class data
-        $this->templateMgr->assign(json_decode(file_get_contents(dirname(__FILE__) . '/classData.json'), JSON_OBJECT_AS_ARRAY));
+        $this->templateMgr->assign($this->getStatistics($journal->getId()));
 
         // If we're viewing an article-specific page...
         if ($article = $this->templateMgr->getTemplateVars('article')) {
@@ -218,6 +218,32 @@ class PflPlugin extends GenericPlugin {
 		array_unshift($actions, $linkAction);
 
 		return $actions;
+	}
+
+	function getStatistics($journalId) {
+		$cache = CacheManager::getManager()->getCache('pflStats', $journalId, [$this, '_statsCacheMiss']);
+		if (time() - $cache->getCacheTime() > 60 * 60 * 24) {
+			error_log('FLUSHING: ' . $cache->getCacheTime());
+			// Cache is older than one day, erase it.
+			$cache->flush();
+		}
+		return $cache->getContents();
+	}
+
+	/**
+	 * Callback to fill cache with data, if empty.
+	 * @param $cache FileCache
+	 * @param $pubObjectId int
+	 * @return array
+	 */
+	function _statsCacheMiss($cache, $pubObjectId) {
+		$client = Application::get()->getHttpClient();
+		$versionDao = DAORegistry::getDAO('VersionDAO');
+		$currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
+		$response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => ['version' => $currentVersion->getVersionString()]]);
+		$data = json_decode($response->getBody(), true);
+		$cache->setEntireCache($data);
+		return $data;
 	}
 
 	/**
