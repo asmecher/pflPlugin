@@ -1,4 +1,11 @@
-
+.ciStatementLabel {
+}
+.ciStatementContents {
+  padding-left: 2em;
+}
+.ciStatementContents p:first-child {
+  margin-top: 0;
+}
 
 .publication-facts-label {
   font-size: 14px;
@@ -356,23 +363,23 @@
   margin-top: 2em;
  }
 
- .publication-facts-label .pfl-modal-footer button  {
+.publication-facts-label .pfl-modal-footer button  {
   color: #0D0DF5;
   text-decoration: underline;
- }
+}
 
- #funding-data:target {
+#funding-data:target {
   animation:pflflash 1s 1;
   -webkit-animation:pflflash 1s 1; /* Safari and Chrome */
- }
+}
 
- @keyframes pflflash
- {
+@keyframes pflflash
+{
     0%      {background:yellow;}
- }
+}
 
- @-webkit-keyframes pflflash /* Safari and Chrome */
- {
+@-webkit-keyframes pflflash /* Safari and Chrome */
+{
     0%      {background:yellow;}
- }
+}
 
