@@ -29,6 +29,9 @@ class PflPlugin extends GenericPlugin {
                 HookRegistry::register('Templates::Index::journal', [$this, 'stashTemplateManager']);
                 HookRegistry::register('Templates::Article::Details', [$this, 'stashTemplateManager']);
 
+                // Add the author CI statements to the author list
+                HookRegistry::register('TemplateManager::display', [$this, 'handleTemplateDisplay']);
+
                 // Present the information apge
                 HookRegistry::register('LoadHandler', [$this, 'callbackHandleContent']);
             }
@@ -244,6 +247,73 @@ class PflPlugin extends GenericPlugin {
 		$data = json_decode($response->getBody(), true);
 		$cache->setEntireCache($data);
 		return $data;
+	}
+
+	/**
+         * Hook callback: register output filter for article display.
+         * This is used to add the CI statements to the author information.
+	 *
+	 * @param string $hookName
+	 * @param array $args
+	 *
+	 * @return bool
+	 *
+	 * @see TemplateManager::display()
+	 *
+	 */
+	public function handleTemplateDisplay($hookName, $args)
+	{
+		$templateMgr = & $args[0];
+		$template = & $args[1];
+		$request = Application::get()->getRequest();
+
+		switch ($template) {
+			case 'frontend/pages/article.tpl':
+                                $templateMgr->registerFilter('output', [$this, 'articleDisplayFilter']);
+				break;
+		}
+		return false;
+	}
+
+	/**
+	 * Output filter adds author CI statements to article view.
+	 *
+	 * @param string $output
+	 * @param TemplateManager $templateMgr
+	 *
+	 * @return string
+	 */
+	public function articleDisplayFilter($output, $templateMgr)
+	{
+		$authorIndex = 0;
+		$publication = $templateMgr->getTemplateVars('publication');
+		$authors = array_values(iterator_to_array($publication->getData('authors')));
+
+                // Identify the ul.authors list and traverse li/ul/ol elements from there.
+                // For any </li> elements in 1st-level depth, append CI statements before </li> element.
+		$startMarkup = '<ul class="authors">';
+		$startOffset = strpos($output, $startMarkup);
+		if ($startOffset === false) return $output;
+                $startOffset += strlen($startMarkup);
+                $depth = 1; // Depth of potentially nested ul/ol list elements
+	        return substr($output, 0, $startOffset) . preg_replace_callback(
+			'/(<\/li>)|(<[uo]l[^>]*>)|(<\/[uo]l>)/i',
+			function($matches) use (&$depth, &$authorIndex, $authors) {
+				switch (true) {
+					case $depth == 1 && $matches[1] !== '': // </li> in first level depth
+						if ($ciStatement = $authors[$authorIndex++]->getLocalizedCompetingInterests()) return '
+						        <div class="ciStatement">
+                                                            <div class="ciStatementLabel">' . htmlspecialchars(__('author.competingInterests')) . '</div>
+                                                            <div class="ciStatementContents">' . PKPString::stripUnsafeHtml($ciStatement) . '</div>
+                                                        </div>' . $matches[0];
+						break;
+                                        case !empty($matches[2]) && $depth >= 1: $depth++; break; // <ul>; do not re-enter once we leave
+					case !empty($matches[3]): $depth--; break; // </ul>
+				}
+				return $matches[0];
+			},
+			substr($output, $startOffset)
+		);
 	}
 
 	/**
