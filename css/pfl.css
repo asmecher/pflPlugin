@@ -8,8 +8,6 @@
   font-variation-settings:
     "wdth" 100;
   font-weight: 350;
-  font-variation-settings:
-  "wdth" 100;
   padding-top: 2em;
   max-width: fit-content;
   min-width: fit-content;
@@ -42,8 +40,6 @@
 
 .pfl-header-row {
   border-top: 0.85rem solid black;
-  display: flex;
-  justify-content: space-between;
   border-bottom: 0.01rem solid #000000;
   padding-top: 0.4rem;
   padding-bottom: 0.3rem;
@@ -80,13 +76,6 @@
 
 .publication-facts-label .pfl-indent{
   text-indent: 1.5rem !important;
-}
-
-.publication-facts-label .pfl-indent:dir(ltr){
-  text-align: start;
-}
-
-.publication-facts-label .pfl-indent:dir(rtl){
   text-align: start;
 }
 
@@ -106,6 +95,8 @@
   border-top: 0.4rem solid black;
   white-space: nowrap;
   padding-top: 0.4rem;
+  display: inline-block;
+  width: 100%;
 }
 
 .publication-facts-label #pfl-table-footer-info-link {
@@ -125,6 +116,7 @@
   white-space: nowrap;
   font-size: 0.98rem;
   padding-top: -3rem;
+  float: inline-end;
 }
 
 
@@ -200,74 +192,33 @@
   height: 100%;
   width: 100%;
   text-align: start;
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
   color: rgba(0,0,0,0.54);
   font-family: 'Noto Sans', sans-serif;
   font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 1.4rem;
 }
+
+.publication-facts-label #pfl-button-open-facts[aria-expanded="true"] {
+  opacity: 0.5;
+}
+
+#pfl-button-open-facts img {
+  height: 0.6rem;
+  width: 0.6rem;
+  position: static;
+  padding-top: 0.1rem;
+  opacity: 0.5;
+}
+
 
 #pfl-buttonText {
-  display: inline-block;
   width: 100%;
   height: 100%;
-}
-
-:dir(ltr) #pfl-button-open-facts[aria-expanded="false"]:after {
-  display: block;
-  font: normal normal normal 0.6rem / 1 FontAwesome;
-  content: "\f0d7";
-  position: absolute;
-  top: 1.15rem;
-  right: 1rem;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-:dir(rtl) #pfl-button-open-facts[aria-expanded="false"]:after {
-  display: block;
-  font: normal normal normal 0.6rem / 1 FontAwesome;
-  content: "\f0d7";
-  position: absolute;
-  top: 1.2rem;
-  left: -18rem;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-:dir(ltr) #pfl-button-open-facts[aria-expanded="true"]:after {
-  display: block;
-  font: normal normal normal 0.6rem / 1 FontAwesome;
-  content: "\f0d7";
-  position: absolute;
-  top: 1.1rem;
-  right: 1rem;
-  -webkit-transform: translate(-50%, -50%) rotate(180deg);
-  -moz-transform: translate(-50%, -50%) rotate(180deg);
-  -ms-transform: translate(-50%, -50%) rotate(180deg);
-  -o-transform: translate(-50%, -50%) rotate(180deg);
-  transform: translate(-50%, -50%) rotate(180deg);  
-  opacity: 0.4;
-}
-
-:dir(rtl) #pfl-button-open-facts[aria-expanded="true"]:after {
-  display: block;
-  font: normal normal normal 0.6rem / 1 FontAwesome;
-  content: "\f0d7";
-  position: absolute;
-  top: 1.1rem;
-  left: 7.7rem;
-  -webkit-transform: translate(-50%, -50%) rotate(180deg);
-  -moz-transform: translate(-50%, -50%) rotate(180deg);
-  -ms-transform: translate(-50%, -50%) rotate(180deg);
-  -o-transform: translate(-50%, -50%) rotate(180deg);
-  transform: translate(-50%, -50%) rotate(180deg);  
-  opacity: 0.4;
+  line-height: 1.2rem;
 }
 
 
@@ -294,16 +245,8 @@
   margin-block-end: unset;
   margin-inline-start: unset;
   margin-inline-end: unset;
-}
-
-.publication-facts-label h3:dir(ltr) {
   text-align: start;
 }
-
-.publication-facts-label h3:dir(rtl) {
-  text-align: start;
-}
-
 
 
 
@@ -317,6 +260,7 @@
   margin-block-end: 0rem !important;
   padding-inline-start: 0;
   list-style: none;
+  text-align: start;
 }
 
 
@@ -327,14 +271,6 @@
 
 .publication-facts-label dl dt {
   display: inline-block;
-}
-
-.publication-facts-label dl:dir(ltr) {
-  text-align: start;
-}
-
-.publication-facts-label dl:dir(rtl) {
-  text-align: end;
 }
 
 .publication-facts-label ul {
@@ -368,15 +304,9 @@
   line-height: 1.5rem !important;
   margin-block-start: unset;
   margin-block-end: unset;
-}
-
-.publication-facts-label p:dir(ltr) {
   text-align: start;
 }
 
-.publication-facts-label p:dir(rtl) {
-  text-align: start;
-}
 
 
 
@@ -454,15 +384,14 @@
 /* ACCESSIBILITY */
 
 .pfl-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 1px !important;
+  height: 1px !important;
   padding: 0;
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
   border-width: 0;
+  z-index: -1;
 }
 
 
@@ -479,17 +408,21 @@
 }
 
 #pfl-info-header_01 {
-  font-family: "Noto Sans", sans-serif;
-  font-size: 1.55rem;
-  line-height: 2.7rem;
+  font-size: 1.4rem;
+  line-height: 3rem;
   margin-bottom: -3.3rem;
+  font-weight: 600;
+  letter-spacing: -0.025rem;
 }
 
 #pfl-info-header_02 {
-  font-family: "Noto Sans", sans-serif;
-  font-size: 2.1rem;
+  font-size: 2.8rem;
   line-height: 3rem;
-  margin-bottom: -2rem;
+  margin-bottom: -1.5rem;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "wdth" 85;
+  letter-spacing: -0.05rem;
 }
 
 #pfl-info-page-header {
@@ -501,28 +434,27 @@
   font-size: 1.1rem !important;
   line-height: 1.7rem !important;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 
 .pfl-info-page-intro.black-bar:before {
   content: "";
   display: block;
-  height: 0.08rem;
+  height: 0.2rem;
   background-color: #000;
-  margin-bottom: 1.3rem;
+  margin-bottom: 2.5rem;
 }
 
 #pfl-info-page h3 {
   font-size: 1.4rem;
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   margin-top: 2.5rem;
   margin-bottom: -1.5rem;
+  font-variation-settings: "wdth" 95;
 }
 
 #pfl-info-page ul {
-  font-family: "Noto Sans", sans-serif;
   font-size: 1.1rem;
   margin: 3rem auto;
 }
@@ -538,7 +470,6 @@
 }
 
 #pfl-info-page p {
-  font-family: "Noto Sans", sans-serif;
   font-size: 1.1rem;
   line-height: 1.7rem;
   margin-top: 2rem;

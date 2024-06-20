@@ -36,7 +36,7 @@
 
                 pflContainer.classList.add("expanded");
                 highlightDropdown.classList.add("expanded");
-                placeHolderText.style.visibility = "hidden";
+                placeHolderText.classList.add("pfl-sr-only");
                 
                 pflFactTable.style.display = "block";
                 pflFactTable.focus();
@@ -45,7 +45,7 @@
 
                 pflContainer.classList.remove("expanded");
                 highlightDropdown.classList.remove("expanded");
-                placeHolderText.style.visibility = "visible";
+                placeHolderText.classList.remove("pfl-sr-only");
 
                 pflFactTable.style.display = "none";
             }
@@ -63,13 +63,13 @@
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
-            <span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span>
+            <span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" alt="dropdown arrow button">
         </button>
     </div>
  
     <div id="pfl-container" class="pfl-container">
 
-        <div id="pfl-fact-table" class="pfl-tables" role="region" tabindex="-1">
+        <div id="pfl-fact-table" class="pfl-tables" role="region">
  
             <h2 id="pfl-title" data-name="pfl-title">{translate key="plugins.generic.pfl.publicationFactsTitle"}</h2>
  

@@ -12,6 +12,10 @@
 
 <link rel="stylesheet" href="{$baseUrl}/plugins/generic/pflPlugin/css/pfl.css" type="text/css">
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
+</style>
+
 <div id="pfl-info-page">
 
     <div id="pfl-info-page-header">
