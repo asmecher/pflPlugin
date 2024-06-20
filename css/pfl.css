@@ -1,11 +1,138 @@
-/* GENERAL CONTAINER */
+
+
+/* GENERAL */
 
 .publication-facts-label {
-  font-family: "Helvetica", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "wdth" 100;
+  font-weight: 350;
+  font-variation-settings:
+  "wdth" 100;
   padding-top: 2em;
   max-width: fit-content;
   min-width: fit-content;
 }
+
+
+
+
+
+
+/* MAIN CLASSES */
+
+
+.publication-facts-label #pfl-title {
+  text-align: start;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.7rem;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: none;
+  font-weight: 850;
+  font-style: normal;
+  font-variation-settings: "wdth" 85;
+  font-size: 3rem;
+  white-space: nowrap;
+  line-height: 0.5;
+  letter-spacing: -0.1rem;
+}  
+
+.pfl-header-row {
+  border-top: 0.85rem solid black;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.01rem solid #000000;
+  padding-top: 0.4rem;
+  padding-bottom: 0.3rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.pfl-body-row {
+  border-bottom: 0.01rem solid #000000;
+  font-size: 1.25rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  line-height: 1.6rem;
+  text-align: start;
+  letter-spacing: -0.025rem;
+}
+
+.pfl-this-cell {
+  display:inline-block;
+  text-align: start;
+}
+
+.pfl-other-cell {
+  display: block;
+  float: inline-end;
+  text-align: end;
+}
+
+.pfl-bold {
+  font-family: 'Noto Sans', sans-serif !important;
+  font-weight: 550 !important;
+  font-size: 1.25rem;
+}
+
+.publication-facts-label .pfl-indent{
+  text-indent: 1.5rem !important;
+}
+
+.publication-facts-label .pfl-indent:dir(ltr){
+  text-align: start;
+}
+
+.publication-facts-label .pfl-indent:dir(rtl){
+  text-align: start;
+}
+
+.publication-facts-label .pfl-body-row li a {
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-block;
+  text-align: center;
+  line-height: 24px; 
+}
+
+.pfl-body-row ul {
+  padding-inline-start: 4px !important;
+}
+
+.publication-facts-label #pfl-table-footer {
+  border-top: 0.4rem solid black;
+  white-space: nowrap;
+  padding-top: 0.4rem;
+}
+
+.publication-facts-label #pfl-table-footer-info-link {
+  text-align: start;
+  display: flex;
+  gap: 0.45rem;
+  color: inherit;
+  text-decoration: none;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 0.98rem;
+  padding-bottom: -0.1rem;
+}
+
+.publication-facts-label #pfl-table-footer p {
+  text-align: start;
+  white-space: nowrap;
+  font-size: 0.98rem;
+  padding-top: -3rem;
+}
+
+
+
+
+
+
+/* CONTAINER */
 
 
 .publication-facts-label .pfl-container.expanded {
@@ -26,6 +153,10 @@
   z-index: 9999;
 }
 
+.publication-facts-label .pfl-container {
+  color: #000;
+}
+
 
 
 
@@ -37,7 +168,7 @@
 .pfl-dropdown {
   width: 100%;
   height: 100%;
-  min-width: 308px;
+  min-width: 324px;
   position: relative;
   border: 0.1rem solid rgba(0,0,0,0.4);
   -webkit-border-radius: 0.2rem;
@@ -70,12 +201,12 @@
   width: 100%;
   text-align: start;
   font-size: 1rem !important;
-  font-weight: 500;
-  color: rgba(0,0,0,0.45);
-  font-family: "Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen-Sans","Ubuntu","Cantarell","Helvetica Neue",sans-serif;
+  color: rgba(0,0,0,0.54);
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 400;
 }
 
-#buttonText {
+#pfl-buttonText {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -115,7 +246,7 @@
   content: "\f0d7";
   position: absolute;
   top: 1.1rem;
-  right: 1.15rem;
+  right: 1rem;
   -webkit-transform: translate(-50%, -50%) rotate(180deg);
   -moz-transform: translate(-50%, -50%) rotate(180deg);
   -ms-transform: translate(-50%, -50%) rotate(180deg);
@@ -139,139 +270,30 @@
   opacity: 0.4;
 }
 
-.publication-facts-label button {
-  height: fit-content;
-  width: fit-content;
-  text-align: start;
-  border: none;
-  cursor: pointer;
-  appearance: none;
-  background-color: inherit;
-  padding: 0rem;
-  margin: 0rem;
-  color: #000000;
-  padding-inline: 0rem;
-  padding-block: 0rem;
+
+
+
+
+
+
+
+/* PFL H ELEMENTS */
+
+.publication-facts-label h2 {
+  font-weight: unset;
 }
 
-
-
-/* PFL TITLE */
-
-.publication-facts-label #pfl-title {
-  text-align: start;
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 1.35rem;
-  margin-bottom: 0.2rem;
-  font-family: 'ITCFranklinGothicStd-Hvy';
-  font-size: 2.7rem;
-  white-space: nowrap;
-  line-height: 0.5;
-  letter-spacing: -1px;
-}  
-
-
-
-
-
-/* PFL LEFT-RIGHT ALIGN */
-
-.pfl-left-align:dir(ltr){
-  text-align: start;
-}
-
-.pfl-right-align:dir(ltr){
-  text-align: end;
-}
-
-.pfl-left-align:dir(rtl){
-  text-align: end;
-}
-
-.pfl-right-align:dir(rtl){
-  text-align: end;
-}
-
-.publication-facts-label .pfl-left-align p {
-  vertical-align: middle;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-
-
-
-
-
-/* PFL INDENT */
-
-.publication-facts-label .pfl-indent{
-  text-indent: 1.5rem !important;
-}
-
-.publication-facts-label .pfl-indent:dir(ltr){
-  text-align: start;
-}
-
-.publication-facts-label .pfl-indent:dir(rtl){
-  text-align: start;
-}
-
-.publication-facts-label .pfl-container {
-  color: #000;
-}
- 
-.pfl-orcid-icon img {
-  width: 1.3rem;
-  height: 1.3rem;
-}
-
-
-
-
-
-
-/* PFL FOOTER */
-
-.publication-facts-label #pfl-table-footer {
-  border-top: 0.5rem solid black;
-  white-space: nowrap;
-  padding-top: 0.3rem;
-}
-
-.publication-facts-label #pfl-table-footer-info-link {
-  text-align: start;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: inherit;
-  text-decoration: none;
-  text-align: start;
-  white-space: nowrap;
-  font-size: 1rem;
-  padding-bottom: 0rem;
-}
-
-.publication-facts-label #pfl-table-footer p {
-  text-align: start;
-  white-space: nowrap;
-  font-size: 0.96rem;
-  padding-top: -3rem;
-}
-
-
-
-
-
-
-/* PFL H3 ELEMENT */
 
 .publication-facts-label h3 {
-  font-family: "Helvetica", sans-serif;
   margin: 0 0;
-  font-size: 1.2rem;
-  padding-top: 0.3rem !important;
+  font-weight: unset;
+  font-family: unset;
+  font-size: unset;
+  line-height: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  margin-inline-start: unset;
+  margin-inline-end: unset;
 }
 
 .publication-facts-label h3:dir(ltr) {
@@ -279,7 +301,7 @@
 }
 
 .publication-facts-label h3:dir(rtl) {
-  text-align: end;
+  text-align: start;
 }
 
 
@@ -299,19 +321,12 @@
 
 
 .publication-facts-label dl dd {
-  display: block;
+  display: inline-block;
   margin-inline-start: unset;
 }
 
 .publication-facts-label dl dt {
-  padding-top: 0.25rem !important;
-}
-
-
-.publication-facts-label .pfl-list-item {
-  border-bottom: 0.015rem solid black;
-  vertical-align: middle;
-  padding: 0.175rem 0;
+  display: inline-block;
 }
 
 .publication-facts-label dl:dir(ltr) {
@@ -323,24 +338,19 @@
 }
 
 .publication-facts-label ul {
-  list-style-type: unset !important;
-  margin-block-start: 0rem !important;
-  margin-block-end: 0rem !important;
-  margin-inline-start: 0rem !important;
-  margin-inline-end: 0rem !important;
-  padding-inline-start: 0rem !important;
-  unicode-bidi: unset !important;
-  font-size: 1.2rem !important;
+  list-style-type: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  margin-inline-start: unset;
+  margin-inline-end: unset;
+  padding-inline-start: unset;
+  unicode-bidi: unset;
+  font-size: unset;
 }
 
-.publication-facts-label .pfl-paragraph-item li {
+.publication-facts-label li {
   display: inline-block;
   list-style-type: none;
-}
-
-.pfl-last {
-  border: none;
-  padding: 0.2rem 0;
 }
 
 
@@ -355,7 +365,6 @@
   vertical-align: middle;
   margin-bottom: 0 !important;
   margin-top: 0 !important;
-  font-size: 1.2rem;
   line-height: 1.5rem !important;
   margin-block-start: unset;
   margin-block-end: unset;
@@ -369,21 +378,6 @@
   text-align: start;
 }
 
-.publication-facts-label .pfl-paragraph-item {
-  font-weight: 900;
-  border-bottom: 0.015rem solid black;
-  vertical-align: middle;
-  padding: 0.2rem 0;
-}
-
-.publication-facts-label #pfl-paragraph-item:dir(ltr) {
-  text-align: start;
-}
-
-.publication-facts-label #pfl-paragraph-item:dir(rtl) {
-  text-align: start;
-}
-
 
 
 
@@ -391,26 +385,6 @@
 
 
 /* TABLES */
-
-.publication-facts-label table {
-  border-collapse: collapse;
-  width: 100%; 
-  text-indent: unset;
-  border-spacing: unset;
-}
-
-
-.publication-facts-label table th {
-  border-top: 1em solid black;
-  border-bottom: 0.030rem solid black; 
-  padding: 0.090rem 0;
-}
-
-.publication-facts-label table td {
-  border-bottom: 0.015em solid black; 
-  font-size: 1.2rem;
-  padding: 0.3rem 0;
-}
 
 .publication-facts-label .pfl-tables {
   display: none;
@@ -421,71 +395,31 @@
 
 
 
-/* PFL TABLE HEADER */
-
-.publication-facts-label .pfl-table-header {
-  font-size: 0.95rem !important;
-  color: #000000;
-  font-weight: 600;
-}
-
-.pfl-table-header-left:dir(ltr){
-  text-align: start;
-}
-
-.pfl-table-header-right:dir(ltr){
-  text-align: end;
-}
-
-.pfl-table-header-left:dir(rtl){
-  text-align: start;
-}
-
-.pfl-table-header-right:dir(rtl){
-  text-align: end;
-}
-
-
-
-
-
-
-/* PFL TABLE CELLS */
-
-.publication-facts-label .pfl-table-cells {
-  font-weight: 900;
-}
-
-.pfl-table-cells-left:dir(ltr){
-  text-align: start;
-}
-
-.pfl-table-cells-right:dir(ltr){
-  text-align: end;
-  font-weight: 500;
-}
-
-.pfl-table-cells-left:dir(rtl){
-  text-align: start;
-}
-
-.pfl-table-cells-right:dir(rtl){
-  text-align: end;
-  font-weight: 500;
-}
-
-
-
-
-
-/* A ELEMENTS */
+/* INTERACTIVE ELEMENTS */
 
 .publication-facts-label a {
   text-decoration: underline;
-  font-weight: 500;
   color: #006798;
   text-indent: 0rem;
 }
+
+.publication-facts-label button {
+  height: fit-content;
+  width: fit-content;
+  text-align: start;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  padding: 0rem;
+  margin: 0rem;
+  color: #000000;
+  padding-inline: 0rem;
+  padding-block: 0rem;
+}
+
+
+
 
 
 
@@ -502,9 +436,16 @@
 .publication-facts-label .pfl-orcid-icon {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
 
 }
+ 
+.pfl-orcid-icon img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+
 
 
 
@@ -529,53 +470,23 @@
 
 
 
-/* MEDIA QUERIES WEREN'T ACTIVE IN LAST VERSION */
-
-/*
-@media only screen and (max-width: 500px) {
-.publication-facts-label {
-  font-size: 14px;
-}
-
-.publication-facts-label table th {
-  font-size: 1.07em;
-  text-align: left;
-}
-
-.publication-facts-label #pfl-button-open-facts {
-  font-size: 2.3em;
-}
-
-.publication-facts-label table th:first-of-type {
-  width: 55%;
-}
-
-.publication-facts-label .pfl-container {
-  padding: 0em 0.35em 0.4em 0.35em;
-} 
-}
-*/
-
-
-
-
 
 
 /* PFL INFO PAGE */
 
 #pfl-info-page {
-  font-family: "Helvetica", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 #pfl-info-header_01 {
-  font-family: 'ITCFranklinGothicStd-Demi';
+  font-family: "Noto Sans", sans-serif;
   font-size: 1.55rem;
   line-height: 2.7rem;
   margin-bottom: -3.3rem;
 }
 
 #pfl-info-header_02 {
-  font-family: 'ITCFranklinGothicStd-Demi';
+  font-family: "Noto Sans", sans-serif;
   font-size: 2.1rem;
   line-height: 3rem;
   margin-bottom: -2rem;
@@ -604,14 +515,14 @@
 
 #pfl-info-page h3 {
   font-size: 1.4rem;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   font-weight: 900;
   margin-top: 2.5rem;
   margin-bottom: -1.5rem;
 }
 
 #pfl-info-page ul {
-  font-family: "Helvetica", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   font-size: 1.1rem;
   margin: 3rem auto;
 }
@@ -627,7 +538,7 @@
 }
 
 #pfl-info-page p {
-  font-family: "Helvetica", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   font-size: 1.1rem;
   line-height: 1.7rem;
   margin-top: 2rem;

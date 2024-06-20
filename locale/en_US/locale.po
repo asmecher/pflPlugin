@@ -131,17 +131,20 @@ msgstr "Link to editor and board member profiles."
 msgid "plugins.generic.pfl.linkToPKPWebsite"
 msgstr "Link to Public Knowledge Project website."
 
-msgid "plugins.generic.pfl.profiles"
-msgstr " profiles"
-
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.editorAndBoardMembers"
-msgstr "Editor & board member "
+msgstr "Editor & member board "
+
+msgid "plugins.generic.pfl.profiles"
+msgstr " profiles"
+
+msgid "plugins.generic.pfl.articlesAccepted"
+msgstr "Articles accepted&nbsp;"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
-msgstr "Articles accepted&nbsp;&nbsp;{$num}%"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.numArticlesAcceptedShort"
 msgstr "{$num}%"
@@ -149,14 +152,20 @@ msgstr "{$num}%"
 msgid "plugins.generic.pfl.daysToPublication"
 msgstr "Days to publication&nbsp;"
 
+msgid "plugins.generic.pfl.numDaysToPublication"
+msgstr "{$num}"
+
 msgid "plugins.generic.pfl.indexedIn"
+msgstr "Indexed in"
+
+msgid "plugins.generic.pfl.indexedList"
 msgstr "{$indexList}"
 
 msgid "plugins.generic.pfl.journalIndexedIn"
 msgstr "showcasing where this journal is indexed:"
 
 msgid "plugins.generic.pfl.academicSociety"
-msgstr "Academic society&nbsp;"
+msgstr "Academic Society&nbsp;"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
@@ -176,44 +185,50 @@ msgstr "Other journals"
 msgid "plugins.generic.pfl.otherJournalsHave"
 msgstr "For other journals:"
 
+msgid "plugins.generic.pfl.peerReviewers"
+msgstr "Peer reviewers&nbsp;"
+
 msgid "plugins.generic.pfl.numPeerReviewers"
-msgstr "Peer reviewers&nbsp;&nbsp;{$num}"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num}"
 
+msgid "plugins.generic.pfl.competingInterests"
+msgstr "Competing interests&nbsp;"
+
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interests&nbsp;<a><em>N/A</em></a>"
+msgstr "<a>Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
-msgstr "Competing interests&nbsp;<em>No</em>"
-
-msgid "plugins.generic.pfl.competingInterests"
-msgstr "Competing Interests"
+msgstr "No"
 
 msgid "plugins.generic.pfl.competingInterests.description"
 msgstr "The following authors have listed Competing Interests:"
 
-msgid "plugins.generic.pfl.percentYes"
+msgid "plugins.generic.pfl.averagePercentYes"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.authorStatements"
-msgstr "Author statements"
+msgstr "Author Statements"
+
+msgid "plugins.generic.pfl.dataAvailability"
+msgstr "Data availability&nbsp;"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
-msgstr "Data availability&nbsp;<a href=\"{$dataAvailabilityUrl}\">Yes</a>"
+msgstr "<a href=\"{$dataAvailabilityUrl}\">Yes</a>"
 
 msgid "plugins.generic.pfl.dataAvailability.no"
-msgstr "Data availability&nbsp;<em>No</em>"
+msgstr "No"
 
 msgid "plugins.generic.pfl.funders"
-msgstr "Funders"
+msgstr "External Funding&nbsp;"
 
 msgid "plugins.generic.pfl.funders.yes"
-msgstr "External Funding&nbsp;<button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-funders-data\">Yes</button>"
+msgstr "<button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-funders-data\">Yes</button>"
 
 msgid "plugins.generic.pfl.funders.no"
-msgstr "External Funding&nbsp;<em>No</em>"
+msgstr "No"
 
 msgid "plugins.generic.pfl.funders.description"
 msgstr "The following funders have been identified as funders of the research:"
