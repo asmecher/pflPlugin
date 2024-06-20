@@ -87,13 +87,11 @@
                 </div>
             </div>
 
-            {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
-
             <div class="pfl-indent pfl-body-row">
                 <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles_01"}
                     <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image">
                     <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"} </a>
-                </p>
+                </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
             </div>
 
             <h3 class="pfl-body-row">
@@ -115,28 +113,18 @@
                             {translate key="plugins.generic.pfl.dataAvailability.no"}
                         {/if}
                     </div>
-                    <div role="cell"class="pfl-other-cell">
-                        {if $pflDataAvailabilityUrl}
-                            {translate key="plugins.generic.pfl.averagePercentYes" num=$pflDataAvailabilityPercentClass}
-                        {else}
-                        {/if}
-                    </div>
+                    <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePercentYes" num=$pflDataAvailabilityPercentClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
                     <div role="rowheader" class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.funders"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $pflFunderList}
-                            {translate key="plugins.generic.pfl.funders.yes" pflFunderList=$pflpflNumHaveFundersClass}
+                            {translate key="plugins.generic.pfl.funders.yes"} {* This URL is missing *}
                         {else}
                             {translate key="plugins.generic.pfl.funders.no"}
                         {/if}
                     </div>
-                    <div role="cell"class="pfl-other-cell">
-                        {if $pflFunderList}
-                            {translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}
-                        {else}
-                        {/if}
-                    </div>
+                    <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
                     <div role="rowheader"class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.competingInterests"}</div>

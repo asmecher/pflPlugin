@@ -25,8 +25,8 @@
   text-align: start;
   max-width: 100%;
   max-height: 100%;
-  margin-top: 1rem;
-  margin-bottom: 0.7rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1.2rem;
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: none;
   font-weight: 850;
@@ -116,7 +116,7 @@
   white-space: nowrap;
   font-size: 0.98rem;
   padding-top: -3rem;
-  float: inline-end;
+  float: inline-start;
 }
 
 
