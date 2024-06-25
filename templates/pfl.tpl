@@ -11,7 +11,12 @@
 <link rel="stylesheet" href="{$baseUrl}/plugins/generic/pflPlugin/css/pfl.css" type="text/css">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
+@font-face {
+  font-family: 'Noto Sans';
+  src: url({$baseUrl|concat:"/plugins/generic/pflPlugin/font/NotoSans-VariableFont_wdth,wght.woff2"}) format('woff2');
+  font-weight: 100 900;
+  font-variation-settings: 'wdth' 75;
+}
 </style>
 
 <script>
@@ -40,7 +45,9 @@
                 
                 pflFactTable.style.display = "block";
                 pflFactTable.focus();
+
             } else {
+
                 toggleButton.setAttribute("aria-expanded","false");
 
                 pflContainer.classList.remove("expanded");
@@ -56,6 +63,7 @@
                 toggleButton.addEventListener('click', pflShowHideFactsLabel);
             }
     });
+    
 </script>
  
 
@@ -63,7 +71,7 @@
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
-            <span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" alt="dropdown arrow button">
+            <span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" aria-hidden="true" tabindex="-1">
         </button>
     </div>
  
@@ -89,7 +97,7 @@
 
             <div class="pfl-indent pfl-body-row">
                 <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles_01"}
-                    <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image">
+                    <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true" tabindex="-1">
                     <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"} </a>
                 </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
             </div>
@@ -183,7 +191,7 @@
                 <div class="pfl-body-row pfl-orcid-icon">
                     <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoardMembers"}</dt>
                     <dd class="pfl-this-cell pfl-orcid-icon">
-                        <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image">
+                        <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true" tabindex="-1">
                         <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
                     </dd>
                 </div>

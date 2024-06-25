@@ -13,7 +13,12 @@
 <link rel="stylesheet" href="{$baseUrl}/plugins/generic/pflPlugin/css/pfl.css" type="text/css">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
+@font-face {
+  font-family: 'Noto Sans';
+  src: url({$baseUrl|concat:"/plugins/generic/pflPlugin/font/NotoSans-VariableFont_wdth,wght.woff2"}) format('woff2');
+  font-weight: 100 900;
+  font-variation-settings: 'wdth' 75;
+}
 </style>
 
 <div id="pfl-info-page">
