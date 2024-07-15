@@ -165,8 +165,8 @@
             </div>
 
             <div class="pfl-body-row">
-                <h3 id="pfl-heading-indexed-in" class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.indexedIn"}</h3>
-                <ul class="pfl-list-item pfl-this-cell" aria-labelledby="pfl-heading-indexed-in" role="list">
+                <h3 id="pfl-heading-indexed-in" class="pfl-bold">{translate key="plugins.generic.pfl.indexedIn"}</h3>
+                <ul class="pfl-list-item" aria-labelledby="pfl-heading-indexed-in" role="list">
                     {capture assign="pflIndexListMarkup"}
 
                         {foreach from=$pflIndexList key=pflIndexListItemUrl item=pflIndexListItem}
@@ -186,23 +186,23 @@
 
                 <div class="pfl-body-row pfl-orcid-icon">
                     <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoardMembers"}</dt>
-                    <dd class="pfl-this-cell pfl-orcid-icon">
+                    <dd class="pfl-list-item pfl-orcid-icon">
                         <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true">
                         <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
                     </dd>
                 </div>
 
                 <div class="pfl-body-row">
-                    <dt class="pfl-list-item pfl-this-cell pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}</dt>
+                    <dt class="pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}</dt>
                     {* URL to Academic Society is missing *}
-                    <dd><a href="" target="_blank">N/A</a></dd>
+                    <dd class="pfl-list-item" ><a href="" target="_blank">N/A</a></dd>
                 </div>
 
                 {if $pflPublisherUrl or $pflPublisherName}
 
                 <div class="pfl-body-row">
                     <dt class="pfl-indent">{translate key="plugins.generic.pfl.publisher"}</dt>
-                    <dd class="pfl-list-item pfl-this-cell">
+                    <dd class="pfl-list-item">
                         {if $pflPublisherUrl}
                             <a href="{$pflPublisherUrl|escape}" target="_blank">{$pflPublisherName|escape|default:"&mdash;"}</a>
                         {else}

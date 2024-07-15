@@ -199,6 +199,14 @@
   margin-right: auto;
 }
 
+[dir="ltr"] .pfl-list-item {
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .pfl-list-item {
+  margin-right: 0.5rem;
+}
+
 .pfl-bold {
   font-family: "Noto Sans", sans-serif !important;
   font-weight: 550 !important;
@@ -206,11 +214,11 @@
 }
 
 [dir="ltr"] .publication-facts-label .pfl-indent {
-  padding-left: 1.5rem;
+  padding-left: 1.2rem;
 }
 
 [dir="rtl"] .publication-facts-label .pfl-indent {
-  padding-right: 1.5rem;
+  padding-right: 1.2rem;
 }
 
 .publication-facts-label .pfl-body-row li a {
