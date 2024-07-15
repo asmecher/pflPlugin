@@ -237,7 +237,7 @@ msgid "plugins.generic.pfl.dataAvailability"
 msgstr "Data availability&nbsp;"
 
 msgid "plugins.generic.pfl.dataAvailability.unsupported"
-msgstr "Data availability: Unsupported by Platform"
+msgstr "Unsupported by Platform"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
 msgstr "<a href=\"{$dataAvailabilityUrl}\">Yes</a>"

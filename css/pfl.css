@@ -161,6 +161,7 @@
   padding-bottom: 0.3rem;
   font-size: 1rem;
   font-weight: 500;
+  display: flex;
 }
 
 .pfl-body-row {
@@ -171,6 +172,7 @@
   line-height: 1.6rem;
   text-align: start;
   letter-spacing: -0.025rem;
+  display: flex;
 }
 
 .pfl-this-cell {
@@ -180,8 +182,11 @@
 
 .pfl-other-cell {
   display: block;
-  float: inline-end;
-  text-align: end;
+  margin-left: auto;
+}
+
+[dir="rtl"] .pfl-other-cell {
+  margin-right: auto;
 }
 
 .pfl-bold {
@@ -191,8 +196,11 @@
 }
 
 .publication-facts-label .pfl-indent {
-  text-indent: 1.5rem !important;
-  text-align: start;
+  margin-left: 1.5rem;
+}
+
+[dir="rtl"] .publication-facts-label .pfl-indent {
+  margin-right: 1.5rem;
 }
 
 .publication-facts-label .pfl-body-row li a {
@@ -321,7 +329,6 @@
 .publication-facts-label a {
   text-decoration: underline;
   color: #006798;
-  text-indent: 0rem;
 }
 
 .publication-facts-label button {
@@ -361,14 +368,15 @@
 /* ACCESSIBILITY */
 
 .pfl-sr-only {
+  position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
   border-width: 0;
-  z-index: -1;
 }
 
 /* PFL INFO PAGE */

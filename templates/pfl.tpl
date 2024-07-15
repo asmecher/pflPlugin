@@ -71,7 +71,7 @@
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
-            <span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" aria-hidden="true" tabindex="-1">
+            <span><span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span></span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" aria-hidden="true">
         </button>
     </div>
  
@@ -97,7 +97,7 @@
 
             <div class="pfl-indent pfl-body-row">
                 <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles_01"}
-                    <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true" tabindex="-1">
+                    <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true">
                     <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"} </a>
                 </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
             </div>
@@ -187,7 +187,7 @@
                 <div class="pfl-body-row pfl-orcid-icon">
                     <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoardMembers"}</dt>
                     <dd class="pfl-this-cell pfl-orcid-icon">
-                        <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true" tabindex="-1">
+                        <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true">
                         <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
                     </dd>
                 </div>
