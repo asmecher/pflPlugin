@@ -89,7 +89,7 @@
                     <div role="columnheader" class="pfl-other-cell">{translate key="plugins.generic.pfl.otherArticles"}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.peerReviewers"}</div>
+                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.peerReviewers"}</div>
                     <div role="cell"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.numPeerReviewers" peerReviewersUrl=$pflPeerReviewersUrl num=$pflReviewerCount|escape}</div>
                     <div role="cell" class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePeerReviewers" num=$pflReviewerCountClass|escape}</div>
                 </div>
@@ -113,14 +113,14 @@
                     <div role="columnheader">{translate key="plugins.generic.pfl.otherArticles"}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.dataAvailability"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.dataAvailability"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {translate key="plugins.generic.pfl.dataAvailability.unsupported"}                    
                     </div>
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePercentYes" num=$pflDataAvailabilityPercentClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader" class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.funders"}</div>
+                    <div role="rowheader" class="pfl-indent">{translate key="plugins.generic.pfl.funders"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $funderData}{* Provided by funding plugin when available *}
                             {translate key="plugins.generic.pfl.funders.yes"} {* This URL is missing *}
@@ -131,7 +131,7 @@
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.competingInterests"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.competingInterests"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $pflCompetingInterests}
                             {translate key="plugins.generic.pfl.competingInterests.yes"} {* This URL is missing *}
@@ -152,13 +152,13 @@
                 </div>
                 
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.articlesAccepted"}</div>
+                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.articlesAccepted"}</div>
                     <div role="cell"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.numArticlesAccepted" num=$pflAcceptedPercent|escape}</div>
                     <div role="cell" class="pfl-other-cell">{translate key="plugins.generic.pfl.numArticlesAcceptedShort" num=$pflNumAcceptedClass}</div>
                 </div>
                 
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-this-cell pfl-indent">{translate key="plugins.generic.pfl.daysToPublication"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.daysToPublication"}</div>
                     <div role="cell"class="pfl-this-cell">{translate key="plugins.generic.pfl.numDaysToPublication" num=$pflDaysToPublication|escape}</div>
                     <div role="cell" class="pfl-other-cell">{$pflDaysToPublicationClass|escape}</div>
                 </div>
