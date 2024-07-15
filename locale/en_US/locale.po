@@ -254,9 +254,6 @@ msgstr "Funders: <a href="#funding-data">Yes</a>"
 msgid "plugins.generic.pfl.funders.no"
 msgstr "No"
 
-msgid "plugins.generic.pfl.funders.description"
-msgstr "The following funders have been identified as funders of the research:"
-
 msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}%"
 

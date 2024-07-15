@@ -115,18 +115,14 @@
                 <div role="row" class="pfl-body-row">
                     <div role="rowheader"class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.dataAvailability"}</div>
                     <div role="cell"class="pfl-this-cell">
-                        {if $pflDataAvailabilityUrl}
-                            {translate key="plugins.generic.pfl.dataAvailability.yes" dataAvailabilityUrl=$pflDataAvailabilityUrl}
-                        {else}
-                            {translate key="plugins.generic.pfl.dataAvailability.no"}
-                        {/if}
+                        {translate key="plugins.generic.pfl.dataAvailability.unsupported"}                    
                     </div>
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePercentYes" num=$pflDataAvailabilityPercentClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
                     <div role="rowheader" class="pfl-indent pfl-this-cell">{translate key="plugins.generic.pfl.funders"}</div>
                     <div role="cell"class="pfl-this-cell">
-                        {if $pflFunderList}
+                        {if $funderData}{* Provided by funding plugin when available *}
                             {translate key="plugins.generic.pfl.funders.yes"} {* This URL is missing *}
                         {else}
                             {translate key="plugins.generic.pfl.funders.no"}
