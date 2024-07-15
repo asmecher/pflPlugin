@@ -110,83 +110,161 @@ msgstr "If the journal is not indexed, here is the <a target=\"_new\" href=\"htt
 msgid "plugins.generic.pfl.publicationFacts"
 msgstr "Publication Facts"
 
-msgid "plugins.generic.pfl.factsForJournal"
-msgstr "Publication Facts for journal"
+msgid "plugins.generic.pfl.publicationFactsButton"
+msgstr "Publication Facts Label dropdown button"
 
-msgid "plugins.generic.pfl.forThisJournal"
-msgstr "For this journal"
+msgid "plugins.generic.pfl.publicationFactsLabelTitle"
+msgstr "Publication Facts Label Title."
 
-msgid "plugins.generic.pfl.forOtherJournals"
-msgstr "Other journals"
+msgid "plugins.generic.pfl.publicationFactsTitle"
+msgstr "Publication Facts"
+
+msgid "plugins.generic.pfl.factsForArticle"
+msgstr "Publication Facts for article."
+
+msgid "plugins.generic.pfl.thisArticle"
+msgstr "This article"
+
+msgid "plugins.generic.pfl.thisArticleHas"
+msgstr "Publication facts for this article:"
+
+msgid "plugins.generic.pfl.otherArticles"
+msgstr "Other articles"
+
+msgid "plugins.generic.pfl.otherArticlesHave"
+msgstr "For other articles:"
 
 msgid "plugins.generic.pfl.publisher"
-msgstr "Publisher:"
+msgstr "Publisher&nbsp;"
 
-msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Editorial team</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\">"
+msgid "plugins.generic.pfl.reviewerProfiles_01"
+msgstr "Reviewer "
+
+msgid "plugins.generic.pfl.linkToReviewerProfiles"
+msgstr "Link to reviewer profiles. "
+
+msgid "plugins.generic.pfl.reviewerProfiles"
+msgstr "Reviewer Profiles."
+
+msgid "plugins.generic.pfl.linkToEditorAndBoardMembersProfiles"
+msgstr "Link to editor and board member profiles."
+
+msgid "plugins.generic.pfl.linkToPKPWebsite"
+msgstr "Link to Public Knowledge Project website."
 
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
+msgid "plugins.generic.pfl.editorAndBoardMembers"
+msgstr "Editor & member board "
+
+msgid "plugins.generic.pfl.profiles"
+msgstr " profiles"
+
+msgid "plugins.generic.pfl.articlesAccepted"
+msgstr "Articles accepted&nbsp;"
+
 msgid "plugins.generic.pfl.numArticlesAccepted"
-msgstr "Articles accepted: {$num}%"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.numArticlesAcceptedShort"
-msgstr "{$num}% accepted"
+msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.daysToPublication"
+msgstr "Days to publication&nbsp;"
+
+msgid "plugins.generic.pfl.numDaysToPublication"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexed: {$indexList}"
+msgstr "Indexed in"
+
+msgid "plugins.generic.pfl.indexedList"
+msgstr "{$indexList}"
+
+msgid "plugins.generic.pfl.journalIndexedIn"
+msgstr "showcasing where this journal is indexed:"
+
+msgid "plugins.generic.pfl.academicSociety"
+msgstr "Academic Society&nbsp;"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
 
-msgid "plugins.generic.pfl.factsForArticle"
-msgstr "Publication Facts for article"
+msgid "plugins.generic.pfl.factsForJournal"
+msgstr "Publication Facts for journal"
 
-msgid "plugins.generic.pfl.forThisResearchArticle"
-msgstr "For this article"
+msgid "plugins.generic.pfl.forThisJournal"
+msgstr "This journal"
 
-msgid "plugins.generic.pfl.forOtherArticles"
-msgstr "Other articles"
+msgid "plugins.generic.pfl.thisJournalHas"
+msgstr "Publication facts for this journal:"
+
+msgid "plugins.generic.pfl.otherJournals"
+msgstr "Other journals"
+
+msgid "plugins.generic.pfl.otherJournalsHave"
+msgstr "For other journals:"
+
+msgid "plugins.generic.pfl.peerReviewers"
+msgstr "Peer reviewers&nbsp;"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
-msgstr "<a href=\"{$peerReviewersUrl}\">Peer reviewers</a>: {$num}"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.averagePeerReviewers"
-msgstr "{$num} average"
-
-msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Competing interests: <button style=\"text-decoration: underline; color: #0000ff;\" data-a11y-dialog-show=\"pfl-modal-competing-interests-data\">Yes</button>"
-
-msgid "plugins.generic.pfl.competingInterests.no"
-msgstr "Competing interests: No"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.competingInterests"
-msgstr "Competing Interests"
+msgstr "Competing interests&nbsp;"
+
+msgid "plugins.generic.pfl.competingInterests.yes"
+msgstr "<a>Yes</a>"
+
+msgid "plugins.generic.pfl.competingInterests.no"
+msgstr "No"
 
 msgid "plugins.generic.pfl.competingInterests.description"
 msgstr "The following authors have listed Competing Interests:"
 
-msgid "plugins.generic.pfl.percentYes"
-msgstr "{$num}% yes"
+msgid "plugins.generic.pfl.averagePercentYes"
+msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.authorStatements"
+msgstr "Author Statements"
+
+msgid "plugins.generic.pfl.dataAvailability"
+msgstr "Data availability&nbsp;"
 
 msgid "plugins.generic.pfl.dataAvailability.unsupported"
-msgstr "Data availability: Unsupported by Platform"
+msgstr "Unsupported by Platform"
+
+msgid "plugins.generic.pfl.dataAvailability.yes"
+msgstr "<a href=\"{$dataAvailabilityUrl}\">Yes</a>"
+
+msgid "plugins.generic.pfl.dataAvailability.no"
+msgstr "No"
+
+msgid "plugins.generic.pfl.funders"
+msgstr "External Funding&nbsp;"
 
 msgid "plugins.generic.pfl.funders.yes"
 msgstr "Funders: <a href="#funding-data">Yes</a>"
 
 msgid "plugins.generic.pfl.funders.no"
-msgstr "Funders: No"
+msgstr "No"
 
 msgid "plugins.generic.pfl.numHaveFunders"
-msgstr "{$num}% have funders"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationAlt"
-msgstr "Information"
+msgstr "To learn about why these facts matter, click here."
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn more about a fact, click <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
+msgstr "To learn about why these facts matter, click"
+
+msgid "plugins.generic.pfl.maintainedByPKP"
+msgstr "<b>PF</b> is maintained by the "
 
 msgid "plugins.generic.pfl.closeLabel"
 msgstr "Close dialog"
@@ -307,4 +385,151 @@ msgstr ""
 "<ul>"
 "  <li>Consist of government, corporate, and private agencies that, after a review process, support a study’s related research expenses.</li>"
 "  <li>Funders’ acronyms are linked to their websites.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.about"
+msgstr "Publication Facts Label"
+
+msgid "plugins.generic.pflPlugin.aboutHeader_01"
+msgstr "Information on each fact on"
+
+msgid "plugins.generic.pflPlugin.aboutHeader_02"
+msgstr "Publication Facts Label (PFL)"
+
+msgid "plugins.generic.pflPlugin.aboutDescription_01"
+msgstr ""
+"The PFL, developed by the Public Knowledge Project at Simon Fraser University, seeks to help readers learn about an article's and journal's adherence to scholarly standards."
+
+msgid "plugins.generic.pflPlugin.aboutDescription_02"
+msgstr ""
+"The journal operates on a software publishing platform that provides the label with the data you see, while the publishing organization <a href=\"https://orcid.org/\" target=\"_blank\" rel=\"noopener\">ORCID</a> verifies the personnel identities of those working on the journal (more about that <a href=\"https://doi.org/10.1002/leap.1599\" target=\"_blank\" rel=\"noopener\">here</a>)."
+
+
+msgid "plugins.generic.pflPlugin.aboutOtherArticles"
+msgstr ""
+"<h3>Other articles</h3>"
+"<ul>"
+"    <li>The column on the right of the label presents the averages from articles published in this and other journals that employ the PFL, initially limited to journals using OJS.</li>"
+"    <li>See list of journals utilizing PFL.</li>"
+"    <li>Note that at this point these other articles and journals are from a range of disciplines, which often have different scholarly practices. The plan is to provide labels with comparisons from the same disciplines when the number of journals using the label is sufficient to do so.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutOtherJournals"
+msgstr ""
+"<h3>Other journals</h3>"
+"<ul>"
+"    <li>The column on the right also presents average data from other journals employing the PFL.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutPeerReviewers"
+msgstr ""
+"<h3>Peer reviewers</h3>"
+"<ul>"
+"    <li>The journal editors invite researchers with the relevant expertise to review the article, evaluating, as well as suggesting improvements to, the article’s quality, methods, completeness, clarity, ethics, and other aspects.</li>"
+"    <li>Reviewers are typically asked to recommend acceptance, revisions, or rejection, while their identities are commonly kept from authors (and vice versa).</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutReviewerProfiles"
+msgstr ""
+"<h3>Reviewer <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles</h3>"
+"<ul>"
+"   <li>To protect reviewer anonymity, the set of <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles (as managed and verified by <a href=\"https://orcid.org/\" target=\"_blank\" rel=\"noopener\">ORCID</a>) on the masthead are from the reviewers of the journal’s last complete volume.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutAuthorStatements"
+msgstr ""
+"<h3>Author statements</h3>"
+"<ul>"
+"   <li>On submitting an article, authors are asked to declare competing interests, data availability, and external funding sources:</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutCompetingInterests"
+msgstr ""
+"<h3>Competing interests</h3>"
+"<ul>"
+"    <li>If authors respond yes, then “view” leads to the authors’ report of potential competing interests involving their study and other interests (e.g., involving a business or family).</li>"
+"    <li>The conflict, which has been considered by reviewers and the editor, is judged not to threaten the research’s integrity, in part, by making it known.</li>"
+"    <li>Under “other articles,” the percentage is for articles declaring “yes.”</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutDataAvailability"
+msgstr ""
+"<h3>Data availability</h3>"
+"<ul>"
+"    <li>If authors respond yes, then “view” leads to the authors’ Data Availability Statement indicating that the data collected for their study is available for further analysis, including replication studies, by others.</li>"
+"    <li>Sharing data may not be appropriate for all studies due to privacy, security and other issues.</li>"
+"    <li>Under “other articles,” the percentage is for articles declaring “yes.”</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutExternalFunding"
+msgstr ""
+"<h3>External funding</h3>"
+"<ul>"
+"    <li>If authors respond yes, then “view” leads to the list of government, corporate, and private agencies that, after a review process, have supported related research expenses.</li>"
+"    <li>Under “other articles,” the percentage is for articles declaring “yes.”</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutArticlesAccepted"
+msgstr ""
+"<h3>Articles accepted</h3>"
+"<ul>"
+"   <li>Percentage of articles selected by the editors, from among those submitted, for publication, following peer review and revision process.</li>"
+"   <li>Editors decline articles due to topic relevance or research quality.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutDaysToPublication"
+msgstr ""
+"<h3>Days to Publication</h3>"
+"<ul>"
+"    <li>This is the average time from the day authors submit a paper to, if it is accepted, its day of publication.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutIndexing"
+msgstr ""
+"<h3>Indexing</h3>"
+"<ul>"
+"    <li>The PFL checks six research indexes, linking the acronym, for those that index the journal, to the page listing it. Below they are linked to the index homepage."
+"        <ul id=\"pfl-info-page-ul-sub-list\">"
+"            <li><a href=\"https://doaj.org\" target=\"_blank\" rel=\"noopener\">D</a> Directory of Open Access Journals (open for readers)</li>"
+"            <li><a href=\"https://scholar.google.com\" target=\"_blank\" rel=\"noopener\">GS</a> Google Scholar (open for readers)</li>"
+"            <li>L Latindex (open for readers)</li>"
+"            <li><a href=\"https://www.nlm.nih.gov/medline/medline_overview.html\" target=\"_blank\" rel=\"noopener\">M</a> Medline (open for readers)</li>"
+"            <li><a href=\"https://www.elsevier.com/solutions/scopus\" target=\"_blank\" rel=\"noopener\">S</a> Scopus (requires subscription to view)</li>"
+"            <li><a href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform\" target=\"_blank\" rel=\"noopener\">WS</a> Web of Science (requires subscription to view)</li>"
+"        </ul>"
+"    </li>"
+"    <li>Not all indexes are appropriate for all journals. Latindex is for Latin American journals; Medline for the health sciences; while the other four are general indexes.</li>"
+"    <li>Indexes search out journals to include in their database and/or accept applications from journals and publishers to include them.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutEditorAndBoardMemberProfiles"
+msgstr ""
+"<h3>Editor and board member <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles</h3>"
+"<ul>"
+"   <li>Editors oversee the review and selection of submissions, as well as their preparation, for publication, and they are selected by publisher, board, and/or society.</li>"
+"   <li>Editorial board members advise editors and publishers on research matters, and they are selected by editors and/or society.</li>"
+"   <li>Their <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles are managed and verified by <a href=\"https://orcid.org\" target=\"_blank\" rel=\"noopener\">ORCID</a>.</li>"
+"</ul>"
+
+
+msgid "plugins.generic.pflPlugin.aboutAcademicSociety"
+msgstr ""
+"<h3>Academic society</h3>"
+"<ul>"
+"   <li>Societies sponsor relevant journals as part of their work in advancing their field, appointing editors and board members in the process.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutPublisher"
+msgstr ""
+"<h3>Publisher</h3>"
+"<ul>"
+"   <li>The publisher is responsible for the journal’s management, production, publication, promotion, and indexing, and, for journals without an academic society, will own the title.</li>"
+"</ul>"
+
+msgid "plugins.generic.pflPlugin.aboutListOfJournals"
+msgstr ""
+"<h3>List of Journals Employing the Publication Facts Label</h3>"
+"<p>For the journals listed below, the editors or publishers have activated the Publication Facts Label plugin, which enables PKP to collect and compile PFL data and redistribute it to journals employing the PFL, where it appears under “other articles” or “other journals” in the PFL.</p>"
+"<ul>"
+"   <li><em>Test Journal</em></li>" 
 "</ul>"
