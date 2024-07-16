@@ -203,159 +203,158 @@ class PflPlugin extends GenericPlugin {
         return false;
     }
 
-	/**
-	 * @see Plugin::getActions()
-	 */
-	public function getActions($request, $actionArgs) {
+    /**
+     * @see Plugin::getActions()
+     */
+    public function getActions($request, $actionArgs) {
 
-		$actions = parent::getActions($request, $actionArgs);
+    $actions = parent::getActions($request, $actionArgs);
 
-		if (!$this->getEnabled()) {
-			return $actions;
-		}
+    if (!$this->getEnabled()) {
+        return $actions;
+    }
 
-		$router = $request->getRouter();
-		import('lib.pkp.classes.linkAction.request.AjaxModal');
-		$linkAction = new LinkAction(
-			'settings',
-			new AjaxModal(
-				$router->url(
-					$request,
-					null,
-					null,
-					'manage',
-					null,
-					array(
-						'verb' => 'settings',
-						'plugin' => $this->getName(),
-						'category' => 'generic'
-					)
-				),
-				$this->getDisplayName()
-			),
-			__('manager.plugins.settings'),
-			null
-		);
+        $router = $request->getRouter();
+        import('lib.pkp.classes.linkAction.request.AjaxModal');
+        $linkAction = new LinkAction(
+            'settings',
+            new AjaxModal(
+                $router->url(
+                    $request,
+                    null,
+                    null,
+                    'manage',
+                    null,
+                    array(
+                        'verb' => 'settings',
+                        'plugin' => $this->getName(),
+                        'category' => 'generic'
+                    )
+                ),
+                $this->getDisplayName()
+            ),
+            __('manager.plugins.settings'),
+            null
+        );
 
-		array_unshift($actions, $linkAction);
+        array_unshift($actions, $linkAction);
 
-		return $actions;
-	}
+        return $actions;
+    }
 
-	function getStatistics($journalId) {
-		$cache = CacheManager::getManager()->getCache('pflStats', $journalId, [$this, '_statsCacheMiss']);
-		if (time() - $cache->getCacheTime() > 60 * 60 * 24) {
-			error_log('FLUSHING: ' . $cache->getCacheTime());
-			// Cache is older than one day, erase it.
-			$cache->flush();
-		}
-		return $cache->getContents();
-	}
+    function getStatistics($journalId) {
+        $cache = CacheManager::getManager()->getCache('pflStats', $journalId, [$this, '_statsCacheMiss']);
+        if (time() - $cache->getCacheTime() > 60 * 60 * 24) {
+            // Cache is older than one day, erase it.
+            $cache->flush();
+        }
+        return $cache->getContents();
+    }
 
-	/**
-	 * Callback to fill cache with data, if empty.
-	 * @param $cache FileCache
-	 * @param $pubObjectId int
-	 * @return array
-	 */
-	function _statsCacheMiss($cache, $pubObjectId) {
-		$client = Application::get()->getHttpClient();
-		$versionDao = DAORegistry::getDAO('VersionDAO');
-		$currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
-		$response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => ['version' => $currentVersion->getVersionString()]]);
-		$data = json_decode($response->getBody(), true);
-		$cache->setEntireCache($data);
-		return $data;
-	}
+    /**
+     * Callback to fill cache with data, if empty.
+     * @param $cache FileCache
+     * @param $pubObjectId int
+     * @return array
+     */
+    function _statsCacheMiss($cache, $pubObjectId) {
+        $client = Application::get()->getHttpClient();
+        $versionDao = DAORegistry::getDAO('VersionDAO');
+        $currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
+        $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => ['version' => $currentVersion->getVersionString()]]);
+        $data = json_decode($response->getBody(), true);
+        $cache->setEntireCache($data);
+        return $data;
+    }
 
-	/**
+    /**
          * Hook callback: register output filter for article display.
          * This is used to add the CI statements to the author information.
-	 *
-	 * @param string $hookName
-	 * @param array $args
-	 *
-	 * @return bool
-	 *
-	 * @see TemplateManager::display()
-	 *
-	 */
-	public function handleTemplateDisplay($hookName, $args)
-	{
-		$templateMgr = & $args[0];
-		$template = & $args[1];
-		$request = Application::get()->getRequest();
+     *
+     * @param string $hookName
+     * @param array $args
+     *
+     * @return bool
+     *
+     * @see TemplateManager::display()
+     *
+     */
+    public function handleTemplateDisplay($hookName, $args)
+    {
+        $templateMgr = & $args[0];
+        $template = & $args[1];
+        $request = Application::get()->getRequest();
 
-		switch ($template) {
-			case 'frontend/pages/article.tpl':
+        switch ($template) {
+            case 'frontend/pages/article.tpl':
                 $templateMgr->registerFilter('output', [$this, 'articleDisplayFilter']);
-				break;
-		}
-		return false;
-	}
+                break;
+        }
+        return false;
+    }
 
-	/**
-	 * Output filter adds author CI statements to article view.
-	 *
-	 * @param string $output
-	 * @param TemplateManager $templateMgr
-	 *
-	 * @return string
-	 */
-	public function articleDisplayFilter($output, $templateMgr)
-	{
-		$authorIndex = 0;
-		$publication = $templateMgr->getTemplateVars('publication');
-		$authors = array_values(iterator_to_array($publication->getData('authors')));
+    /**
+     * Output filter adds author CI statements to article view.
+     *
+     * @param string $output
+     * @param TemplateManager $templateMgr
+     *
+     * @return string
+     */
+    public function articleDisplayFilter($output, $templateMgr)
+    {
+        $authorIndex = 0;
+        $publication = $templateMgr->getTemplateVars('publication');
+        $authors = array_values(iterator_to_array($publication->getData('authors')));
 
                 // Identify the ul.authors list and traverse li/ul/ol elements from there.
                 // For any </li> elements in 1st-level depth, append CI statements before </li> element.
-		$startMarkup = '<ul class="authors">';
-		$startOffset = strpos($output, $startMarkup);
-		if ($startOffset === false) return $output;
+        $startMarkup = '<ul class="authors">';
+        $startOffset = strpos($output, $startMarkup);
+        if ($startOffset === false) return $output;
                 $startOffset += strlen($startMarkup);
                 $depth = 1; // Depth of potentially nested ul/ol list elements
-	        return substr($output, 0, $startOffset) . preg_replace_callback(
-			'/(<\/li>)|(<[uo]l[^>]*>)|(<\/[uo]l>)/i',
-			function($matches) use (&$depth, &$authorIndex, $authors) {
-				switch (true) {
-					case $depth == 1 && $matches[1] !== '': // </li> in first level depth
-						if ($ciStatement = $authors[$authorIndex++]->getLocalizedCompetingInterests()) return '
-						        <div class="ciStatement">
+            return substr($output, 0, $startOffset) . preg_replace_callback(
+            '/(<\/li>)|(<[uo]l[^>]*>)|(<\/[uo]l>)/i',
+            function($matches) use (&$depth, &$authorIndex, $authors) {
+                switch (true) {
+                    case $depth == 1 && $matches[1] !== '': // </li> in first level depth
+                        if ($ciStatement = $authors[$authorIndex++]->getLocalizedCompetingInterests()) return '
+                                <div class="ciStatement">
                                                             <div class="ciStatementLabel">' . htmlspecialchars(__('author.competingInterests')) . '</div>
                                                             <div class="ciStatementContents">' . PKPString::stripUnsafeHtml($ciStatement) . '</div>
                                                         </div>' . $matches[0];
-						break;
+                        break;
                                         case !empty($matches[2]) && $depth >= 1: $depth++; break; // <ul>; do not re-enter once we leave
-					case !empty($matches[3]): $depth--; break; // </ul>
-				}
-				return $matches[0];
-			},
-			substr($output, $startOffset)
-		);
-	}
+                    case !empty($matches[3]): $depth--; break; // </ul>
+                }
+                return $matches[0];
+            },
+            substr($output, $startOffset)
+        );
+    }
 
-	/**
-	 * @see Plugin::manage()
-	 */
-	public function manage($args, $request) {
-		switch ($request->getUserVar('verb')) {
-			case 'settings':
-				$this->import('PflSettingsForm');
-				$form = new PflSettingsForm($this);
+    /**
+     * @see Plugin::manage()
+     */
+    public function manage($args, $request) {
+        switch ($request->getUserVar('verb')) {
+            case 'settings':
+                $this->import('PflSettingsForm');
+                $form = new PflSettingsForm($this);
 
-				if ($request->getUserVar('save')) {
-					$form->readInputData();
-					if ($form->validate()) {
-						$form->execute();
-						return new JSONMessage(true);
-					}
-				}
+                if ($request->getUserVar('save')) {
+                    $form->readInputData();
+                    if ($form->validate()) {
+                        $form->execute();
+                        return new JSONMessage(true);
+                    }
+                }
 
-				$form->initData();
-				return new JSONMessage(true, $form->fetch($request));
-		}
-		return parent::manage($args, $request);
-	}
+                $form->initData();
+                return new JSONMessage(true, $form->fetch($request));
+        }
+        return parent::manage($args, $request);
+    }
 
 }
