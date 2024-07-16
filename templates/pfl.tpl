@@ -123,7 +123,7 @@
                     <div role="rowheader" class="pfl-indent">{translate key="plugins.generic.pfl.funders"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $funderData}{* Provided by funding plugin when available *}
-                            {translate key="plugins.generic.pfl.funders.yes"} {* This URL is missing *}
+                            {translate key="plugins.generic.pfl.funders.yes"}
                         {else}
                             {translate key="plugins.generic.pfl.funders.no"}
                         {/if}
