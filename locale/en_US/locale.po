@@ -219,7 +219,7 @@ msgid "plugins.generic.pfl.competingInterests"
 msgstr "Competing interests&nbsp;"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "<a>Yes</a>"
+msgstr "<a href=\"#author-list\">Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "No"
@@ -249,7 +249,7 @@ msgid "plugins.generic.pfl.funders"
 msgstr "External Funding&nbsp;"
 
 msgid "plugins.generic.pfl.funders.yes"
-msgstr "Funders: <a href="#funding-data">Yes</a>"
+msgstr "Funders: <a href=\"#funding-data\">Yes</a>"
 
 msgid "plugins.generic.pfl.funders.no"
 msgstr "No"

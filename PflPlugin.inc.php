@@ -308,9 +308,12 @@ class PflPlugin extends GenericPlugin {
         $publication = $templateMgr->getTemplateVars('publication');
         $authors = array_values(iterator_to_array($publication->getData('authors')));
 
+        // Add an ID to the author list
+        $startMarkup = '<ul id="author-list" class="authors">';
+        $output = str_replace('<ul class="authors">', $startMarkup, $output);
+
         // Identify the ul.authors list and traverse li/ul/ol elements from there.
         // For any </li> elements in 1st-level depth, append CI statements before </li> element.
-        $startMarkup = '<ul class="authors">';
         $startOffset = strpos($output, $startMarkup);
 
         if ($startOffset === false) return $output;

@@ -12,6 +12,11 @@
   -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
 }
 
+#author-list:target {
+  animation: pflflash 1s 1;
+  -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
+}
+
 @keyframes pflflash {
   0% {
     background: yellow;

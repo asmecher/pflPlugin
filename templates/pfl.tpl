@@ -134,7 +134,7 @@
                     <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.competingInterests"}</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $pflCompetingInterests}
-                            {translate key="plugins.generic.pfl.competingInterests.yes"} {* This URL is missing *}
+                            {translate key="plugins.generic.pfl.competingInterests.yes"}
                         {else}
                         {/if}
                     </div>
