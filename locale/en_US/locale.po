@@ -110,38 +110,20 @@ msgstr "Publication Facts"
 msgid "plugins.generic.pfl.publicationFactsButton"
 msgstr "Publication Facts Label dropdown button"
 
-msgid "plugins.generic.pfl.publicationFactsLabelTitle"
-msgstr "Publication Facts Label Title."
-
 msgid "plugins.generic.pfl.publicationFactsTitle"
 msgstr "Publication Facts"
-
-msgid "plugins.generic.pfl.factsForArticle"
-msgstr "Publication Facts for article."
 
 msgid "plugins.generic.pfl.thisArticle"
 msgstr "This article"
 
-msgid "plugins.generic.pfl.thisArticleHas"
-msgstr "Publication facts for this article:"
-
 msgid "plugins.generic.pfl.otherArticles"
 msgstr "Other articles"
-
-msgid "plugins.generic.pfl.otherArticlesHave"
-msgstr "For other articles:"
 
 msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher"
 
-msgid "plugins.generic.pfl.reviewerProfiles.title"
-msgstr "Reviewer"
-
-msgid "plugins.generic.pfl.linkToReviewerProfiles"
-msgstr "Link to reviewer profiles. "
-
 msgid "plugins.generic.pfl.reviewerProfiles"
-msgstr "Reviewer Profiles."
+msgstr "Reviewer"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
@@ -173,29 +155,17 @@ msgstr "Indexed in"
 msgid "plugins.generic.pfl.indexedList"
 msgstr "{$indexList}"
 
-msgid "plugins.generic.pfl.journalIndexedIn"
-msgstr "showcasing where this journal is indexed:"
-
 msgid "plugins.generic.pfl.academicSociety"
 msgstr "Academic Society"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
 
-msgid "plugins.generic.pfl.factsForJournal"
-msgstr "Publication Facts for journal"
-
 msgid "plugins.generic.pfl.forThisJournal"
 msgstr "This journal"
 
-msgid "plugins.generic.pfl.thisJournalHas"
-msgstr "Publication facts for this journal:"
-
 msgid "plugins.generic.pfl.otherJournals"
 msgstr "Other journals"
-
-msgid "plugins.generic.pfl.otherJournalsHave"
-msgstr "For other journals:"
 
 msgid "plugins.generic.pfl.peerReviewers"
 msgstr "Peer reviewers"
@@ -214,9 +184,6 @@ msgstr "<a href=\"#author-list\">Yes</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "No"
-
-msgid "plugins.generic.pfl.competingInterests.description"
-msgstr "The following authors have listed Competing Interests:"
 
 msgid "plugins.generic.pfl.averagePercentYes"
 msgstr "{$num}%"
@@ -249,7 +216,7 @@ msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn about why these facts matter, click"
+msgstr "To learn about why these facts matter, click {$imageMarkup}"
 
 msgid "plugins.generic.pfl.maintainedByPKP"
 msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"

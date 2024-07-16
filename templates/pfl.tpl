@@ -96,7 +96,7 @@
             </div>
 
             <div class="pfl-indent pfl-body-row">
-                <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles.title"}&nbsp;
+                <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles"}&nbsp;
                     <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">&nbsp;
                     <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>&nbsp;
                 </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
@@ -168,15 +168,12 @@
                 <h3 id="pfl-heading-indexed-in" class="pfl-bold">{translate key="plugins.generic.pfl.indexedIn"}</h3>
                 <ul class="pfl-list-item" aria-labelledby="pfl-heading-indexed-in" role="list">
                     {capture assign="pflIndexListMarkup"}
-
                         {foreach from=$pflIndexList key=pflIndexListItemUrl item=pflIndexListItem}
                             <li><a href="{$pflIndexListItemUrl|escape}" target="_blank" aria-description="{$pflIndexListItem.description|escape}">{$pflIndexListItem.name|escape}</a></li>
-
                         {foreachelse}
                             &mdash;
-
                         {/foreach}
-                        {/capture}
+                    {/capture}
                         
                     {translate key="plugins.generic.pfl.indexedList" indexList=$pflIndexListMarkup}
                 </ul>
@@ -194,14 +191,12 @@
 
                 <div class="pfl-body-row">
                     <dt class="pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}&nbsp;</dt>
-                    {* URL to Academic Society is missing *}
                     {capture assign="notApplicable"}{translate key="common.notApplicableShort"}{/capture}
                     <dd class="pfl-list-item" >{if $pflAcademicSocietyUrl}<a href="{$pflAcademicSocietyUrl|escape}" target="_blank">{/if}{$pflAcademicSociety|escape|default:$notApplicable}{if $pflAcademicSocietyUrl}</a>{/if}</dd>
                 </div>
 
                 {if $pflPublisherUrl or $pflPublisherName}
-
-                <div class="pfl-body-row">
+                  <div class="pfl-body-row">
                     <dt class="pfl-indent">{translate key="plugins.generic.pfl.publisher"}&nbsp;</dt>
                     <dd class="pfl-list-item">
                         {if $pflPublisherUrl}
@@ -210,14 +205,14 @@
                             {$pflPublisherName|escape|default:"&mdash;"}
                         {/if}
                     </dd>
-                </div>
-
+                  </div>
                 {/if}
 
             </dl>
 
             <div id="pfl-table-footer">
-                <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank"> {translate key="plugins.generic.pfl.informationFooter"} <img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></a>
+                {capture assign="pflInfoImageMarkup"}<img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg">{/capture}
+                <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank">{translate key="plugins.generic.pfl.informationFooter" imageMarkup=$pflInfoImageMarkup}</a>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
 
