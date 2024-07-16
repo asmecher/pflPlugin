@@ -211,7 +211,7 @@
             </dl>
 
             <div id="pfl-table-footer">
-                {capture assign="pflInfoImageMarkup"}<img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg">{/capture}
+                {capture assign="pflInfoImageMarkup"}<img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" alt="{translate key="icon.info.alt"}">{/capture}
                 <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank">{translate key="plugins.generic.pfl.informationFooter" imageMarkup=$pflInfoImageMarkup}</a>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
