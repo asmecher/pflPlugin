@@ -195,7 +195,8 @@
                 <div class="pfl-body-row">
                     <dt class="pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}</dt>
                     {* URL to Academic Society is missing *}
-                    <dd class="pfl-list-item" ><a href="" target="_blank">N/A</a></dd>
+                    {capture assign="notApplicable"}{translate key="common.notApplicableShort"}{/capture}
+                    <dd class="pfl-list-item" >{if $pflAcademicSocietyUrl}<a href="{$pflAcademicSocietyUrl|escape}" target="_blank">{/if}{$pflAcademicSociety|escape|default:$notApplicable}{if $pflAcademicSocietyUrl}</a>{/if}</dd>
                 </div>
 
                 {if $pflPublisherUrl or $pflPublisherName}
