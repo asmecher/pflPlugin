@@ -132,10 +132,10 @@ msgid "plugins.generic.pfl.otherArticlesHave"
 msgstr "For other articles:"
 
 msgid "plugins.generic.pfl.publisher"
-msgstr "Publisher&nbsp;"
+msgstr "Publisher"
 
-msgid "plugins.generic.pfl.reviewerProfiles_01"
-msgstr "Reviewer "
+msgid "plugins.generic.pfl.reviewerProfiles.title"
+msgstr "Reviewer"
 
 msgid "plugins.generic.pfl.linkToReviewerProfiles"
 msgstr "Link to reviewer profiles. "
@@ -147,13 +147,13 @@ msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
 
 msgid "plugins.generic.pfl.editorAndBoardMembers"
-msgstr "Editor & member board "
+msgstr "Editor & member board"
 
 msgid "plugins.generic.pfl.profiles"
-msgstr " profiles"
+msgstr "profiles"
 
 msgid "plugins.generic.pfl.articlesAccepted"
-msgstr "Articles accepted&nbsp;"
+msgstr "Articles accepted"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
 msgstr "{$num}%"
@@ -162,7 +162,7 @@ msgid "plugins.generic.pfl.numArticlesAcceptedShort"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.daysToPublication"
-msgstr "Days to publication&nbsp;"
+msgstr "Days to publication"
 
 msgid "plugins.generic.pfl.numDaysToPublication"
 msgstr "{$num}"
@@ -177,7 +177,7 @@ msgid "plugins.generic.pfl.journalIndexedIn"
 msgstr "showcasing where this journal is indexed:"
 
 msgid "plugins.generic.pfl.academicSociety"
-msgstr "Academic Society&nbsp;"
+msgstr "Academic Society"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
@@ -198,7 +198,7 @@ msgid "plugins.generic.pfl.otherJournalsHave"
 msgstr "For other journals:"
 
 msgid "plugins.generic.pfl.peerReviewers"
-msgstr "Peer reviewers&nbsp;"
+msgstr "Peer reviewers"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
 msgstr "{$num}"
@@ -207,7 +207,7 @@ msgid "plugins.generic.pfl.averagePeerReviewers"
 msgstr "{$num}"
 
 msgid "plugins.generic.pfl.competingInterests"
-msgstr "Competing interests&nbsp;"
+msgstr "Competing interests"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
 msgstr "<a href=\"#author-list\">Yes</a>"
@@ -225,7 +225,7 @@ msgid "plugins.generic.pfl.authorStatements"
 msgstr "Author Statements"
 
 msgid "plugins.generic.pfl.dataAvailability"
-msgstr "Data availability&nbsp;"
+msgstr "Data availability"
 
 msgid "plugins.generic.pfl.dataAvailability.unsupported"
 msgstr "Unsupported by Platform"
@@ -237,7 +237,7 @@ msgid "plugins.generic.pfl.dataAvailability.no"
 msgstr "No"
 
 msgid "plugins.generic.pfl.funders"
-msgstr "External Funding&nbsp;"
+msgstr "External Funding"
 
 msgid "plugins.generic.pfl.funders.yes"
 msgstr "Funders: <a href=\"#funding-data\">Yes</a>"
@@ -252,4 +252,4 @@ msgid "plugins.generic.pfl.informationFooter"
 msgstr "To learn about why these facts matter, click"
 
 msgid "plugins.generic.pfl.maintainedByPKP"
-msgstr "<b>PF</b> is maintained by the "
+msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"

@@ -13,7 +13,7 @@
 <style>
 @font-face {
   font-family: 'Noto Sans';
-  src: url({$baseUrl|concat:"/plugins/generic/pflPlugin/font/NotoSans-VariableFont_wdth,wght.woff2"}) format('woff2');
+  src: url({$baseUrl}/plugins/generic/pflPlugin/font/NotoSans-VariableFont_wdth,wght.woff2) format('woff2');
   font-weight: 100 900;
   font-variation-settings: 'wdth' 75;
 }
@@ -71,7 +71,7 @@
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
-            <span><span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span></span><img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/pfl-down-arrow.svg"}" aria-hidden="true">
+            <span><span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span></span><img src="{$baseUrl}/plugins/generic/pflPlugin/img/pfl-down-arrow.svg" aria-hidden="true">
         </button>
     </div>
  
@@ -89,16 +89,16 @@
                     <div role="columnheader" class="pfl-other-cell">{translate key="plugins.generic.pfl.otherArticles"}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.peerReviewers"}</div>
+                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.peerReviewers"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.numPeerReviewers" peerReviewersUrl=$pflPeerReviewersUrl num=$pflReviewerCount|escape}</div>
                     <div role="cell" class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePeerReviewers" num=$pflReviewerCountClass|escape}</div>
                 </div>
             </div>
 
             <div class="pfl-indent pfl-body-row">
-                <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles_01"}
-                    <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true">
-                    <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"} </a>
+                <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles.title"}&nbsp;
+                    <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">&nbsp;
+                    <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>&nbsp;
                 </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
             </div>
 
@@ -113,14 +113,14 @@
                     <div role="columnheader">{translate key="plugins.generic.pfl.otherArticles"}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.dataAvailability"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.dataAvailability"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell">
                         {translate key="plugins.generic.pfl.dataAvailability.unsupported"}                    
                     </div>
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.averagePercentYes" num=$pflDataAvailabilityPercentClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader" class="pfl-indent">{translate key="plugins.generic.pfl.funders"}</div>
+                    <div role="rowheader" class="pfl-indent">{translate key="plugins.generic.pfl.funders"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $funderData}{* Provided by funding plugin when available *}
                             {translate key="plugins.generic.pfl.funders.yes"}
@@ -131,7 +131,7 @@
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}</div>
                 </div>
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.competingInterests"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.competingInterests"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell">
                         {if $pflCompetingInterests}
                             {translate key="plugins.generic.pfl.competingInterests.yes"}
@@ -152,13 +152,13 @@
                 </div>
                 
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.articlesAccepted"}</div>
+                    <div role="rowheader"class="pfl-bold">{translate key="plugins.generic.pfl.articlesAccepted"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell pfl-bold">{translate key="plugins.generic.pfl.numArticlesAccepted" num=$pflAcceptedPercent|escape}</div>
                     <div role="cell" class="pfl-other-cell">{translate key="plugins.generic.pfl.numArticlesAcceptedShort" num=$pflNumAcceptedClass}</div>
                 </div>
                 
                 <div role="row" class="pfl-body-row">
-                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.daysToPublication"}</div>
+                    <div role="rowheader"class="pfl-indent">{translate key="plugins.generic.pfl.daysToPublication"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell">{translate key="plugins.generic.pfl.numDaysToPublication" num=$pflDaysToPublication|escape}</div>
                     <div role="cell" class="pfl-other-cell">{$pflDaysToPublicationClass|escape}</div>
                 </div>
@@ -187,13 +187,13 @@
                 <div class="pfl-body-row pfl-orcid-icon">
                     <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoardMembers"}</dt>
                     <dd class="pfl-list-item pfl-orcid-icon">
-                        <img src="{$baseUrl|concat:"/plugins/generic/pflPlugin/img/orcid.svg"}" alt="ORCiD logo image" aria-hidden="true">
+                        <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">
                         <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
                     </dd>
                 </div>
 
                 <div class="pfl-body-row">
-                    <dt class="pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}</dt>
+                    <dt class="pfl-indent">{translate key="plugins.generic.pfl.academicSociety"}&nbsp;</dt>
                     {* URL to Academic Society is missing *}
                     {capture assign="notApplicable"}{translate key="common.notApplicableShort"}{/capture}
                     <dd class="pfl-list-item" >{if $pflAcademicSocietyUrl}<a href="{$pflAcademicSocietyUrl|escape}" target="_blank">{/if}{$pflAcademicSociety|escape|default:$notApplicable}{if $pflAcademicSocietyUrl}</a>{/if}</dd>
@@ -202,7 +202,7 @@
                 {if $pflPublisherUrl or $pflPublisherName}
 
                 <div class="pfl-body-row">
-                    <dt class="pfl-indent">{translate key="plugins.generic.pfl.publisher"}</dt>
+                    <dt class="pfl-indent">{translate key="plugins.generic.pfl.publisher"}&nbsp;</dt>
                     <dd class="pfl-list-item">
                         {if $pflPublisherUrl}
                             <a href="{$pflPublisherUrl|escape}" target="_blank">{$pflPublisherName|escape|default:"&mdash;"}</a>
@@ -217,8 +217,8 @@
             </dl>
 
             <div id="pfl-table-footer">
-                <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank"> {translate key="plugins.generic.pfl.informationFooter"} <img class="pfl-info-icon" src="{$baseUrl|concat:'/plugins/generic/pflPlugin/img/info_icon.svg'}"></a>
-                <p> {translate key="plugins.generic.pfl.maintainedByPKP"}<a href="https://pkp.sfu.ca" target="_blank">Public Knowledge Project</a></p>
+                <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank"> {translate key="plugins.generic.pfl.informationFooter"} <img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg"></a>
+                <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
 
         </div>
