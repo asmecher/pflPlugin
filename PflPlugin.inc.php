@@ -308,25 +308,28 @@ class PflPlugin extends GenericPlugin {
         $publication = $templateMgr->getTemplateVars('publication');
         $authors = array_values(iterator_to_array($publication->getData('authors')));
 
-                // Identify the ul.authors list and traverse li/ul/ol elements from there.
-                // For any </li> elements in 1st-level depth, append CI statements before </li> element.
+        // Identify the ul.authors list and traverse li/ul/ol elements from there.
+        // For any </li> elements in 1st-level depth, append CI statements before </li> element.
         $startMarkup = '<ul class="authors">';
         $startOffset = strpos($output, $startMarkup);
+
         if ($startOffset === false) return $output;
-                $startOffset += strlen($startMarkup);
-                $depth = 1; // Depth of potentially nested ul/ol list elements
-            return substr($output, 0, $startOffset) . preg_replace_callback(
+
+        $startOffset += strlen($startMarkup);
+        $depth = 1; // Depth of potentially nested ul/ol list elements
+
+        return substr($output, 0, $startOffset) . preg_replace_callback(
             '/(<\/li>)|(<[uo]l[^>]*>)|(<\/[uo]l>)/i',
             function($matches) use (&$depth, &$authorIndex, $authors) {
                 switch (true) {
                     case $depth == 1 && $matches[1] !== '': // </li> in first level depth
                         if ($ciStatement = $authors[$authorIndex++]->getLocalizedCompetingInterests()) return '
-                                <div class="ciStatement">
-                                                            <div class="ciStatementLabel">' . htmlspecialchars(__('author.competingInterests')) . '</div>
-                                                            <div class="ciStatementContents">' . PKPString::stripUnsafeHtml($ciStatement) . '</div>
-                                                        </div>' . $matches[0];
+                            <div class="ciStatement">
+                                <div class="ciStatementLabel">' . htmlspecialchars(__('author.competingInterests')) . '</div>
+                                <div class="ciStatementContents">' . PKPString::stripUnsafeHtml($ciStatement) . '</div>
+                            </div>' . $matches[0];
                         break;
-                                        case !empty($matches[2]) && $depth >= 1: $depth++; break; // <ul>; do not re-enter once we leave
+                    case !empty($matches[2]) && $depth >= 1: $depth++; break; // <ul>; do not re-enter once we leave
                     case !empty($matches[3]): $depth--; break; // </ul>
                 }
                 return $matches[0];
