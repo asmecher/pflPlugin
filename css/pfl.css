@@ -260,11 +260,9 @@
 }
 
 .publication-facts-label #pfl-table-footer p {
-  text-align: start;
   white-space: nowrap;
   font-size: 0.98rem;
   padding-top: -3rem;
-  float: inline-start;
 }
 
 /* PFL H ELEMENTS */

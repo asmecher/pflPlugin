@@ -210,7 +210,8 @@
             </dl>
 
             <div id="pfl-table-footer">
-                <p>{translate key="plugins.generic.pfl.informationFooter" }</p>
+                {capture assign="pflInfoUrl"}https://todo-url-to-pkp/..{/capture}
+                <p>{translate key="plugins.generic.pfl.informationFooter" url=$pflInfoUrl}</p>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
 
