@@ -107,7 +107,8 @@
   font-size: 0.95rem !important;
   color: rgba(0, 0, 0, 0.54);
   font-family: "Noto Sans", sans-serif;
-  font-weight: 400;
+  /*Intentionally unusual font-weight to start downloading the pfl variable noto sans file before opening PFL*/
+  font-weight: 401;
   display: flex;
   justify-content: space-between;
   align-items: center;
