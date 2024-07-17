@@ -15,7 +15,6 @@
   font-family: 'Noto Sans';
   src: url({$baseUrl}/plugins/generic/pflPlugin/font/NotoSans-VariableFont_wdth,wght.woff2) format('woff2');
   font-weight: 100 900;
-  font-variation-settings: 'wdth' 75;
 }
 </style>
 
@@ -182,7 +181,7 @@
             <dl>
 
                 <div class="pfl-body-row pfl-orcid-icon">
-                    <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoardMembers"}</dt>
+                    <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoard"}</dt>
                     <dd class="pfl-list-item pfl-orcid-icon">
                         <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">
                         <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
@@ -211,8 +210,7 @@
             </dl>
 
             <div id="pfl-table-footer">
-                {capture assign="pflInfoImageMarkup"}<img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" alt="{translate key="icon.info.alt"}">{/capture}
-                <a id="pfl-table-footer-info-link" href="{url page="publicationFacts"}" target="_blank">{translate key="plugins.generic.pfl.informationFooter" imageMarkup=$pflInfoImageMarkup}</a>
+                <p>{translate key="plugins.generic.pfl.informationFooter" }</p>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
 
