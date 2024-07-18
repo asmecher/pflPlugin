@@ -26,7 +26,7 @@
             const pflContainer = document.getElementById("pfl-container");
             const highlightDropdown = document.querySelector(".pfl-dropdown");
             const placeHolderText = document.getElementById("pfl-buttonText");
-            
+            const survey = document.getElementById("ff-compose");
             if (!toggleButton || !pflFactTable || !pflContainer || !highlightDropdown || !placeHolderText) {
                 console.error("One or more required elements are missing.");
 
@@ -43,7 +43,9 @@
                 placeHolderText.classList.add("pfl-sr-only");
                 
                 pflFactTable.style.display = "block";
-                pflFactTable.focus();
+                if(survey) {
+                    survey.style.display = "block";
+                }
 
             } else {
 
@@ -54,13 +56,20 @@
                 placeHolderText.classList.remove("pfl-sr-only");
 
                 pflFactTable.style.display = "none";
+                
+                if(survey) {
+                    survey.style.display = "none";
+                }
+
             }
         }
-            const toggleButton = document.getElementById('pfl-button-open-facts');
-            
-            if (toggleButton) {
-                toggleButton.addEventListener('click', pflShowHideFactsLabel);
-            }
+
+        const toggleButton = document.getElementById('pfl-button-open-facts');
+        
+        if (toggleButton) {
+            toggleButton.addEventListener('click', pflShowHideFactsLabel);
+        }
+
     });
     
 </script>
@@ -216,8 +225,32 @@
             </div>
 
         </div>
-
     </div>
-
+        <div id="ff-compose"></div>
+        <script>
+            window.journalISSN="{$currentJournal->getData('onlineIssn')|default:$currentJournal->getData('printIssn'):default:'unknown'|escape}"
+            
+            window.pflRecordSurveySubmit = function(data) {
+                try {   
+                    localStorage.setItem('pfl-survey-submitted', 'true');
+                }catch(e) { }
+            }
+            try {
+                if (localStorage.getItem('pfl-survey-submitted') !== 'true') {
+                    var script = document.createElement('script');
+                    script.src = "https://formfacade.com/include/107243796606886510755/form/1FAIpQLSepKMZUu10Zif6AlCvtjc4_QbuVYsqxfZMjMt86_tw7s_3fmA/classic.js?div=ff-compose&onsubmit=pflRecordSurveySubmit"
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                } else {
+                    const survey = document.getElementById("ff-compose");
+                    if(survey) {
+                        survey.remove()
+                    }
+                }
+            } catch(e) { }
+ 
+        </script>
+ 
 </div>
  
