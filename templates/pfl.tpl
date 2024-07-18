@@ -63,11 +63,13 @@
 
             }
         }
-            const toggleButton = document.getElementById('pfl-button-open-facts');
-            
-            if (toggleButton) {
-                toggleButton.addEventListener('click', pflShowHideFactsLabel);
-            }
+
+        const toggleButton = document.getElementById('pfl-button-open-facts');
+        
+        if (toggleButton) {
+            toggleButton.addEventListener('click', pflShowHideFactsLabel);
+        }
+
     });
     
 </script>
@@ -226,11 +228,12 @@
     </div>
         <div id="ff-compose"></div>
         <script>
-            window.journalISSN="testingISSN"
+            window.journalISSN="{$currentJournal->getData('onlineIssn')|default:$currentJournal->getData('printIssn'):default:'unknown'|escape}"
+            
             window.pflRecordSurveySubmit = function(data) {
                 try {   
                     localStorage.setItem('pfl-survey-submitted', 'true');
-                }catch(e){}
+                }catch(e) { }
             }
             try {
                 if (localStorage.getItem('pfl-survey-submitted') !== 'true') {
@@ -245,9 +248,8 @@
                         survey.remove()
                     }
                 }
-
-            } catch(e){}
-
+            } catch(e) { }
+ 
         </script>
  
 </div>
