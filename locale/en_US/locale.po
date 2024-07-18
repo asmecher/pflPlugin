@@ -216,7 +216,7 @@ msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "To learn more about these publication facts, click"
+msgstr "To learn about these publication facts, click"
 
 msgid "plugins.generic.pfl.informationIcon"
 msgstr "Publication facts information page."
