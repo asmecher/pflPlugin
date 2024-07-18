@@ -220,7 +220,7 @@
 
             <div id="pfl-table-footer">
                 {capture assign="pflInfoUrl"}https://todo-url-to-pkp/..{/capture}
-                <p>{translate key="plugins.generic.pfl.informationFooter" url=$pflInfoUrl}</p>
+                <p>{translate key="plugins.generic.pfl.informationFooter"} <a href="{$pflInfoUrl}"><img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" alt="{translate key="plugins.generic.pfl.informationIcon"}"></a></p>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
 

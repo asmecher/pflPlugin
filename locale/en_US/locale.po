@@ -195,7 +195,7 @@ msgid "plugins.generic.pfl.dataAvailability"
 msgstr "Data availability"
 
 msgid "plugins.generic.pfl.dataAvailability.unsupported"
-msgstr "C"
+msgstr "N/A"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
 msgstr "<a href=\"{$dataAvailabilityUrl}\">Yes</a>"
@@ -216,7 +216,10 @@ msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "Learn about the <a href=\"{$url}\">facts on the label</a>. C = Coming "
+msgstr "To learn about these publication facts, click"
+
+msgid "plugins.generic.pfl.informationIcon"
+msgstr "Publication facts information page."
 
 msgid "plugins.generic.pfl.maintainedByPKP"
 msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"
