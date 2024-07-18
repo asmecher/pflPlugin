@@ -144,6 +144,7 @@
                         {if $pflCompetingInterests}
                             {translate key="plugins.generic.pfl.competingInterests.yes"}
                         {else}
+                            {translate key="plugins.generic.pfl.competingInterests.no"}
                         {/if}
                     </div>
                     <div role="cell"class="pfl-other-cell"> {translate key="plugins.generic.pfl.averagePercentYes" num=$pflCompetingInterestsPercentClass|escape}</div>
