@@ -194,7 +194,7 @@
                     <dt class="pfl-bold">{translate key="plugins.generic.pfl.editorAndBoard"}</dt>
                     <dd class="pfl-list-item pfl-orcid-icon">
                         <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">
-                        <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
+                        <a href="{url page="about" op="editorialTeam"}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>
                     </dd>
                 </div>
 
