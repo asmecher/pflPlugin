@@ -129,10 +129,14 @@
                 <div role="row" class="pfl-body-row">
                     <div role="rowheader" class="pfl-indent">{translate key="plugins.generic.pfl.funders"}&nbsp;</div>
                     <div role="cell"class="pfl-this-cell">
-                        {if $funderData}{* Provided by funding plugin when available *}
-                            {translate key="plugins.generic.pfl.funders.yes"}
+                        {if $pflFundingPluginEnabled}
+                            {if $funderData}{* Provided by funding plugin when available *}
+                                {translate key="plugins.generic.pfl.funders.yes"}
+                            {else}
+                                {translate key="plugins.generic.pfl.funders.no"}
+                            {/if}
                         {else}
-                            {translate key="plugins.generic.pfl.funders.no"}
+                            {translate key="common.notApplicableShort"}
                         {/if}
                     </div>
                     <div role="cell"class="pfl-other-cell">{translate key="plugins.generic.pfl.numHaveFunders" num=$pflNumHaveFundersClass}</div>

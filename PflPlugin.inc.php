@@ -145,9 +145,8 @@ class PflPlugin extends GenericPlugin {
             'pflPublisherUrl' => $journal->getData('publisherUrl'),
             'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety'),
             'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
-            'pflNumOfferProfiles' => null, // FIXME: Data not yet available
             'pflIndexList' => $pflIndexList,
-            'pflEditorialTeamUrl' => '', // FIXME: URL not yet available
+            'pflFundingPluginEnabled' => (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin'),
         ]);
 
         // Class data
