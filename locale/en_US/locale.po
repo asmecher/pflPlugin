@@ -123,7 +123,7 @@ msgid "plugins.generic.pfl.publisher"
 msgstr "Publisher"
 
 msgid "plugins.generic.pfl.reviewerProfiles"
-msgstr "Reviewer"
+msgstr "Reviewer profiles"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
 msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
