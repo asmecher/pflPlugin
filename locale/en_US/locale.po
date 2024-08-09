@@ -20,9 +20,6 @@ msgstr "This plugin adds a sidebar block with statistics to indicate the journal
 msgid "plugins.generic.pflPlugin.settings.journal"
 msgstr "Journal Information"
 
-msgid "plugins.generic.pflPlugin.settings.academicSociety"
-msgstr "Academic society"
-
 msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
 msgstr "URL"
 
@@ -156,7 +153,7 @@ msgid "plugins.generic.pfl.indexedList"
 msgstr "{$indexList}"
 
 msgid "plugins.generic.pfl.academicSociety"
-msgstr "Academic Society"
+msgstr "Academic society"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
