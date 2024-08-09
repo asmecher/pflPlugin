@@ -104,10 +104,9 @@
             </div>
 
             <div class="pfl-indent pfl-body-row">
-                <p class="pfl-orcid-icon">{translate key="plugins.generic.pfl.reviewerProfiles"}&nbsp;
-                    <img src="{$baseUrl}/plugins/generic/pflPlugin/img/orcid.svg" alt="ORCiD logo image" aria-hidden="true">&nbsp;
-                    <a href="{$editorialTeamUrl}" target="_blank">{translate key="plugins.generic.pfl.profiles"}</a>&nbsp;
-                </p> {* $editorialTeamUrl doesn't seem to point to the correct place inside the template *}
+                <p>{translate key="plugins.generic.pfl.reviewerProfiles"}&nbsp;
+                {translate key="common.notApplicableShort"}
+                </p>
             </div>
 
             <h3 class="pfl-body-row">
