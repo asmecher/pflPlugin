@@ -21,7 +21,7 @@ msgid "plugins.generic.pflPlugin.settings.journal"
 msgstr "Journal Information"
 
 msgid "plugins.generic.pflPlugin.settings.academicSociety"
-msgstr "Academic Society"
+msgstr "Academic society"
 
 msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
 msgstr "URL"
@@ -189,7 +189,7 @@ msgid "plugins.generic.pfl.averagePercentYes"
 msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.authorStatements"
-msgstr "Author Statements"
+msgstr "Author statements"
 
 msgid "plugins.generic.pfl.dataAvailability"
 msgstr "Data availability"
@@ -204,7 +204,7 @@ msgid "plugins.generic.pfl.dataAvailability.no"
 msgstr "No"
 
 msgid "plugins.generic.pfl.funders"
-msgstr "External Funding"
+msgstr "External funding"
 
 msgid "plugins.generic.pfl.funders.yes"
 msgstr "Funders: <a href=\"#funding-data\">Yes</a>"
