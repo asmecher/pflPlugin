@@ -155,19 +155,20 @@ class PflPlugin extends GenericPlugin {
         // If we're viewing an article-specific page...
         if ($article = $this->templateMgr->getTemplateVars('article')) {
             $publication = $this->templateMgr->getTemplateVars('publication');
+
             // Article-specific PFL data
-            if ($journal->getData('requireAuthorCompetingInterests')) {
-                $competingInterests = [];
-                foreach ($publication->getData('authors') as $author) {
-                    $competingInterests[$author->getId()] = $author->getLocalizedCompetingInterests();
-                }
-            } else $competingInterests = null;
+            $competingInterests = [];
+            foreach ($publication->getData('authors') as $author) {
+                $ciStatement = trim($author->getLocalizedCompetingInterests());
+                if (!empty($ciStatement)) $competingInterests[$author->getId()] = $ciStatement;
+            }
 
             $publicationDate = new DateTime($publication->getData('datePublished'));
             $submissionDate = new DateTime($article->getDateSubmitted());
             $this->templateMgr->assign([
                 'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                 'pflCompetingInterests' => $competingInterests,
+                'pflCompetingInterestsEnabled' => $journal->getData('requireAuthorCompetingInterests'),
                 'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
                 'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
             ]);
