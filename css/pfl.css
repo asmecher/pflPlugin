@@ -201,11 +201,11 @@
 }
 
 [dir="ltr"] .pfl-list-item {
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
 }
 
 [dir="rtl"] .pfl-list-item {
-  margin-right: 0.5rem;
+  margin-right: 0.2rem;
 }
 
 .pfl-bold {
@@ -376,12 +376,16 @@
 .publication-facts-label .pfl-orcid-icon {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
 }
 
 .pfl-orcid-icon img {
   width: 1.2rem;
   height: 1.2rem;
+  margin-right: 0.2rem;
+}
+
+[dir="rtl"] .pfl-orcid-icon img {
+  margin-left: 0.2rem;
 }
 
 /* ACCESSIBILITY */
