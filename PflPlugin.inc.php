@@ -10,6 +10,9 @@
  * @brief Publication Facts Label plugin
  */
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\MySqlConnection;
+
 import('lib.pkp.classes.plugins.GenericPlugin');
 
 class PflPlugin extends GenericPlugin {
@@ -86,7 +89,101 @@ class PflPlugin extends GenericPlugin {
         )->current();
         return $row->reviewer_count;
     }
-    
+
+    /**
+     * Get the average peer reviews per published submission in a reviewed section for the journal.
+     */
+    function getReviewerAverage($journalId) {
+        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+        $row = $submissionDao->retrieve(
+            'SELECT AVG(a.ra_count) AS reviewer_count FROM (
+                SELECT COUNT(*) AS ra_count FROM review_assignments ra
+                JOIN submissions s ON (ra.submission_id = s.submission_id)
+                JOIN publications p ON (s.current_publication_id = p.publication_id)
+                JOIN sections sec ON (p.section_id = sec.section_id)
+                WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
+                GROUP BY s.submission_id
+            ) a',
+            [$journalId, STATUS_PUBLISHED]
+        )->current();
+        return $row->reviewer_count;
+    }
+
+    /**
+     * Get the average peer reviews per published submission in a reviewed section for the journal.
+     */
+    function getDaysToPublicationAverage($journalId) {
+        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+        $datediff = Capsule::connection() instanceof MySqlConnection
+            ? 'DATEDIFF(p.date_published, s.date_submitted)'
+            : "DATE_PART('day', p.date_published, s.date_submitted)";
+
+        $row = $submissionDao->retrieve(
+            'SELECT AVG(a.time_to_publish) AS time_to_publish FROM (
+                SELECT ' . $datediff . ' AS time_to_publish FROM review_assignments ra
+                JOIN submissions s ON (ra.submission_id = s.submission_id)
+                JOIN publications p ON (s.current_publication_id = p.publication_id)
+                JOIN sections sec ON (p.section_id = sec.section_id)
+                WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
+                GROUP BY s.submission_id
+            ) a',
+            [$journalId, STATUS_PUBLISHED]
+        )->current();
+        return $row->time_to_publish;
+    }
+
+    /**
+     * Get the number of published submissions in a peer reviewed section for the journal.
+     */
+    function getPublishedReviewableSubmissionCount($journalId) {
+        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+        $row = $submissionDao->retrieve(
+            'SELECT COUNT(*) AS submission_count
+            FROM submissions s
+            JOIN publications p ON (s.current_publication_id = p.publication_id)
+            JOIN sections sec ON (p.section_id = sec.section_id)
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?',
+            [$journalId, STATUS_PUBLISHED]
+        )->current();
+        return $row->submission_count;
+    }
+
+    /**
+     * Get the number of published submissions with at least one author CI statement in a peer reviewed section for the journal.
+     */
+    function getCompetingInterestsSubmissionCount($journalId) {
+        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+        $row = $submissionDao->retrieve(
+            'SELECT COUNT(*) AS submission_count
+            FROM submissions s
+            JOIN publications p ON (s.current_publication_id = p.publication_id)
+            JOIN authors a ON (a.publication_id = p.publication_id)
+            JOIN author_settings a_s ON (a_s.author_id = a.author_id AND a_s.setting_name = ? AND a_s.setting_value <> ?)
+            JOIN sections sec ON (p.section_id = sec.section_id)
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?',
+            ['competingInterests', '', $journalId, STATUS_PUBLISHED]
+        )->current();
+        return $row->submission_count;
+    }
+
+    /**
+     * Get the number of published submissions with at least one funding source in a peer reviewed section for the journal.
+     */
+    function getFundedSubmissionCount($journalId) {
+        if (!PluginRegistry::getPlugin('generic', 'FundingPlugin')) return null;
+        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+        $row = $submissionDao->retrieve(
+            'SELECT COUNT(*) AS submission_count
+            FROM submissions s
+            JOIN publications p ON (s.current_publication_id = p.publication_id)
+            JOIN funders f ON (f.submission_id = s.submission_id)
+            JOIN sections sec ON (p.section_id = sec.section_id)
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
+            GROUP BY s.submission_id',
+            [$journalId, STATUS_PUBLISHED]
+        )->current();
+        return $row->submission_count;
+    }
 
     /**
      * Hook callback for displaying the publication facts label.
@@ -159,7 +256,7 @@ class PflPlugin extends GenericPlugin {
             // Article-specific PFL data
             $competingInterests = [];
             foreach ($publication->getData('authors') as $author) {
-                $ciStatement = trim($author->getLocalizedCompetingInterests());
+                $ciStatement = trim($author->getLocalizedCompetingInterests() ?? '');
                 if (!empty($ciStatement)) $competingInterests[$author->getId()] = $ciStatement;
             }
 
@@ -228,15 +325,28 @@ class PflPlugin extends GenericPlugin {
 
     /**
      * Callback to fill cache with data, if empty.
-     * @param $cache FileCache
-     * @param $pubObjectId int
      * @return array
      */
-    function _statsCacheMiss($cache, $pubObjectId) {
-        $client = Application::get()->getHttpClient();
+    function _statsCacheMiss($cache, $cacheId) {
         $versionDao = DAORegistry::getDAO('VersionDAO');
         $currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
-        $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => ['version' => $currentVersion->getVersionString()]]);
+        $request = Application::get()->getRequest();
+        $journal = $request->getJournal();
+        $publishedReviewableSubmissionsCount = $this->getPublishedReviewableSubmissionCount($journal->getId());
+        $fundedSubmissionsCount = $this->getFundedSubmissionCount($journal->getId());
+        $queryParams = [
+            'version' => $currentVersion->getVersionString(),
+            'journalUrl' => $request->url(null, 'index'),
+            'pflNumAcceptedClass' => $this->getAcceptedPercent($journal->getId()),
+            'pflReviewerCountClass' => $this->getReviewerAverage($journal->getId()),
+            'pflCompetingInterestsPercentClass' => $this->getCompetingInterestsSubmissionCount($journal->getId()) / $publishedReviewableSubmissionsCount * 100,
+            'pflDataAvailabilityPercentClass' => 'N/A',
+            'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : ($fundedSubmissionsCount / $publishedReviewableSubmissionsCount * 100),
+            'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId()),
+        ];
+
+        $client = Application::get()->getHttpClient();
+        $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => $queryParams]);
         $data = json_decode($response->getBody(), true);
         $cache->setEntireCache($data);
         return $data;
