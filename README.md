@@ -7,7 +7,6 @@ The Publication Facts Label presents data about other journals in its class. The
 
 | Key                               | Example | Description                                                          |
 | --------------------------------- | ------- | -------------------------------------------------------------------- |
-| pflNumOfferProfilesClass          | 65      | Percentage of ORCID coverage on a typical journal's editorial board  |
 | pflNumAcceptedClass               | 13      | Percentage of articles accepted by a typical journal                 |
 | pflNumIndexesClass                | 3.4     | Average number of indexes a typical journal is accepted into         |
 | pflReviewerCountClass             | 2.4     | Average number of peer reviewers for an article in a typical journal |
