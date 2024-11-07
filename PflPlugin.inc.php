@@ -62,20 +62,18 @@ class PflPlugin extends GenericPlugin {
     /**
      * Get the article acceptance percentage for a given journal.
      */
-    function getAcceptedPercent($journalId) {
+    function getAcceptanceCount($journalId) {
         $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        import('lib.pkp.classes.workflow.PKPEditorDecisionActionsManager');
         $row = $submissionDao->retrieve(
-            'SELECT COUNT(s.submission_id) AS submission_count, COUNT(eda.edit_decision_id) AS accepted_submission_count FROM submissions s
-            LEFT JOIN edit_decisions eda ON (eda.submission_id = s.submission_id AND eda.decision = ?)
-            LEFT JOIN edit_decisions edn ON (edn.submission_id = s.submission_id AND edn.decision = eda.decision AND edn.edit_decision_id > eda.edit_decision_id)
-            WHERE s.context_id = ? AND s.submission_progress = 0 AND (edn.edit_decision_id IS NULL OR eda.edit_decision_id IS NOT NULL)',
-            [SUBMISSION_EDITOR_RECOMMEND_ACCEPT, $journalId]
+            'SELECT COUNT(*) AS submission_count
+            FROM submissions s
+            JOIN publications p ON (s.current_publication_id = p.publication_id)
+            JOIN sections sec ON (p.section_id = sec.section_id)
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ? AND
+            s.submission_id IN (SELECT submission_id FROM review_assignments)',
+            [$journalId, STATUS_PUBLISHED]
         )->current();
-        $submissionCount = $row->submission_count;
-        $acceptedSubmissionCount = $row->accepted_submission_count;
-        if ($submissionCount == 0) return 0;
-        return intval($acceptedSubmissionCount / $submissionCount * 100);
+        return $row->submission_count;
     }
 
     /**
@@ -235,9 +233,13 @@ class PflPlugin extends GenericPlugin {
         }
 
         // Journal-specific PFL data
+        $acceptanceNumerator = $this->getAcceptanceCount($journal->getId());
+        $acceptanceDenominator = $this->getPublishedReviewableSubmissionCount($journal->getId());
+        $acceptanceRate = $acceptanceDenominator ? intval($acceptanceNumerator / $acceptanceDenominator * 100) : 0;
+
         $this->templateMgr->assign([
             'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
-            'pflAcceptedPercent' => $this->getAcceptedPercent($journal->getId()),
+            'pflAcceptedPercent' => $acceptanceRate,
             'pflPublisherName' => $journal->getData('publisherInstitution'),
             'pflPublisherUrl' => $journal->getData('publisherUrl'),
             'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety'),
@@ -334,15 +336,17 @@ class PflPlugin extends GenericPlugin {
         $journal = $request->getJournal();
         $publishedReviewableSubmissionsCount = $this->getPublishedReviewableSubmissionCount($journal->getId());
         $fundedSubmissionsCount = $this->getFundedSubmissionCount($journal->getId());
+        $acceptanceCount = $this->getAcceptanceCount($journal->getId());
         $queryParams = [
             'version' => $currentVersion->getVersionString(),
             'journalUrl' => $request->url(null, 'index'),
-            'pflNumAcceptedClass' => $this->getAcceptedPercent($journal->getId()),
+            'pflNumAcceptedClass' => $acceptanceCount,
             'pflReviewerCountClass' => $this->getReviewerAverage($journal->getId()),
-            'pflCompetingInterestsPercentClass' => $this->getCompetingInterestsSubmissionCount($journal->getId()) / $publishedReviewableSubmissionsCount * 100,
+            'pflCompetingInterestsPercentClass' => $this->getCompetingInterestsSubmissionCount($journal->getId()),
             'pflDataAvailabilityPercentClass' => 'N/A',
-            'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : ($fundedSubmissionsCount / $publishedReviewableSubmissionsCount * 100),
+            'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : $fundedSubmissionsCount,
             'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId()),
+            'publishedReviewableSubmissionsCount' => $publishedReviewableSubmissionsCount,
         ];
 
         $client = Application::get()->getHttpClient();
@@ -353,8 +357,8 @@ class PflPlugin extends GenericPlugin {
     }
 
     /**
-         * Hook callback: register output filter for article display.
-         * This is used to add the CI statements to the author information.
+     * Hook callback: register output filter for article display.
+     * This is used to add the CI statements to the author information.
      *
      * @param string $hookName
      * @param array $args
