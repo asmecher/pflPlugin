@@ -394,7 +394,7 @@ class PflPlugin extends GenericPlugin {
     {
         $authorIndex = 0;
         $publication = $templateMgr->getTemplateVars('publication');
-        $authors = array_values(iterator_to_array($publication->getData('authors')));
+        $authors = array_values($publication->getData('authors'));
 
         // Add an ID to the author list
         $startMarkup = '<ul id="author-list" class="authors">';
