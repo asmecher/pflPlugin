@@ -4,8 +4,8 @@
 <!--
   * version.xml
   *
-  * Copyright (c) 2023 Simon Fraser University
-  * Copyright (c) 2023 John Willinsky
+  * Copyright (c) 2023-2024 Simon Fraser University
+  * Copyright (c) 2023-2024 John Willinsky
   * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Plugin version information.
@@ -13,8 +13,8 @@
 <version>
 	<application>pflPlugin</application>
 	<type>plugins.generic</type>
-	<release>1.0.0.1</release>
-	<date>2024-08-15</date>
+	<release>1.0.0.2</release>
+	<date>2024-11-06</date>
 	<lazy-load>1</lazy-load>
 	<class>PflPlugin</class>
 </version>
