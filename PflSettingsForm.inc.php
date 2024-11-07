@@ -2,14 +2,14 @@
 /**
  * @file PflSettingsForm.inc.php
  *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
+ * Copyright (c) 2023-2024 Simon Fraser University
+ * Copyright (c) 2023-2024 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class PflSettingsForm
  * @ingroup plugins_generic_pflPlugin
  *
- * @brief Form for site admins to modify Publication Facts Label settings.
+ * @brief Form for journal managers to modify Publication Facts Label settings.
  */
 
 
