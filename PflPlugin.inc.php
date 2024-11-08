@@ -258,7 +258,8 @@ class PflPlugin extends GenericPlugin {
             // Article-specific PFL data
             $competingInterests = [];
             foreach ($publication->getData('authors') as $author) {
-                $ciStatement = trim($author->getLocalizedCompetingInterests() ?? '');
+                if (!method_exists($author, 'getLocalizedCompetingInterests')) continue;
+                $ciStatement = trim($author->getLocalizedData('competingInterests') ?? '');
                 if (!empty($ciStatement)) $competingInterests[$author->getId()] = $ciStatement;
             }
 
@@ -414,7 +415,7 @@ class PflPlugin extends GenericPlugin {
             function($matches) use (&$depth, &$authorIndex, $authors) {
                 switch (true) {
                     case $depth == 1 && $matches[1] !== '': // </li> in first level depth
-                        if ($ciStatement = $authors[$authorIndex++]->getLocalizedCompetingInterests()) return '
+                        if ($ciStatement = $authors[$authorIndex++]->getLocalizedData('competingInterests')) return '
                             <div class="ciStatement">
                                 <div class="ciStatementLabel">' . htmlspecialchars(__('author.competingInterests')) . '</div>
                                 <div class="ciStatementContents">' . PKPString::stripUnsafeHtml($ciStatement) . '</div>
