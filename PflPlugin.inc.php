@@ -203,7 +203,7 @@ class PflPlugin extends GenericPlugin {
         // Only journal homepages and article landing pages get the PFL.
         if (!in_array($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request), ['article/view', 'index/index'])) return false;
 
-        if ($this->templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
+        if (!$this->templateMgr || $this->templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
 
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
