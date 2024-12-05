@@ -201,9 +201,16 @@ class PflPlugin extends GenericPlugin {
         if (!$router instanceof PageRouter) return false;
 
         // Only journal homepages and article landing pages get the PFL.
-        if (!in_array($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request), ['article/view', 'index/index'])) return false;
+        $pageAndOp = $router->getRequestedPage($request) . '/' . $router->getRequestedOp($request);
+        if (!in_array($pageAndOp, ['article/view', 'index/index'])) return false;
 
         if (!$this->templateMgr || $this->templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
+
+        if ($pageAndOp == 'article/view') {
+            // https://github.com/asmecher/pflPlugin/issues/20 Only apply PFL to peer reviewed sections
+            $section = $this->templateMgr->get_template_vars('section');
+            if ($section && !$section->getMetaReviewed()) return false;
+        }
 
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
