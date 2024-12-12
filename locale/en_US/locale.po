@@ -20,6 +20,18 @@ msgstr "This plugin adds a sidebar block with statistics to indicate the journal
 msgid "plugins.generic.pflPlugin.settings.journal"
 msgstr "Journal Information"
 
+msgid "plugins.generic.pflPlugin.settings.excludePrior"
+msgstr "Exclude by Date"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart"
+msgstr "Start Date"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.description"
+msgstr "If your journal did not make use of OJS's editorial workflow prior to a certain date, specify it here in order to exclude prior submissions from the collection of statistics. The Publication Facts Label will not be presented on submissions prior to this date."
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.invalid"
+msgstr "Please double-check that the specified start date is valid."
+
 msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
 msgstr "URL"
 

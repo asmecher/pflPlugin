@@ -30,9 +30,13 @@
 		{fbvElement type="text" id="academicSocietyUrl" value=$academicSocietyUrl label="plugins.generic.pflPlugin.settings.academicSocietyUrl"}
 	{/fbvFormArea}
 
+	{fbvFormArea id="dateSettings" title="plugins.generic.pflPlugin.settings.excludePrior"}
+		<div id="excludePriorDescription">{translate key="plugins.generic.pflPlugin.settings.dateStart.description"}</div>
+		{fbvElement type="text" name="dateStart" id="dateStart" value=$dateStart label="plugins.generic.pflPlugin.settings.dateStart" size=$fbvStyles.size.SMALL inline=true class="datepicker"}
+	{/fbvFormArea}
 
 	{fbvFormArea id="pflPluginSettings" title="plugins.generic.pflPlugin.settings.indexes"}
-		<div id="description">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
+		<div id="indexesDescription">{translate key="plugins.generic.pflPlugin.settings.indexes.description"}</div>
 		<br />
 		{fbvFormSection list="true" title="plugins.generic.pflPlugin.settings.indexes.automatic"}
 			{fbvElement type="checkbox" id="includeDoaj" checked=$includeDoaj|default:false label="plugins.generic.pflPlugin.settings.indexes.automatic.doaj"}

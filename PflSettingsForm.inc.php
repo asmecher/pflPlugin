@@ -86,6 +86,7 @@ class PflSettingsForm extends Form {
         $this->addCheck(new FormValidatorUrl($this, 'academicSocietyUrl', 'optional', 'plugins.generic.pflPlugin.settings.academicSocietyUrl.invalid'));
         $this->addCheck(new FormValidatorUrl($this, 'scopusUrl', 'optional', 'plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid'));
         $this->addCheck(new FormValidatorRegExp($this, 'scopusUrl', 'optional', 'plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid', '/^https:\/\/www\.scopus\.com\/sourceid\/[0-9]+$/'));
+        $this->addCheck(new FormValidatorCustom($this, 'dateStart', 'optional', 'plugins.generic.pflPlugin.settings.dateStart.invalid', function($v) {return strtotime($v) !== false;}));
 
         // The validator below is removed because WOS URLs appear to have a weird colon that the validator (possibly correctly) does not like.
         // $this->addCheck(new FormValidatorUrl($this, 'wosUrl', 'optional', 'plugins.generic.pflPlugin.settings.indexes.manual.wos.urlInvalid'));
@@ -100,7 +101,7 @@ class PflSettingsForm extends Form {
         $context = $request->getContext();
         $contextId = $context ? $context->getId() : 0;
 
-        foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl'] as $settingName) {
+        foreach (['includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl', 'dateStart'] as $settingName) {
             $this->setData($settingName, $this->plugin->getSetting($contextId, $settingName));
         }
     }
@@ -110,7 +111,7 @@ class PflSettingsForm extends Form {
      */
     public function readInputData() {
         $this->readUserVars([
-            'includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl',
+            'includeMedline', 'includeDoaj', 'includeLatindex', 'includeScholar', 'scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl', 'dateStart',
         ]);
     }
 
@@ -144,6 +145,8 @@ class PflSettingsForm extends Form {
         foreach (['scopusUrl', 'wosUrl', 'academicSociety', 'academicSocietyUrl'] as $stringSettingName) {
             $this->plugin->updateSetting($context->getId(), $stringSettingName, (string) $this->getData($stringSettingName));
         }
+
+        $this->plugin->updateSetting($context->getId(), 'dateStart', ((string) $this->getData('dateStart')) ?: null);
 
         import('classes.notification.NotificationManager');
         $notificationMgr = new NotificationManager();
