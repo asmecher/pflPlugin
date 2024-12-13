@@ -24,13 +24,15 @@ class PflPlugin extends GenericPlugin {
     function register($category, $path, $mainContextId = null) {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
+                // Display the PFL in the journal index page.
                 // HACK: We don't have a hook for the appropriate spot in the page presentation, so we watch for
                 // the page footer template to be looked up. When that happens, we output the PFL markup directly.
                 HookRegistry::register('TemplateResource::getFilename', [$this, 'getFilenameHook']);
-
                 // HACK: The funding plugin stores data in the TemplateManager but it appears to be a different instance.
                 HookRegistry::register('Templates::Index::journal', [$this, 'stashTemplateManager']);
-                HookRegistry::register('Templates::Article::Details', [$this, 'stashTemplateManager']);
+
+                // Display the PFL in the article landing page.
+                HookRegistry::register('Templates::Article::Main', [$this, 'displayArticlePfl']);
 
                 // Add the author CI statements to the author list
                 HookRegistry::register('TemplateManager::display', [$this, 'handleTemplateDisplay']);
@@ -219,26 +221,50 @@ class PflPlugin extends GenericPlugin {
         $router = $request->getRouter();
         if (!$router instanceof PageRouter) return false;
 
-        // Only journal homepages and article landing pages get the PFL.
-        $pageAndOp = $router->getRequestedPage($request) . '/' . $router->getRequestedOp($request);
-        if (!in_array($pageAndOp, ['article/view', 'index/index'])) return false;
-
         if (!$this->templateMgr || $this->templateMgr->getTemplateVars('pflDisplayed')) return false; // Only display the PFL once per request
 
-        if ($pageAndOp == 'article/view') {
-            // https://github.com/asmecher/pflPlugin/issues/20 Only apply PFL to peer reviewed sections
-            $section = $this->templateMgr->get_template_vars('section');
-            if ($section && !$section->getMetaReviewed()) return false;
+        $dateStart = $this->getSetting($journal->getId(), 'dateStart');
 
-            $article = $this->templateMgr->getTemplateVars('article');
-
-            // Check if the submission came in before a specified start date for inclusion
-            $dateStart = $this->getSetting($journal->getId(), 'dateStart');
-            if ($dateStart && strtotime($dateStart) > strtotime($article->getDateSubmitted())) return false;
-        } else {
-            $article = null;
+        switch ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request)) {
+            case 'index/index':
+                $this->displayPfl($journal, null, $dateStart);
         }
+        return false;
+    }
 
+    /**
+     * Hook handler to display article PFL
+     * @param $hookName string
+     * @param $args array
+     */
+    function displayArticlePfl($hookName, $args) {
+        $this->templateMgr =& $args[1];
+        $output =& $args[2];
+
+        $request = Application::get()->getRequest();
+        $journal = $request->getContext();
+        $dateStart = $this->getSetting($journal->getId(), 'dateStart');
+
+        // https://github.com/asmecher/pflPlugin/issues/20 Only apply PFL to peer reviewed sections
+        $section = $this->templateMgr->get_template_vars('section');
+        if ($section && !$section->getMetaReviewed()) return false;
+
+        // Check if the submission came in before a specified start date for inclusion
+        if ($dateStart && strtotime($dateStart) > strtotime($article->getDateSubmitted())) return false;
+
+        $output .= '<section class="item pflPlugin">' . $this->displayPfl($journal, $this->templateMgr->get_template_vars('article'), $dateStart, true) . '</section>';
+        return false;
+    }
+
+    /**
+     * Display the Publication Facts Label.
+     * @param $journal Journal
+     * @param $article ?Article
+     * @param $dateStart ?string
+     * @param $fetch boolean
+     * @return ?string If true, return the PFL markup as a string
+     */
+    function displayPfl($journal, $article = null, $dateStart = null, $fetch = false) {
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
 
@@ -265,8 +291,6 @@ class PflPlugin extends GenericPlugin {
         if ($wosUrl = $this->getSetting($journal->getId(), 'wosUrl')) {
             $pflIndexList[$wosUrl] = ['name' => 'WS', 'description' => 'Web of Science'];
         }
-
-        $dateStart = $this->getSetting($journal->getId(), 'dateStart');
 
         // Journal-specific PFL data
         $acceptanceNumerator = $this->getAcceptanceCount($journal->getId(), $dateStart);
@@ -310,8 +334,11 @@ class PflPlugin extends GenericPlugin {
             ]);
         }
 
+        if ($fetch) {
+            return $this->templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
+        }
         $this->templateMgr->display($this->getTemplateResource('pfl.tpl'));
-        return false;
+        return null;
     }
 
     /**
@@ -414,7 +441,10 @@ class PflPlugin extends GenericPlugin {
 
         switch ($template) {
             case 'frontend/pages/article.tpl':
-                $templateMgr->registerFilter('output', [$this, 'articleDisplayFilter']);
+                $templateMgr->registerFilter('output', [$this, 'authorCiFilter']);
+                break;
+            case 'frontend/components/footer.tpl':
+                $templateMgr->registerFilter('output', [$this, 'pflFilter']);
                 break;
         }
         return false;
@@ -428,7 +458,7 @@ class PflPlugin extends GenericPlugin {
      *
      * @return string
      */
-    public function articleDisplayFilter($output, $templateMgr)
+    public function authorCiFilter($output, $templateMgr)
     {
         $authorIndex = 0;
         $publication = $templateMgr->getTemplateVars('publication');
