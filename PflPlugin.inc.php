@@ -227,6 +227,7 @@ class PflPlugin extends GenericPlugin {
 
         switch ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request)) {
             case 'index/index':
+            case '/index':
                 $this->displayPfl($journal, null, $dateStart);
         }
         return false;
