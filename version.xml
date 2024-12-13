@@ -14,7 +14,7 @@
 	<application>pflPlugin</application>
 	<type>plugins.generic</type>
 	<release>1.0.0.5</release>
-	<date>2024-12-12</date>
+	<date>2024-12-13</date>
 	<lazy-load>1</lazy-load>
 	<class>PflPlugin</class>
 </version>
