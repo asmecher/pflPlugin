@@ -79,7 +79,7 @@
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
-            <span><span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span></span><img src="{$baseUrl}/plugins/generic/pflPlugin/img/pfl-down-arrow.svg" aria-hidden="true">
+            <span><span id="pfl-buttonText">{translate key="plugins.generic.pfl.publicationFacts"}</span></span><img src="{$baseUrl}/plugins/generic/pflPlugin/img/pfl-down-arrow.svg" aria-hidden="true" height="10">
         </button>
     </div>
  
