@@ -251,6 +251,7 @@ class PflPlugin extends GenericPlugin {
         if ($section && !$section->getMetaReviewed()) return false;
 
         // Check if the submission came in before a specified start date for inclusion
+        $article = $this->templateMgr->get_template_vars('article');
         if ($dateStart && strtotime($dateStart) > strtotime($article->getDateSubmitted())) return false;
 
         $output .= '<section class="item pflPlugin">' . $this->displayPfl($journal, $this->templateMgr->get_template_vars('article'), $dateStart, true) . '</section>';
