@@ -279,7 +279,7 @@ class PflPlugin extends GenericPlugin {
 
         $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
 
-	return false;
+        return false;
     }
 
     /**
@@ -353,6 +353,7 @@ class PflPlugin extends GenericPlugin {
             'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : $fundedSubmissionsCount,
             'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId(), $dateStart),
             'publishedReviewableSubmissionsCount' => $publishedReviewableSubmissionsCount,
+            'issn' => $journal->getSetting('onlineIssn') ?? $journal->getSetting('printIssn'),
         ];
 
         $client = Application::get()->getHttpClient();
