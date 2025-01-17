@@ -8,6 +8,8 @@
 * Journal Integrity Initiative Publication Facts Label template
 *}
 
+<section class="item pflPlugin">
+
 <link rel="stylesheet" href="{$baseUrl}/plugins/generic/pflPlugin/css/pfl.css" type="text/css">
 
 <style>
@@ -259,3 +261,4 @@
  
 </div>
  
+</section>
