@@ -165,7 +165,10 @@ msgid "plugins.generic.pfl.indexedList"
 msgstr "{$indexList}"
 
 msgid "plugins.generic.pfl.academicSociety"
-msgstr "Academic society"
+msgstr "Society"
+
+msgid "plugins.generic.pfl.academicSociety.fieldLabel"
+msgstr "Society name or acronym (limited to 18 characters including spaces)"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"

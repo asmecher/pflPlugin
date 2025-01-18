@@ -26,7 +26,7 @@
 	{/if}
 
 	{fbvFormArea id="additionalJournalSettings" title="plugins.generic.pflPlugin.settings.journal"}
-		{fbvElement type="text" id="academicSociety" value=$academicSociety label="plugins.generic.pfl.academicSociety"}
+		{fbvElement type="text" id="academicSociety" maxlength=18 value=$academicSociety label="plugins.generic.pfl.academicSociety.fieldLabel"}
 		{fbvElement type="text" id="academicSocietyUrl" value=$academicSocietyUrl label="plugins.generic.pflPlugin.settings.academicSocietyUrl"}
 	{/fbvFormArea}
 
