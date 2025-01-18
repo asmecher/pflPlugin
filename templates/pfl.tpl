@@ -31,7 +31,6 @@
             const survey = document.getElementById("ff-compose");
             if (!toggleButton || !pflFactTable || !pflContainer || !highlightDropdown || !placeHolderText) {
                 console.error("One or more required elements are missing.");
-
                 return;
             }
 
@@ -48,9 +47,7 @@
                 if(survey) {
                     survey.style.display = "block";
                 }
-
             } else {
-
                 toggleButton.setAttribute("aria-expanded","false");
 
                 pflContainer.classList.remove("expanded");
@@ -62,18 +59,14 @@
                 if(survey) {
                     survey.style.display = "none";
                 }
-
             }
         }
 
         const toggleButton = document.getElementById('pfl-button-open-facts');
-        
         if (toggleButton) {
             toggleButton.addEventListener('click', pflShowHideFactsLabel);
         }
-
     });
-    
 </script>
  
 
@@ -91,7 +84,6 @@
  
             <h2 id="pfl-title" data-name="pfl-title">{translate key="plugins.generic.pfl.publicationFactsTitle"}</h2>
  
-            {if $article}
             <div role="table">
                 <div role="row" class="pfl-header-row">
                     <div role="columnheader" class="pfl-sr-only"><span>Metric</span></div>
@@ -157,8 +149,6 @@
                     <div role="cell"class="pfl-other-cell"> {translate key="plugins.generic.pfl.averagePercentYes" num=$pflCompetingInterestsPercentClass|escape}</div>
                 </div>
             </div>
-
-            {/if} {* If this is an article-specific page *}
 
             <div role="table">
                 <div role="row" class="pfl-header-row">
@@ -258,7 +248,6 @@
             } catch(e) { }
  
         </script>
- 
 </div>
- 
+
 </section>
