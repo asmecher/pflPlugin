@@ -2,148 +2,236 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13T00:55:57+00:00\n"
-"PO-Revision-Date: 2023-09-24 17:46-0700\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: es\n"
+"Last-Translator: Jordi Lacruz Casado\n"
+"Language-Team: UAB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"POT-Creation-Date: 2020-02-13T00:55:57+00:00\n"
+"PO-Revision-Date: 2025-01-13T00:40:57+00:00\n"
+"Language: es\n"
 
 msgid "plugins.generic.pfl.displayName"
-msgstr "plugin sobre información de publicación"
+msgstr "Módulo Publication Facts Label"
 
 msgid "plugins.generic.pfl.description"
-msgstr "Este plugin agrega un bloque de barra lateral con estadísticas para indicar las características de integridad de la revista a los lectores."
+msgstr "Este módulo agrega un bloque en la barra lateral con estadísticas para indicar a los lectores/as las características de integridad de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.journal"
+msgstr "Información de la revista"
+
+msgid "plugins.generic.pflPlugin.settings.excludePrior"
+msgstr "Excluir por fecha"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart"
+msgstr "Fecha de inicio"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.description"
+msgstr "Si su revista no utilizaba el flujo editorial de OJS antes de una fecha concreta, especifíquela aquí para excluir los envíos previos a dicha fecha de la recolección de estadísticas. Publication Facts Label no se mostrará en los envíos anteriores a esta fecha."
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.invalid"
+msgstr "Compruebe que la fecha de inicio especificada es válida."
+
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
+msgstr "URL"
+
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl.invalid"
+msgstr "La URL de la sociedad académica no es válida. Asegúrese de que la URL esté completa y tenga el formato correcto."
+
+msgid "plugins.generic.pflPlugin.fundingPluginMissing"
+msgstr "Falta el módulo Funding"
+
+msgid "plugins.generic.pflPlugin.fundingPluginMissing.description"
+msgstr "El módulo Funding no está instalado ni activado. Para que Publication Facts Label muestre los datos de financiación, este módulo deberá estar instalado y activo, y cada envío deberá contar con los datos pertinentes. Compruebe la galería de módulos para localizarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes"
+msgstr "Listados de indexación de la revista"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.description"
+msgstr "Bajo el título \"Indexada en\" de Publication Facts Label (PFL), los lectores/as encontrarán hasta cuatro índices en los que aparece la revista. Cuatro de los índices que aparecen a continuación ofrecen una amplia cobertura, mientras que MEDLINE cubre las ciencias de la salud y Latindex abarca Latinoamérica (ver información más abajo). Los índices permiten que su listado de revistas se muestre públicamente (incluso cuando el índice esté cerrado). Dos de los índices pueden comprobarse automáticamente, pero los otros cuatro requieren que busque la revista en el índice y, si la encuentra, la añada a PFL."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic"
+msgstr "Listado automático de índices en PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj"
+msgstr "Directory of Open Access Journals"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en DOAJ. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.scholar"
+msgstr "Google Scholar"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline"
+msgstr "MEDLINE"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en MEDLINE. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex"
+msgstr "Latindex"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en Latindex. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual"
+msgstr "Listado manual de índices en PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus"
+msgstr "<strong>Scopus</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Scopus\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid"
+msgstr "La URL de Scopus introducida no es correcta. Lea las instrucciones y vuelva a intentarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step1"
+msgstr "Vaya a la página <a href=\"https://www.scopus.com/sources.uri?zone=TopNavBar&origin=\" target=\"_new\">Fuentes</a> de Scopus y seleccione \"Title\" en el menú desplegable."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step2"
+msgstr "Introduzca el título de la revista y, si está indexada, aparecerá como \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step3"
+msgstr "Haga clic en el título y copie la URL de la página aquí:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"
+msgstr "Si la revista no está indexada, consulte el <a target=\"_new\" href=\"https://www.elsevier.com/solutions/scopus/how-scopus-works/content/content-policy-and-selection\">proceso</a> que hay que seguir para su inclusión."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos"
+msgstr "<strong>Web of Science</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Web_of_Science\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.urlInvalid"
+msgstr "La URL de Web of Science introducida no es correcta. Lea las instrucciones y vuelva a intentarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step1"
+msgstr "Vaya a la página de <a href=\"https://mjl.clarivate.com/search-results\" target=\"_new\">Web of Science</a> e introduzca el nombre de la revista en la caja de búsqueda."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step2"
+msgstr "Si la revista está indexada en Web of Science aparecerá como \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step3"
+msgstr "Copie la URL desde \"Share This Journal\" y péguela aquí:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step4"
+msgstr "Si la revista no está indexada, consulte el <a target=\"_new\" href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/web-of-science-core-collection/editorial-selection-process/\">proceso</a> que hay que seguir para su inclusión."
 
 msgid "plugins.generic.pfl.publicationFacts"
-msgstr "Sobre la revista"
+msgstr "Publication Facts"
 
-msgid "plugins.generic.pfl.factsForJournal"
-msgstr "Datos de publicación para la revista"
+msgid "plugins.generic.pfl.publicationFactsButton"
+msgstr "Botón desplegable de Publication Facts Label"
 
-msgid "plugins.generic.pfl.forThisJournal"
-msgstr "Para esta revista "
+msgid "plugins.generic.pfl.publicationFactsTitle"
+msgstr "Publication Facts"
 
-msgid "plugins.generic.pfl.forOtherJournals"
-msgstr "Otras revistas"
+msgid "plugins.generic.pfl.thisArticle"
+msgstr "Este artículo"
+
+msgid "plugins.generic.pfl.otherArticles"
+msgstr "Otros artículos"
 
 msgid "plugins.generic.pfl.publisher"
-msgstr "Editora:"
+msgstr "Editorial"
 
-msgid "plugins.generic.pfl.editorialTeamProfiles"
-msgstr "<a href=\"{$editorialTeamUrl}\">Equipo editorial</a> <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\">"
+msgid "plugins.generic.pfl.reviewerProfiles"
+msgstr "Perfiles de revisor/a"
 
 msgid "plugins.generic.pfl.numOfferProfiles"
-msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> profiles"
+msgstr "{$num}% <img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"> perfiles"
+
+msgid "plugins.generic.pfl.editorAndBoard"
+msgstr "Editor/a & consejo editorial"
+
+msgid "plugins.generic.pfl.profiles"
+msgstr "perfiles"
+
+msgid "plugins.generic.pfl.articlesAccepted"
+msgstr "Artículos aceptados"
 
 msgid "plugins.generic.pfl.numArticlesAccepted"
-msgstr "Artículos aceptados: {$num}%"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.numArticlesAcceptedShort"
-msgstr "{$num}% aceptado"
+msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.daysToPublication"
+msgstr "Días hasta la publicación"
+
+msgid "plugins.generic.pfl.numDaysToPublication"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.indexedIn"
-msgstr "Indexado: {$indexList}"
+msgstr "Indexada en"
+
+msgid "plugins.generic.pfl.indexedList"
+msgstr "{$indexList}"
+
+msgid "plugins.generic.pfl.academicSociety"
+msgstr "Sociedad"
+
+msgid "plugins.generic.pfl.academicSociety.fieldLabel"
+msgstr "Nombre de la sociedad o acrónimo (límite de 18 caracteres incluyendo espacios)"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} índices"
 
-msgid "plugins.generic.pfl.factsForArticle"
-msgstr "Datos de publicación del artículo"
+msgid "plugins.generic.pfl.forThisJournal"
+msgstr "Esta revista"
 
-msgid "plugins.generic.pfl.forThisResearchArticle"
-msgstr "Para este artículo"
+msgid "plugins.generic.pfl.otherJournals"
+msgstr "Otras revistas"
 
-msgid "plugins.generic.pfl.forOtherArticles"
-msgstr "Otros artículos"
+msgid "plugins.generic.pfl.peerReviewers"
+msgstr "Revisores/as por pares"
 
 msgid "plugins.generic.pfl.numPeerReviewers"
-msgstr "<a href=\"{$peerReviewersUrl}\">Revisores</a>: {$num}"
+msgstr "{$num}"
 
 msgid "plugins.generic.pfl.averagePeerReviewers"
-msgstr "{$num} promedio"
+msgstr "{$num}"
+
+msgid "plugins.generic.pfl.competingInterests"
+msgstr "Conflictos de interés"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "Conflicto de intereses: <button data-a11y-dialog-show="pfl-modal-competing-interests-data">Yes</a>"
+msgstr "<a href=\"#author-list\">Sí</a>"
 
 msgid "plugins.generic.pfl.competingInterests.no"
-msgstr "Conflicto de intereses: No"
+msgstr "No"
 
-msgid "plugins.generic.pfl.percentYes"
-msgstr "{$num}% sí"
+msgid "plugins.generic.pfl.averagePercentYes"
+msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.authorStatements"
+msgstr "Declaraciones del autor/a"
+
+msgid "plugins.generic.pfl.dataAvailability"
+msgstr "Disponibilidad de los datos"
+
+msgid "plugins.generic.pfl.dataAvailability.unsupported"
+msgstr "N/D"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
-msgstr "Disponibilidad de datos: <a href=\"{$dataAvailabilityUrl}\">Yes</a>"
+msgstr "<a href=\"{$dataAvailabilityUrl}\">Sí</a>"
 
 msgid "plugins.generic.pfl.dataAvailability.no"
-msgstr "Disponibilidad de datos: No"
+msgstr "No"
+
+msgid "plugins.generic.pfl.funders"
+msgstr "Financiación externa"
+
+msgid "plugins.generic.pfl.funders.yes"
+msgstr "Financiadores: <a href=\"#funding-data\">Sí</a>"
+
+msgid "plugins.generic.pfl.funders.no"
+msgstr "No"
 
 msgid "plugins.generic.pfl.numHaveFunders"
-msgstr "{$num}% con financiadores"
-
-msgid "plugins.generic.pfl.informationAlt"
-msgstr "Información"
+msgstr "{$num}%"
 
 msgid "plugins.generic.pfl.informationFooter"
-msgstr "Para obtener más información sobre un dato, haga clic <img class=\"pfl-info-icon\" alt=\"Learn more about a publication fact.\" src=\"{$informationIcon}\">"
+msgstr "Haga clic para saber más sobre estos datos de publicación"
 
-msgid "plugins.generic.pfl.closeLabel"
-msgstr "Cerrar diálogo"
+msgid "plugins.generic.pfl.informationIcon"
+msgstr "Página de información de los datos de publicación."
 
-msgid "plugins.generic.pfl.close"
-msgstr "Cerrar"
-
-msgid "plugins.generic.pfl.modalTitle"
-msgstr "Etiqueta de Datos de Publicación"
-
-msgid "plugins.generic.pfl.modalFooter"
-msgstr "Obtener más información sobre <button data-a11y-dialog-show=\"pfl-modal-publication-facts-label\">Etiqueta de Datos de Publicación</button>."
-
-msgid "plugins.generic.pfl.information.publicationFactsLabel"
-msgstr ""
-"<h2>Etiqueta de datos de la publicación </h2><ul>  <li>Desarrollado por primera vez en 2022 por Public Knowledge Project, un servicio central de la Universidad Simon Fraser, como parte de su Iniciativa de Integridad en la Investigación..</li>  <li>Diseñado para informar al público y a la comunidad académica sobre el cumplimiento de las convenciones académicas por parte de revistas y artículos como un estándar "
-"industrial fácilmente reconocible para las revistas académicas..</li>  <li>Los datos son recopilados a través de la plataforma de publicación lo cual implica estrategias como la verificación bidireccional de las identidades y roles de los miembros de la revista utilizando la organización editorial. <a href=\"https://orcid.org/\" target=\"_blank\">ORCID</a>.</li>  <li>En 2022-2023 se llevarán a cabo pruebas de la "
-"eficacia de la etiqueta con editores de revistas, investigadores, periodistas y estudiantes de secundaria..</li></ul>"
-
-msgid "plugins.generic.pfl.information.forOtherJournals"
-msgstr "<h2>Otras revistas</h2><ul>  <li>Esta columna recopila datos extraídos de otras revistas que emplean la etiqueta de datos de publicación (EDP).</li>  <li>Actualmente, el EDP está limitado a revistas que utilizan Open Journal Systems (3.5) como plataforma de publicación..</li>  <li><u>List</u> de revistas que utilizan EDP.</li></ul>"
-
-msgid "plugins.generic.pfl.information.publisher"
-msgstr ""
-"<h2>Editor</h2><ul>  <li>Por lo general, es el director de la revista o es responsable de su gestión, producción, publicación, promoción e indexación.</li>  <li>Nombra investigadores experimentados en campos relevantes para que actúen como (a) editores para supervisar la revisión y selección de los envíos para publicación, y como (b) miembros del consejo editorial para asesorar a los editores y publicadores sobre "
-"la revista.</li>  <li>Los editores están vinculados a su sitio web..</li></ul>"
-
-msgid "plugins.generic.pfl.information.editorialTeam"
-msgstr ""
-"<h2>Equipo editorial</h2><ul>  <li>Está formado por investigadores seleccionados por el editor por su experiencia en investigación relevante para actuar como tal:</li>    <ul>      <li>Editores que supervisan la revisión y selección de los envíos, así como su preparación, para su publicación.</li>      <li>Miembros del consejo editorial que asesoran a editores y editores en asuntos de investigación..</li>    </ul>  "
-"<li>ELos equipos editoriales están vinculados a la cabecera de la revista y enumeran sus nombres, afiliaciones y la <span class=\"pfl-orcid-icon\"><img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"/></span> enlace a sus perfiles, que son verificados y gestionados a través de esta plataforma de publicación por <a href=\"https://orcid.org/\" target=\"_blank\">ORCID</a>.</li></ul>"
-
-msgid "plugins.generic.pfl.information.articlesAccepted"
-msgstr "<h2>Artículos aceptados</h2><ul>  <li>Porcentaje de artículos del total enviados a las revistas que han sido seleccionados por los editores para su publicación, luego de revisión por pares y revisiones.</li></ul>"
-
-msgid "plugins.generic.pfl.information.indexes"
-msgstr ""
-"<h2>Índices</h2><ul>  <li>Una base de datos de fácil búsqueda de publicaciones de investigación comúnmente utilizadas por investigadores, estudiantes y otros.</li>  <li>La etiqueta de datos de la publicación revisa anualmente cinco índices generales de investigación para identificar aquellos que incluyen esta revista, los cuales se enumeran por siglas con un enlace al índice:</li>    <ul>      <li><a href=\"https://"
-"doaj.org/\" target=\"_blank\">D</a> Directorio de revistas de acceso abierto (abierto a lectores)</li>      <li><a href=\"https://scholar.google.com/\" target=\"_blank\">GS</a> Google Scholar (abierto a lectores)</li>      <li><a href=\"https://www.nlm.nih.gov/medline/medline_overview.html\" target=\"_blank\">M</a> Medline (abierto a lectores)</li>      <li><a href=\"https://www.elsevier.com/solutions/scopus\" "
-"target=\"_blank\">S</a> Scopus (requiere subscripción para ver)</li>      <li><a href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/\" target=\"_blank\">WS</a> Web of Science (requiere subscripción para ver)</li>    </ul>  <li>Los índices buscan revistas para incluirlas en su base de datos y/o aceptan solicitudes de ellas para ser "
-"incluidas.</li></ul>"
-
-msgid "plugins.generic.pfl.information.forOtherArticles"
-msgstr "<h2>Otros artículos</h2><ul>  <li>Esta columna presenta datos extraídos de artículos publicados en esta y otras revistas que emplean la etiqueta de datos de publicación (EDP).</li>  <li>Actualmente, la EDP está limitada a revistas que utilizan Open Journal Systems (3.5) como plataforma de publicación.</li>  <li><u>List</u> de revistas que utilizan EDP.</li></ul>"
-
-msgid "plugins.generic.pfl.information.peerReviewers"
-msgstr ""
-"<h2>Revisores</h2><ul>  <li>Invitados por los editores, estos investigadores tienen la experiencia para evaluar y sugerir mejoras en la calidad, los métodos, la integridad, la claridad, la ética y otros aspectos del artículo.</li>  <li>Por lo general, se les pide que recomienden aceptación, revisiones o rechazo, mientras que sus identidades se mantienen ocultas a los autores (y viceversa).</li>  <li>“Revisores "
-"pares” está vinculado a la lista de revisores del volumen y año anterior de la revista, con nombres, afiliaciones y <span class=\"pfl-orcid-icon\"><img src=\"{$orcidIconUrl}\" alt=\"ORCiD logo\"/></span> enlace a sus perfiles, que son gestionados y verificados a través de esta plataforma de publicación por<a href=\"https://orcid.org/\" target=\"_blank\">ORCID</a>, Servir como ejemplos para revisores.</li></ul>"
-
-msgid "plugins.generic.pfl.information.competingInterests"
-msgstr "<h2>Conflicto de intereses</h2><ul>  <li>Los editores piden a los autores que informen sobre posibles conflictos o intereses contrapuestos que involucren su estudio y sus otros intereses.</li>  <li>En caso afirmativo, el enlace conduce a la declaración de los autores.</li></ul>"
-
-msgid "plugins.generic.pfl.information.dataAvailability"
-msgstr "<h2>Disponibilidad de datos</h2><ul>  <li>Indica si los autores han puesto los datos recopilados a disposición de otros para análisis posteriores, incluidos estudios de replicación.</li>  <li>No es apropiado para todos los estudios o disciplinas, según la naturaleza y la función de los datos.</li>  <li>En caso afirmativo, el enlace conduce al conjunto de datos de los autores.</li></ul>"
-
-msgid "plugins.generic.pfl.information.funders"
-msgstr "Financiadores"
+msgid "plugins.generic.pfl.maintainedByPKP"
+msgstr "El mantenimiento de <b>PF</b> va a cargo de <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"
