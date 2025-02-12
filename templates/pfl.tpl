@@ -220,34 +220,8 @@
                 <p>{translate key="plugins.generic.pfl.informationFooter"} <a href="https://pkp.sfu.ca/information-on-pfl/"><img class="pfl-info-icon" src="{$baseUrl}/plugins/generic/pflPlugin/img/info_icon.svg" alt="{translate key="plugins.generic.pfl.informationIcon"}"></a></p>
                 <p>{translate key="plugins.generic.pfl.maintainedByPKP"}</p>
             </div>
-
         </div>
     </div>
-        <div id="ff-compose"></div>
-        <script>
-            window.journalISSN="{$currentJournal->getData('onlineIssn')|default:$currentJournal->getData('printIssn'):default:'unknown'|escape}"
-            
-            window.pflRecordSurveySubmit = function(data) {
-                try {   
-                    localStorage.setItem('pfl-survey-submitted', 'true');
-                }catch(e) { }
-            }
-            try {
-                if (localStorage.getItem('pfl-survey-submitted') !== 'true') {
-                    var script = document.createElement('script');
-                    script.src = "https://formfacade.com/include/106720659299234368816/form/1FAIpQLSfH4YSeVKC2Tk9127-zZLIidxUZGi-O2M736wsgPzzr5bCxAQ/classic.js?div=ff-compose&onsubmit=pflRecordSurveySubmit"
-                    script.async = true;
-                    script.defer = true;
-                    document.head.appendChild(script);
-                } else {
-                    const survey = document.getElementById("ff-compose");
-                    if(survey) {
-                        survey.remove()
-                    }
-                }
-            } catch(e) { }
- 
-        </script>
 </div>
 
 </section>
