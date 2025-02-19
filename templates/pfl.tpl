@@ -70,7 +70,7 @@
 </script>
  
 
-<div class="publication-facts-label" {if !$article}style="padding-top: 2em;"{/if}>
+<div class="publication-facts-label">
  
     <div class="pfl-dropdown">
         <button id="pfl-button-open-facts" aria-controls="pfl-fact-table" aria-expanded="false">
