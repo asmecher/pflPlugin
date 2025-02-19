@@ -17,6 +17,9 @@ msgstr "Módulo Publication Facts Label"
 msgid "plugins.generic.pfl.description"
 msgstr "Este módulo agrega un bloque en la barra lateral con estadísticas para indicar a los lectores/as las características de integridad de la revista."
 
+msgid "plugins.generic.pfl.metric"
+msgstr "Métrico"
+
 msgid "plugins.generic.pflPlugin.settings.journal"
 msgstr "Información de la revista"
 

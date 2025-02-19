@@ -86,7 +86,7 @@
  
             <div role="table">
                 <div role="row" class="pfl-header-row">
-                    <div role="columnheader" class="pfl-sr-only"><span>Metric</span></div>
+                    <div role="columnheader" class="pfl-sr-only"><span>{translate key="plugins.generic.pfl.metric"}</span></div>
                     <div role="columnheader" class="pfl-this-cell">{translate key="plugins.generic.pfl.thisArticle"}</div>
                     <div role="columnheader" class="pfl-other-cell">{translate key="plugins.generic.pfl.otherArticles"}</div>
                 </div>
@@ -152,7 +152,7 @@
 
             <div role="table">
                 <div role="row" class="pfl-header-row">
-                    <div role="columnheader" class="pfl-sr-only"><span>Metric</span></div>
+                    <div role="columnheader" class="pfl-sr-only"><span>{translate key="plugins.generic.pfl.metric"}</span></div>
                     <div role="columnheader" class="pfl-this-cell">{translate key="plugins.generic.pfl.forThisJournal"}</div>
                     <div role="columnheader" class="pfl-other-cell">{translate key="plugins.generic.pfl.otherJournals"}</div>
                 </div>
