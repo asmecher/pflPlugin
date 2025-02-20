@@ -104,7 +104,6 @@
   width: 100%;
   text-align: start;
   font-size: 0.95rem !important;
-  color: rgba(0, 0, 0, 0.54);
   font-family: "Noto Sans", sans-serif;
   /*Intentionally unusual font-weight to start downloading the pfl variable noto sans file before opening PFL*/
   font-weight: 401;
@@ -117,12 +116,20 @@
   opacity: 0.5;
 }
 
+#pfl-buttonText {
+  font-optical-sizing: none;
+  font-weight: 850;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  font-style: normal;
+}
+
 [dir="ltr"] #pfl-buttonText {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 
 [dir="rtl"] #pfl-buttonText {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 [dir="ltr"] #pfl-button-open-facts img {
