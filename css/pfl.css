@@ -103,25 +103,20 @@
   height: 100%;
   width: 100%;
   text-align: start;
-  font-size: 0.95rem !important;
   font-family: "Noto Sans", sans-serif;
   /*Intentionally unusual font-weight to start downloading the pfl variable noto sans file before opening PFL*/
-  font-weight: 401;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-optical-sizing: none;
+  font-weight: 850;
+  font-size: 1.5rem !important;
+  white-space: nowrap;
+  font-style: normal;
 }
 
 .publication-facts-label #pfl-button-open-facts[aria-expanded="true"] {
   opacity: 0.5;
-}
-
-#pfl-buttonText {
-  font-optical-sizing: none;
-  font-weight: 850;
-  font-size: 1.5rem;
-  white-space: nowrap;
-  font-style: normal;
 }
 
 [dir="ltr"] #pfl-buttonText {
@@ -133,10 +128,10 @@
 }
 
 [dir="ltr"] #pfl-button-open-facts img {
-  height: 0.6rem;
-  width: 0.6rem;
+  height: 0.8rem;
+  width: 0.8rem;
   padding-top: 0.1rem;
-  margin-right: 1rem;
+  margin-right: 0.8rem;
   opacity: 0.5;
 }
 
