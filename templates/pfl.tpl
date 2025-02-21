@@ -66,20 +66,6 @@
         if (toggleButton) {
             toggleButton.addEventListener('click', pflShowHideFactsLabel);
         }
-
-        function setPageDir() {
-            const rtlLanguages = ['ar', 'he', 'fa', 'ur', 'syr', 'ps', 'ckb', 'prs', 'sd', 'ug', 'yi'];
-            const userLang = (navigator.language || navigator.userLanguage || 'en').split("-")[0];
-
-            const direction = rtlLanguages.some(lang => userLang.startsWith(lang)) ? 'rtl' : 'ltr';
-            document.documentElement.setAttribute('dir', direction);
-        }
-
-        // Some supported themes do not set the "dir" attribute on the <body> tag, 
-        // but many of our CSS rules depend on it. Thus, setting the "dir" attribute when it is missing
-        if (!document.documentElement.hasAttribute('dir')) {
-            setPageDir();
-        }
     });
 </script>
  
