@@ -114,7 +114,12 @@
 }
 
 #pfl-buttonText {
-  margin-inline-start: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] #pfl-buttonText {
+  margin-right: 0.5rem;
+  margin-left: unset;
 }
 
 #pfl-button-open-facts img {
@@ -122,7 +127,12 @@
   width: 0.8rem;
   padding-top: 0.1rem;
   opacity: 0.5;
-  margin-inline-end: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+[dir="rtl"] #pfl-button-open-facts img {
+  margin-left: 0.8rem;
+  margin-right: unset;
 }
 
 /* MAIN CLASSES */
@@ -162,17 +172,32 @@
 .pfl-this-cell {
   display: inline-block;
   text-align: start;
-  margin-inline-start: 0.2rem;
-  margin-inline-end: 2rem;
+  margin-left: 0.2rem;
+  margin-right: 2rem;
+}
+
+[dir="rtl"] .pfl-this-cell {
+  margin-left: 2rem;
+  margin-right: 0.2rem;
 }
 
 .pfl-other-cell {
   display: block;
-  margin-inline-start: auto;
+  margin-left: auto;
+}
+
+[dir="rtl"] .pfl-other-cell {
+  margin-right: auto;
+  margin-left: unset;
 }
 
 .pfl-list-item {
-  margin-inline-start: 0.2rem;
+  margin-left: 0.2rem;
+}
+
+[dir="rtl"] .pfl-list-item {
+  margin-right: 0.2rem;
+  margin-left: unset;
 }
 
 .pfl-bold {
@@ -182,7 +207,12 @@
 }
 
 .publication-facts-label .pfl-indent {
-  padding-inline-start: 1.2rem;
+  padding-left: 1.2rem;
+}
+
+[dir="rtl"] .publication-facts-label .pfl-indent {
+  padding-right: 1.2rem;
+  padding-left: unset;
 }
 
 .publication-facts-label .pfl-body-row li a {
@@ -194,7 +224,12 @@
 }
 
 .pfl-body-row ul {
-  padding-inline-start: 4px !important;
+  padding-left: 4px !important;
+}
+
+[dir="rtl"] .pfl-body-row ul {
+  padding-right: 4px !important;
+  padding-left: unset !important;
 }
 
 .publication-facts-label #pfl-table-footer {
@@ -230,10 +265,10 @@
   margin: unset;
   line-height: unset;
   font-size: unset;
-  margin-block-start: unset;
-  margin-block-end: unset;
-  margin-inline-start: unset;
-  margin-inline-end: unset;
+  margin-top: unset;
+  margin-bottom: unset;
+  margin-left: unset;
+  margin-right: unset;
   font-weight: unset;
   unicode-bidi: unset;
 }
@@ -244,26 +279,35 @@
   font-family: unset;
   font-size: unset;
   line-height: unset;
-  margin-block-start: unset;
-  margin-block-end: unset;
-  margin-inline-start: unset;
-  margin-inline-end: unset;
+  margin-top: unset;
+  margin-bottom: unset;
+  margin-left: unset;
+  margin-right: unset;
   text-align: start;
 }
 
 /* LIST ELEMENTS */
 
 .publication-facts-label dl {
-  margin-block-start: 0rem !important;
-  margin-block-end: 0rem !important;
-  padding-inline-start: 0;
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  padding-left: 0;
   list-style: none;
   text-align: start;
 }
 
+[dir="rtl"] .publication-facts-label dl {
+  padding-right: 0;
+  padding-left: unset;
+}
+
 .publication-facts-label dl dd {
   display: inline-block;
-  margin-inline-start: unset;
+  margin-left: unset;
+}
+
+[dir="rtl"] .publication-facts-label dl dd {
+  margin-right: unset;
 }
 
 .publication-facts-label dl dt {
@@ -272,13 +316,17 @@
 
 .publication-facts-label ul {
   list-style-type: unset;
-  margin-block-start: unset;
-  margin-block-end: unset;
-  margin-inline-start: unset;
-  margin-inline-end: unset;
-  padding-inline-start: unset;
+  margin-top: unset;
+  margin-bottom: unset;
+  margin-left: unset;
+  margin-right: unset;
+  padding-left: unset;
   unicode-bidi: unset;
   font-size: unset;
+}
+
+[dir="rtl"] .publication-facts-label ul {
+  padding-right: unset;
 }
 
 .publication-facts-label li {
@@ -293,8 +341,8 @@
   margin-bottom: 0 !important;
   margin-top: 0 !important;
   line-height: 1.5rem !important;
-  margin-block-start: unset;
-  margin-block-end: unset;
+  margin-top: unset;
+  margin-bottom: unset;
   text-align: start;
 }
 
@@ -322,8 +370,10 @@
   padding: 0rem;
   margin: 0rem;
   color: #000000;
-  padding-inline: 0rem;
-  padding-block: 0rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 /* PFL IMG AND ICONS */
@@ -478,9 +528,9 @@
 .ff-item {
   font-size: var(--ff-fs);
   -webkit-padding-before: unset;
-  padding-block-start: unset;
+  padding-top: unset;
   -webkit-padding-after: unset;
-  padding-block-end: unset;
+  padding-bottom: unset;
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-around;
