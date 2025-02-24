@@ -345,6 +345,7 @@ class PflPlugin extends GenericPlugin {
         $acceptanceCount = $this->getAcceptanceCount($journal->getId(), $dateStart);
         $queryParams = [
             'version' => $currentVersion->getVersionString(),
+            'platform' => 'ojs',
             'journalUrl' => $request->url(null, 'index'),
             'pflNumAcceptedClass' => $acceptanceCount,
             'pflReviewerCountClass' => $this->getReviewerAverage($journal->getId(), $dateStart),
