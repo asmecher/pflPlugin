@@ -49,19 +49,18 @@ class PflPlugin extends GenericPlugin {
     }
 
     /**
-     * Get the article acceptance percentage for a given journal.
+     * Get the number of published reviewable submissions for a given journal.
      * @param $journalId int
      * @param $dateStart ?string
      */
-    function getAcceptanceCount($journalId, $dateStart = null) {
+    function getPublishedReviewableSubmissionCount($journalId, $dateStart = null) {
         $submissionDao = DAORegistry::getDAO('SubmissionDAO');
         $row = $submissionDao->retrieve(
             'SELECT COUNT(*) AS submission_count
             FROM submissions s
             JOIN publications p ON (s.current_publication_id = p.publication_id)
             JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ? AND
-            s.submission_id IN (SELECT submission_id FROM review_assignments)'
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?'
             . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : ''),
             [$journalId, STATUS_PUBLISHED]
         )->current();
@@ -130,20 +129,20 @@ class PflPlugin extends GenericPlugin {
     }
 
     /**
-     * Get the number of published submissions in a peer reviewed section for the journal.
+     * Get the number of reviewable submissions in a peer reviewed section for the journal.
      * @param $journalId int
      * @param $dateStart ?string
      */
-    function getPublishedReviewableSubmissionCount($journalId, $dateStart = null) {
+    function getReviewableSubmissionCount($journalId, $dateStart = null) {
         $submissionDao = DAORegistry::getDAO('SubmissionDAO');
         $row = $submissionDao->retrieve(
             'SELECT COUNT(*) AS submission_count
             FROM submissions s
             JOIN publications p ON (s.current_publication_id = p.publication_id)
             JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?'
+            WHERE s.context_id = ? AND sec.meta_reviewed = 1'
             . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : ''),
-            [$journalId, STATUS_PUBLISHED]
+            [$journalId]
         )->current();
         return $row->submission_count;
     }
@@ -241,8 +240,8 @@ class PflPlugin extends GenericPlugin {
         }
 
         // Journal-specific PFL data
-        $acceptanceNumerator = $this->getAcceptanceCount($journal->getId(), $dateStart);
-        $acceptanceDenominator = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
+        $acceptanceNumerator = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
+        $acceptanceDenominator = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
         $acceptanceRate = $acceptanceDenominator ? intval($acceptanceNumerator / $acceptanceDenominator * 100) : 0;
 
         $templateMgr->assign([
@@ -340,9 +339,9 @@ class PflPlugin extends GenericPlugin {
         $request = Application::get()->getRequest();
         $journal = $request->getJournal();
         $dateStart = $this->getSetting($journal->getId(), 'dateStart');
-        $publishedReviewableSubmissionsCount = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
+        $reviewableSubmissionsCount = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
         $fundedSubmissionsCount = $this->getFundedSubmissionCount($journal->getId(), $dateStart);
-        $acceptanceCount = $this->getAcceptanceCount($journal->getId(), $dateStart);
+        $acceptanceCount = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
         $queryParams = [
             'version' => $currentVersion->getVersionString(),
             'platform' => 'ojs',
@@ -353,7 +352,7 @@ class PflPlugin extends GenericPlugin {
             'pflDataAvailabilityPercentClass' => 'N/A',
             'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : $fundedSubmissionsCount,
             'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId(), $dateStart),
-            'publishedReviewableSubmissionsCount' => $publishedReviewableSubmissionsCount,
+            'reviewableSubmissionsCount' => $reviewableSubmissionsCount,
             'issn' => $journal->getSetting('onlineIssn') ?? $journal->getSetting('printIssn'),
         ];
 
