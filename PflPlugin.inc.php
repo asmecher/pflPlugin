@@ -111,7 +111,7 @@ class PflPlugin extends GenericPlugin {
         $submissionDao = DAORegistry::getDAO('SubmissionDAO');
         $datediff = Capsule::connection() instanceof MySqlConnection
             ? 'DATEDIFF(p.date_published, s.date_submitted)'
-            : "DATE_PART('day', p.date_published, s.date_submitted)";
+            : "EXTRACT(DAY FROM p.date_published - s.date_submitted)";
 
         $row = $submissionDao->retrieve(
             'SELECT AVG(a.time_to_publish) AS time_to_publish FROM (
@@ -121,7 +121,7 @@ class PflPlugin extends GenericPlugin {
                 JOIN sections sec ON (p.section_id = sec.section_id)
                 WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
                 ' . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : '') . '
-                GROUP BY s.submission_id
+                GROUP BY p.publication_id, s.submission_id
             ) a',
             [$journalId, STATUS_PUBLISHED]
         )->current();
