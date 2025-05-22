@@ -171,7 +171,7 @@ msgid "plugins.generic.pfl.academicSociety"
 msgstr "Society"
 
 msgid "plugins.generic.pfl.academicSociety.fieldLabel"
-msgstr "Society name or acronym (limited to 18 characters including spaces)"
+msgstr "Society name or acronym"
 
 msgid "plugins.generic.pfl.numAverageIndexes"
 msgstr "{$num} indexes"
