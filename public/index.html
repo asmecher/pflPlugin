@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PFL Web Component</title>
+    <style>
+      @font-face {
+        font-family: "PFL Noto Sans";
+        src: url(font/NotoSans-VariableFont_wdthwght.woff2) format("woff2");
+        font-weight: 100 900;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom element usage -->
+    <publication-facts-label></publication-facts-label>
+
+    <!-- Load the web component JavaScript -->
+    <script src="js/pfl.js"></script>
+    <script>
+      // Wait for the component to be defined
+      window.addEventListener("DOMContentLoaded", () => {
+        const pfl = document.querySelector("publication-facts-label");
+
+        pfl.data = {
+          baseUrl: "", // Empty string for current directory
+          labels: {
+            publicationFacts: "Publication Facts",
+            metric: "Metric",
+            thisArticle: "This Article",
+            otherArticles: "Other articles",
+            peerReviewers: "Peer reviewers",
+            reviewerProfiles: "Reviewer profiles",
+            authorStatements: "Author statements",
+            dataAvailability: "Data availability",
+            funders: "External funding",
+            competingInterests: "Competing interests",
+            forThisJournal: "This journal",
+            otherJournals: "Other journals",
+            articlesAccepted: "Articles accepted",
+            daysToPublication: "Days to publication",
+            indexedIn: "Indexed in",
+            editorAndBoard: "Editor & editorial board",
+            profiles: "profiles",
+            academicSociety: "Society",
+            publisher: "Publisher",
+            informationFooter: "To learn about these publication facts, click",
+            informationIcon: "Publication facts information page.",
+            maintainedPF: "PF",
+            maintainedBy: "maintained by",
+            maintainedPKP: "Public  Knowledge Project",
+          },
+          values: {
+            // Peer reviewer data
+            pflReviewerCount: "2",
+            pflReviewerCountClass: "2.5",
+            pflPeerReviewersUrl: "https://example.com/reviewers",
+            pflPeerReviewers: "", // N/A or empty if the url is available
+            // Data availability
+            pflDataAvailabilityValue: "N/A", // Can be "N/A", "Yes", "No"
+            pflDataAvailabilityPercentClass: "40%",
+
+            // Funding data
+            pflFundersValue: "Yes", // Can be "N/A", "Yes", "No"
+            pflNumHaveFundersClass: "20%",
+
+            // Competing interests
+            pflCompetingInterestsValue: "Yes", // Can be "N/A", "Yes", "No"
+            pflCompetingInterestsPercentClass: "25%",
+
+            // Journal statistics
+            pflAcceptedPercent: "15%",
+            pflNumAcceptedClass: "18%",
+            pflDaysToPublication: "180",
+            pflDaysToPublicationClass: "240",
+
+            // Index list as array
+            pflIndexList: [
+              {
+                url: "https://doaj.org/toc/1234-5678",
+                name: "DOAJ",
+                description: "Directory of Open Access Journals",
+              },
+              {
+                url: "https://scholar.google.com",
+                name: "Google Scholar",
+                description: "Google Scholar Index",
+              },
+            ],
+
+            // Editorial team URL
+            editorialTeamUrl: "/about/editorialTeam",
+
+            // Academic society
+            pflAcademicSociety: "Example Academic Society",
+            pflAcademicSocietyUrl: "https://example-society.org",
+
+            // Publisher
+            pflPublisherName: "Example Publisher",
+            pflPublisherUrl: "https://example-publisher.com",
+          },
+        };
+      });
+    </script>
+  </body>
+</html>
