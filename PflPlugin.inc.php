@@ -348,7 +348,7 @@ class PflPlugin extends GenericPlugin {
             ]
         ]);
         
-        $output .= $templateMgr->fetch($this->getTemplateResource('pflWebcomponent.tpl'));
+        $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
 
         return false;
     }
