@@ -195,7 +195,7 @@ msgid "plugins.generic.pfl.competingInterests"
 msgstr "Competing interests"
 
 msgid "plugins.generic.pfl.competingInterests.yes"
-msgstr "<a href=\"#author-list\">Yes</a>"
+msgstr "Yes"
 
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "No"
@@ -213,7 +213,7 @@ msgid "plugins.generic.pfl.dataAvailability.unsupported"
 msgstr "N/A"
 
 msgid "plugins.generic.pfl.dataAvailability.yes"
-msgstr "<a href=\"{$dataAvailabilityUrl}\">Yes</a>"
+msgstr "Yes"
 
 msgid "plugins.generic.pfl.dataAvailability.no"
 msgstr "No"
@@ -222,7 +222,7 @@ msgid "plugins.generic.pfl.funders"
 msgstr "External funding"
 
 msgid "plugins.generic.pfl.funders.yes"
-msgstr "Funders: <a href=\"#funding-data\">Yes</a>"
+msgstr "Yes"
 
 msgid "plugins.generic.pfl.funders.no"
 msgstr "No"

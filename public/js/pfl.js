@@ -40,14 +40,18 @@ class PFL extends HTMLElement {
         pflPeerReviewers: "", // N/A or empty if the url is available
         // Data availability
         pflDataAvailabilityValue: "N/A", // Can be "N/A", "Yes", "No"
+        pflDataAvailabilityValueUrl: "https://", // Can be "N/A", "Yes", "No"
+
         pflDataAvailabilityPercentClass: "40%",
 
         // Funding data
         pflFundersValue: "Yes", // Can be "N/A", "Yes", "No"
+        pflFundersValueUrl: "#funding-data",
         pflNumHaveFundersClass: "20%",
 
         // Competing interests
         pflCompetingInterestsValue: "Yes", // Can be "N/A", "Yes", "No"
+        pflCompetingInterestsValueUrl: "#author-list",
         pflCompetingInterestsPercentClass: "25%",
 
         // Journal statistics
@@ -443,11 +447,12 @@ class PFL extends HTMLElement {
                 <div role="rowheader" class="pfl-indent">
                   <span data-label="dataAvailability"></span>&nbsp;
                 </div>
-                <div
-                  role="cell"
-                  class="pfl-this-cell"
-                  data-value="pflDataAvailabilityValue"
-                ></div>
+                <div role="cell" class="pfl-this-cell">
+                  <span
+                    data-value="pflDataAvailabilityValue"
+                    data-wrap-link="pflDataAvailabilityValueUrl"
+                  ></span>
+                </div>
                 <div
                   role="cell"
                   class="pfl-other-cell"
@@ -458,11 +463,12 @@ class PFL extends HTMLElement {
                 <div role="rowheader" class="pfl-indent">
                   <span data-label="funders"></span>&nbsp;
                 </div>
-                <div
-                  role="cell"
-                  class="pfl-this-cell"
-                  data-value="pflFundersValue"
-                ></div>
+                <div role="cell" class="pfl-this-cell">
+                  <span
+                    data-value="pflFundersValue"
+                    data-wrap-link="pflFundersValueUrl"
+                  ></span>
+                </div>
                 <div
                   role="cell"
                   class="pfl-other-cell"
@@ -473,11 +479,12 @@ class PFL extends HTMLElement {
                 <div role="rowheader" class="pfl-indent">
                   <span data-label="competingInterests"></span>&nbsp;
                 </div>
-                <div
-                  role="cell"
-                  class="pfl-this-cell"
-                  data-value="pflCompetingInterestsValue"
-                ></div>
+                <div role="cell" class="pfl-this-cell">
+                  <span
+                    data-value="pflCompetingInterestsValue"
+                    data-wrap-link="pflCompetingInterestsValueUrl"
+                  ></span>
+                </div>
                 <div
                   role="cell"
                   class="pfl-other-cell"
@@ -559,11 +566,10 @@ class PFL extends HTMLElement {
                     alt="ORCiD logo image"
                     aria-hidden="true"
                   />
-                  <a
-                    data-href="editorialTeamUrl"
-                    target="_blank"
+                  <span
                     data-label="profiles"
-                  ></a>
+                    data-wrap-link="editorialTeamUrl"
+                  ></span>
                 </dd>
               </div>
 
@@ -571,14 +577,24 @@ class PFL extends HTMLElement {
                 <dt class="pfl-indent">
                   <span data-label="academicSociety"></span>&nbsp;
                 </dt>
-                <dd class="pfl-list-item" data-society="true"></dd>
+                <dd class="pfl-list-item">
+                  <span
+                    data-value="pflAcademicSociety"
+                    data-wrap-link="pflAcademicSocietyUrl"
+                  ></span>
+                </dd>
               </div>
 
               <div class="pfl-body-row" data-show="pflPublisherName">
                 <dt class="pfl-indent">
                   <span data-label="publisher"></span>&nbsp;
                 </dt>
-                <dd class="pfl-list-item" data-publisher="true"></dd>
+                <dd class="pfl-list-item" data-publisher="true">
+                  <span
+                    data-value="pflPublisherName"
+                    data-wrap-link="pflPublisherUrl"
+                  ></span>
+                </dd>
               </div>
             </dl>
 
@@ -620,6 +636,13 @@ class PFL extends HTMLElement {
     }
 
     // Render values
+    shadowRoot.querySelectorAll("[data-value]").forEach((span) => {
+      const valueKey = span.getAttribute("data-value");
+      if (this._data.values[valueKey]) {
+        span.textContent = this._data.values[valueKey];
+      }
+    });
+
     for (const [key, value] of Object.entries(this._data.values)) {
       const elements = shadowRoot.querySelectorAll(`[data-value="${key}"]`);
       elements.forEach((el) => {
@@ -642,11 +665,20 @@ class PFL extends HTMLElement {
       }
     });
 
-    // Handle href attributes
-    shadowRoot.querySelectorAll("[data-href]").forEach((link) => {
-      const hrefKey = link.getAttribute("data-href");
+    // Handle wrapping in the link if link available
+    shadowRoot.querySelectorAll("[data-wrap-link]").forEach((span) => {
+      const hrefKey = span.getAttribute("data-wrap-link");
       if (this._data.values[hrefKey]) {
-        link.href = this._data.values[hrefKey];
+        const a = document.createElement("a");
+
+        a.href = this._data.values[hrefKey];
+        if (!this._data.values[hrefKey].includes("#")) {
+          a.target = "_blank";
+        }
+        a.rel = "noopener noreferrer";
+
+        span.parentNode.insertBefore(a, span);
+        a.appendChild(span);
       }
     });
 
@@ -678,43 +710,8 @@ class PFL extends HTMLElement {
       indexList.appendChild(frag);
     } else {
       const li = document.createElement("li");
-      li.textContent = "&mdash;";
+      li.innerHTML = "&mdash;";
       indexList.appendChild(li);
-    }
-
-    // Handle academic society
-    const societyEl = shadowRoot.querySelector('[data-society="true"]');
-    if (societyEl) {
-      const society = this._data.values.pflAcademicSociety;
-      const societyUrl = this._data.values.pflAcademicSocietyUrl;
-      if (society && societyUrl) {
-        const link = document.createElement("a");
-        link.href = societyUrl; // Set href attribute
-        link.target = "_blank"; // Set target attribute
-        link.rel = "noopener noreferrer";
-        link.textContent = society;
-
-        societyEl.appendChild(link);
-      } else if (society) {
-        societyEl.textContent = society;
-      }
-    }
-
-    // Handle publisher
-    const publisherEl = shadowRoot.querySelector('[data-publisher="true"]');
-    if (publisherEl) {
-      const publisher = this._data.values.pflPublisherName;
-      const publisherUrl = this._data.values.pflPublisherUrl;
-      if (publisher && publisherUrl) {
-        const link = document.createElement("a");
-        link.href = publisherUrl;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = publisher;
-        publisherEl.appendChild(link);
-      } else if (publisher) {
-        publisherEl.textContent = publisher;
-      }
     }
 
     // Handle conditional visibility

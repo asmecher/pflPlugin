@@ -245,20 +245,9 @@ class PflPlugin extends GenericPlugin {
         $acceptanceDenominator = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
         $acceptanceRate = $acceptanceDenominator ? intval($acceptanceNumerator / $acceptanceDenominator * 100) : 0;
 
-        $templateMgr->assign([
-            'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
-            'pflAcceptedPercent' => $acceptanceRate,
-            'pflPublisherName' => $journal->getData('publisherInstitution'),
-            'pflPublisherUrl' => $journal->getData('publisherUrl'),
-            'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety'),
-            'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
-            'pflIndexList' => $pflIndexList,
-            'pflFundingPluginEnabled' => (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin'),
-        ]);
 
         // Class data
         $statistics = $this->getStatistics($journal->getId());
-        $templateMgr->assign($statistics);
 
         // Article-specific PFL data
         $competingInterests = [];
@@ -270,31 +259,25 @@ class PflPlugin extends GenericPlugin {
 
         $publicationDate = new DateTime($publication->getData('datePublished'));
         $submissionDate = new DateTime($article->getDateSubmitted());
-        $templateMgr->assign([
-            'pflReviewerCount' => $this->getReviewerCount($article->getId()),
-            'pflCompetingInterests' => $competingInterests,
-            'pflCompetingInterestsEnabled' => $journal->getData('requireAuthorCompetingInterests'),
-            'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
-            'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
-        ]);
 
         // Funding
-        $pflFundingPluginEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
-        // Todo - how to get the value from the funding plugin
+        // Handled in tpl file, but when possible it would be cleaner to calculate it here
+        /*$pflFundingPluginEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
         $funderData = null;
         $pflFundersValue = ($pflFundingPluginEnabled && $funderData) 
             ? __('plugins.generic.pfl.funders.yes')
             : ($pflFundingPluginEnabled 
                 ? __('plugins.generic.pfl.funders.no') 
                 : __('plugins.generic.pfl.dataAvailability.unsupported'));
+        */
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
         $pflCompetingInterestsValue = ($competingInterests) 
-            ? __('plugins.generic.pfl.funders.yes')
+            ? __('plugins.generic.pfl.competingInterests.yes')
             : ($pflCompetingInterestsEnabled 
-                ? __('plugins.generic.pfl.competingInterests.yes') 
-                : __('plugins.generic.pfl.competingInterests.no'));
+                ? __('plugins.generic.pfl.competingInterests.no') 
+                : __('plugins.generic.pfl.dataAvailability.unsupported'));
 
         // pflIndex as array:
         $pflIndexListTransformed = array_map(function($item, $url) {
@@ -342,10 +325,13 @@ class PflPlugin extends GenericPlugin {
                     'pflPeerReviewersUrl' => null, /* */
                     'pflPeerReviewers' => __('plugins.generic.pfl.dataAvailability.unsupported'), // N/A or empty if URL is available
                     'pflDataAvailabilityValue' => __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflDataAvailabilityValueUrl' => null,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
-                    'pflFundersValue' => $pflFundersValue,
+                    'pflFundersValue' => null,
+                    'pflFundersValueUrl' => null,
                     'pflNumHaveFundersClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumHaveFundersClass']]),
                     'pflCompetingInterestsValue' => $pflCompetingInterestsValue,
+                    'pflCompetingInterestsValueUrl' => '#author-list',
                     'pflCompetingInterestsPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflCompetingInterestsPercentClass']]),
                     'pflAcceptedPercent' => __('plugins.generic.pfl.averagePercentYes', ['num' => $acceptanceRate]),
                     'pflNumAcceptedClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumAcceptedClass']]),
@@ -361,8 +347,8 @@ class PflPlugin extends GenericPlugin {
 
             ]
         ]);
-
-        $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
+        
+        $output .= $templateMgr->fetch($this->getTemplateResource('pflWebcomponent.tpl'));
 
         return false;
     }
@@ -503,6 +489,25 @@ class PflPlugin extends GenericPlugin {
                     src: url({$publicPath}font/NotoSans-VariableFont_wdthwght.woff2) format("woff2");
                     font-weight: 100 900;
                 }
+
+                #funding-data:target,
+                #author-list:target {
+                    animation: pflflash 1s 1;
+                    -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
+                }
+
+                @keyframes pflflash {
+                    0% {
+                        background: yellow;
+                    }
+                }
+
+                @-webkit-keyframes pflflash /* Safari and Chrome */ {
+                    0% {
+                        background: yellow;
+                    }
+                }
+
             EOD;
 
 
