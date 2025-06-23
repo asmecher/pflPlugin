@@ -158,7 +158,6 @@ class PflSettingsForm extends Form {
 
         $this->plugin->updateSetting($context->getId(), 'dateStart', ((string) $this->getData('dateStart')) ?: null);
 
-        import('classes.notification.NotificationManager');
         $notificationMgr = new NotificationManager();
         $user = $request->getUser();
         $notificationMgr->createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('common.changesSaved')));
