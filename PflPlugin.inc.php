@@ -261,15 +261,19 @@ class PflPlugin extends GenericPlugin {
         $submissionDate = new DateTime($article->getDateSubmitted());
 
         // Funding
-        // Handled in tpl file, but when possible it would be cleaner to calculate it here
-        /*$pflFundingPluginEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
-        $funderData = null;
-        $pflFundersValue = ($pflFundingPluginEnabled && $funderData) 
-            ? __('plugins.generic.pfl.funders.yes')
-            : ($pflFundingPluginEnabled 
-                ? __('plugins.generic.pfl.funders.no') 
-                : __('plugins.generic.pfl.dataAvailability.unsupported'));
-        */
+        $pflFundingEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
+	$pflFundersCount = 0;
+	$pflFundersValue = $pflFundersValueUrl = null;
+	if ($pflFundingEnabled) {
+	    $funderDao = DAORegistry::getDAO('FunderDAO');
+	    $funders = $funderDao->getBySubmissionId($article->getId());
+	    $firstFunder = $funders->next();
+
+            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.funders.yes') : __('plugins.generic.pfl.funders.no');
+	    if ($firstFunder) $pflFundersValueUrl = '#funding-data';
+	} else {
+	    $pflFundersValue = __('plugins.generic.pfl.funders.no');
+	}
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
@@ -327,8 +331,8 @@ class PflPlugin extends GenericPlugin {
                     'pflDataAvailabilityValue' => __('plugins.generic.pfl.dataAvailability.unsupported'),
                     'pflDataAvailabilityValueUrl' => null,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
-                    'pflFundersValue' => null,
-                    'pflFundersValueUrl' => null,
+                    'pflFundersValue' => $pflFundersValue,
+                    'pflFundersCount' => $pflFundersValueUrl,
                     'pflNumHaveFundersClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumHaveFundersClass']]),
                     'pflCompetingInterestsValue' => $pflCompetingInterestsValue,
                     'pflCompetingInterestsValueUrl' => '#author-list',
