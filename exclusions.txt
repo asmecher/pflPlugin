@@ -1,1 +1,1 @@
-pflPlugin/node_modules
+pflPlugin/pfl/index.html
