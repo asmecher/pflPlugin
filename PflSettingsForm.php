@@ -24,6 +24,7 @@ use PKP\form\validation\FormValidatorUrl;
 use PKP\form\validation\FormValidatorRegExp;
 use APP\template\TemplateManager;
 use APP\notification\NotificationManager;
+use PKP\notification\Notification;
 
 class PflSettingsForm extends Form {
 
@@ -160,7 +161,7 @@ class PflSettingsForm extends Form {
 
         $notificationMgr = new NotificationManager();
         $user = $request->getUser();
-        $notificationMgr->createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('common.changesSaved')));
+        $notificationMgr->createTrivialNotification($user->getId(), Notification::NOTIFICATION_TYPE_SUCCESS, array('contents' => __('common.changesSaved')));
 
         return parent::execute(...$functionArgs);
     }
