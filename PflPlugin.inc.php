@@ -200,6 +200,8 @@ class PflPlugin extends GenericPlugin {
         $output =& $args[2];
 
         $request = Application::get()->getRequest();
+        $router = $request->getRouter();
+
         $journal = $request->getContext();
         $dateStart = $this->getSetting($journal->getId(), 'dateStart');
 
@@ -218,7 +220,6 @@ class PflPlugin extends GenericPlugin {
         if ($this->getSetting($journal->getId(), 'includeDoaj')) {
             $pflIndexList["https://doaj.org/toc/{$onlineIssn}"] = ['name' => 'DOAJ', 'description' => 'Directory of Open Access Journals'];
         }
-
         if ($this->getSetting($journal->getId(), 'includeScholar')) {
             $pflIndexList["https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={$onlineIssn}&btnG="] = ['name' => 'GS', 'description' => 'Google Scholar'];
         }
@@ -244,19 +245,9 @@ class PflPlugin extends GenericPlugin {
         $acceptanceDenominator = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
         $acceptanceRate = $acceptanceDenominator ? intval($acceptanceNumerator / $acceptanceDenominator * 100) : 0;
 
-        $templateMgr->assign([
-            'pflDisplayed' => true, // Set a flag so the PFL is not displayed multiple times
-            'pflAcceptedPercent' => $acceptanceRate,
-            'pflPublisherName' => $journal->getData('publisherInstitution'),
-            'pflPublisherUrl' => $journal->getData('publisherUrl'),
-            'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety'),
-            'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
-            'pflIndexList' => $pflIndexList,
-            'pflFundingPluginEnabled' => (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin'),
-        ]);
 
         // Class data
-        $templateMgr->assign($this->getStatistics($journal->getId()));
+        $statistics = $this->getStatistics($journal->getId());
 
         // Article-specific PFL data
         $competingInterests = [];
@@ -268,14 +259,95 @@ class PflPlugin extends GenericPlugin {
 
         $publicationDate = new DateTime($publication->getData('datePublished'));
         $submissionDate = new DateTime($article->getDateSubmitted());
-        $templateMgr->assign([
-            'pflReviewerCount' => $this->getReviewerCount($article->getId()),
-            'pflCompetingInterests' => $competingInterests,
-            'pflCompetingInterestsEnabled' => $journal->getData('requireAuthorCompetingInterests'),
-            'pflPeerReviewersUrl' => '', // FIXME: URL not yet available
-            'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
-        ]);
 
+        // Funding
+        // Handled in tpl file, but when possible it would be cleaner to calculate it here
+        /*$pflFundingPluginEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
+        $funderData = null;
+        $pflFundersValue = ($pflFundingPluginEnabled && $funderData) 
+            ? __('plugins.generic.pfl.funders.yes')
+            : ($pflFundingPluginEnabled 
+                ? __('plugins.generic.pfl.funders.no') 
+                : __('plugins.generic.pfl.dataAvailability.unsupported'));
+        */
+
+        // Competing Interests
+        $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
+        $pflCompetingInterestsValue = ($competingInterests) 
+            ? __('plugins.generic.pfl.competingInterests.yes')
+            : ($pflCompetingInterestsEnabled 
+                ? __('plugins.generic.pfl.competingInterests.no') 
+                : __('plugins.generic.pfl.dataAvailability.unsupported'));
+
+        // pflIndex as array:
+        $pflIndexListTransformed = array_map(function($item, $url) {
+            return [
+                'name' => $item['name'],
+                'description' => $item['description'],
+                'url' => $url
+            ];
+        }, array_values($pflIndexList), array_keys($pflIndexList));
+        
+        $templateMgr->assign([
+            'pflData' => [
+                'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/public",
+                'labels' => [
+                    'publicationFacts' => __('plugins.generic.pfl.publicationFacts'),
+                    'metric' => __('plugins.generic.pfl.metric'),
+                    'thisArticle' => __('plugins.generic.pfl.thisArticle'),
+                    'otherArticles' => __('plugins.generic.pfl.otherArticles'),
+                    'peerReviewers' => __('plugins.generic.pfl.peerReviewers'),
+                    'reviewerProfiles' => __('plugins.generic.pfl.reviewerProfiles'),
+                    'authorStatements' => __('plugins.generic.pfl.authorStatements'),
+                    'dataAvailability' => __('plugins.generic.pfl.dataAvailability'),
+                    'funders' => __('plugins.generic.pfl.funders'),
+                    'competingInterests' => __('plugins.generic.pfl.competingInterests'),
+                    'forThisJournal' => __('plugins.generic.pfl.forThisJournal'),
+                    'otherJournals' => __('plugins.generic.pfl.otherJournals'),
+                    'articlesAccepted' => __('plugins.generic.pfl.articlesAccepted'),
+                    'daysToPublication' => __('plugins.generic.pfl.daysToPublication'),
+                    'indexedIn' => __('plugins.generic.pfl.indexedIn'),
+                    'editorAndBoard' => __('plugins.generic.pfl.editorAndBoard'),
+                    'profiles' => __('plugins.generic.pfl.profiles'),
+                    'academicSociety' => __('plugins.generic.pfl.academicSociety'),
+                    'publisher' => __('plugins.generic.pfl.publisher'),
+                    'informationFooter' => __('plugins.generic.pfl.informationFooter'),
+                    'informationIcon' => __('plugins.generic.pfl.informationIcon'),
+                    'maintainedByPKP' => __('plugins.generic.pfl.maintainedByPKP'),
+                    'maintainedPF' => __('plugins.generic.pfl.maintainedPF'),
+                    'maintainedBy' => __('plugins.generic.pfl.maintainedBy'),
+                    'maintainedPKP' => __('plugins.generic.pfl.maintainedPKP')
+                    
+                ],
+                'values' => [
+                    'pflReviewerCount' => $this->getReviewerCount($article->getId()),
+                    'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
+                    'pflPeerReviewersUrl' => null, /* */
+                    'pflPeerReviewers' => __('plugins.generic.pfl.dataAvailability.unsupported'), // N/A or empty if URL is available
+                    'pflDataAvailabilityValue' => __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflDataAvailabilityValueUrl' => null,
+                    'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
+                    'pflFundersValue' => null,
+                    'pflFundersValueUrl' => null,
+                    'pflNumHaveFundersClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumHaveFundersClass']]),
+                    'pflCompetingInterestsValue' => $pflCompetingInterestsValue,
+                    'pflCompetingInterestsValueUrl' => '#author-list',
+                    'pflCompetingInterestsPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflCompetingInterestsPercentClass']]),
+                    'pflAcceptedPercent' => __('plugins.generic.pfl.averagePercentYes', ['num' => $acceptanceRate]),
+                    'pflNumAcceptedClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumAcceptedClass']]),
+                    'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
+                    'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
+                    'pflIndexList' => $pflIndexListTransformed,
+                    'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialTeam'),
+                    'pflAcademicSociety' => __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflAcademicSocietyUrl' => null,
+                    'pflPublisherName' =>$journal->getData('publisherInstitution'),
+                    'pflPublisherUrl' => $journal->getData('publisherUrl'),
+                ]
+
+            ]
+        ]);
+        
         $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
 
         return false;
@@ -383,10 +455,71 @@ class PflPlugin extends GenericPlugin {
 
         switch ($template) {
             case 'frontend/pages/article.tpl':
+                $this->addPflJsAndCss($templateMgr);
                 $templateMgr->registerFilter('output', [$this, 'authorCiFilter']);
                 break;
         }
         return false;
+    }
+
+    /*
+    * Add pfl.js and inline css
+    *
+    * @param string $output
+    * @param TemplateManager $templateMgr
+    */  
+    public function addPflJsAndCss($templateMgr) {
+        $request = Application::get()->getRequest();
+
+        $publicPath = "{$request->getBaseUrl()}/{$this->getPluginPath()}/public/";
+
+        $templateMgr->addJavaScript(
+            'FrontendUiExample',
+            "{$publicPath}js/pfl.js",
+            [
+                'inline' => false,
+                'contexts' => ['frontend'],
+                'priority' => STYLE_SEQUENCE_LAST
+            ]
+        );
+
+        $style = <<<EOD
+                @font-face {
+                    font-family: "PFL Noto Sans";
+                    src: url({$publicPath}font/NotoSans-VariableFont_wdthwght.woff2) format("woff2");
+                    font-weight: 100 900;
+                }
+
+                #funding-data:target,
+                #author-list:target {
+                    animation: pflflash 1s 1;
+                    -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
+                }
+
+                @keyframes pflflash {
+                    0% {
+                        background: yellow;
+                    }
+                }
+
+                @-webkit-keyframes pflflash /* Safari and Chrome */ {
+                    0% {
+                        background: yellow;
+                    }
+                }
+
+            EOD;
+
+
+        $templateMgr->addStyleSheet(
+            'fadeout',
+            $style,
+            [
+                'contexts' => 'frontend',
+                'inline' => true,
+                'priority' => STYLE_SEQUENCE_LAST,
+            ]
+        );
     }
 
     /**
