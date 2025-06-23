@@ -12,8 +12,18 @@
  * @brief Form for journal managers to modify Publication Facts Label settings.
  */
 
+namespace APP\plugins\generic\pflPlugin;
 
-import('lib.pkp.classes.form.Form');
+use PKP\form\Form;
+use APP\core\Application;
+use PKP\plugins\PluginRegistry;
+use PKP\form\validation\FormValidatorPost;
+use PKP\form\validation\FormValidatorCSRF;
+use PKP\form\validation\FormValidatorCustom;
+use PKP\form\validation\FormValidatorUrl;
+use PKP\form\validation\FormValidatorRegExp;
+use APP\template\TemplateManager;
+use APP\notification\NotificationManager;
 
 class PflSettingsForm extends Form {
 

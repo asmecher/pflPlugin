@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file PflPlugin.inc.php
+ * @file PflPlugin.php
  *
  * Copyright (c) 2023-2024 Simon Fraser University
  * Copyright (c) 2023-2024 John Willinsky
@@ -10,10 +10,17 @@
  * @brief Publication Facts Label plugin
  */
 
+namespace APP\plugins\generic\pflPlugin;
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\MySqlConnection;
 
-import('lib.pkp.classes.plugins.GenericPlugin');
+use PKP\plugins\GenericPlugin;
+use PKP\plugins\Hook;
+use PKP\linkAction\request\AjaxModal;
+use PKP\linkAction\LinkAction;
+use APP\core\Application;
+use PKP\core\JSONMessage;
 
 class PflPlugin extends GenericPlugin {
     /**
@@ -23,10 +30,10 @@ class PflPlugin extends GenericPlugin {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
                 // Display the PFL in the article landing page.
-                HookRegistry::register('Templates::Article::Main', [$this, 'displayArticlePfl']);
+                Hook::add('Templates::Article::Main', [$this, 'displayArticlePfl']);
 
                 // Add the author CI statements to the author list
-                HookRegistry::register('TemplateManager::display', [$this, 'handleTemplateDisplay']);
+                Hook::add('TemplateManager::display', [$this, 'handleTemplateDisplay']);
             }
             return true;
         }
@@ -369,7 +376,6 @@ class PflPlugin extends GenericPlugin {
     }
 
         $router = $request->getRouter();
-        import('lib.pkp.classes.linkAction.request.AjaxModal');
         $linkAction = new LinkAction(
             'settings',
             new AjaxModal(
@@ -579,7 +585,6 @@ class PflPlugin extends GenericPlugin {
     public function manage($args, $request) {
         switch ($request->getUserVar('verb')) {
             case 'settings':
-                $this->import('PflSettingsForm');
                 $form = new PflSettingsForm($this);
 
                 if ($request->getUserVar('save')) {
