@@ -14,13 +14,18 @@ namespace APP\plugins\generic\pflPlugin;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\MySqlConnection;
+use Illuminate\Support\Facades\DB;
 
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
+use PKP\plugins\PluginRegistry;
 use PKP\linkAction\request\AjaxModal;
 use PKP\linkAction\LinkAction;
 use APP\core\Application;
 use PKP\core\JSONMessage;
+use PKP\db\DAORegistry;
+use PKP\cache\CacheManager;
+use PKP\submission\PKPSubmission;
 
 class PflPlugin extends GenericPlugin {
     /**
@@ -57,143 +62,129 @@ class PflPlugin extends GenericPlugin {
 
     /**
      * Get the number of published reviewable submissions for a given journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getPublishedReviewableSubmissionCount($journalId, $dateStart = null) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
-            'SELECT COUNT(*) AS submission_count
-            FROM submissions s
-            JOIN publications p ON (s.current_publication_id = p.publication_id)
-            JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?'
-            . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : ''),
-            [$journalId, STATUS_PUBLISHED]
-        )->current();
+    function getPublishedReviewableSubmissionCount(int $journalId, ?string $dateStart = null): int
+        {
+        $row = DB::table('submissions AS s')
+            ->select([DB::raw('COUNT(*) AS submission_count')])
+            ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
+            ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
+            ->where('s.context_id', $journalId)
+            ->where('sec.meta_reviewed', 1)
+            ->where('s.status', STATUS_PUBLISHED)
+            ->when($dateStart, fn($q) => $q->where('s.date_submitted', '>=', strtotime($dateStart)))
+            ->get()->first();
         return $row->submission_count;
     }
 
     /**
      * Get the peer reviewer count for a given submission.
-     * @param $submissionId int
      */
-    function getReviewerCount($submissionId) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
-            'SELECT COUNT(DISTINCT r.reviewer_id) AS reviewer_count FROM review_assignments r WHERE r.date_completed IS NOT NULL AND r.submission_id = ?',
-            [$submissionId]
-        )->current();
+    function getReviewerCount(int $submissionId): int
+    {
+        $row = DB::table('review_assignments AS r')
+            ->select([DB::raw('COUNT(DISTINCT r.reviewer_id) AS reviewer_count')])
+            ->whereNotNull('r.date_completed')
+            ->where('r.submission_id', $submissionId)
+            ->get()->first();
         return $row->reviewer_count;
     }
 
     /**
      * Get the average peer reviews per published submission in a reviewed section for the journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getReviewerAverage($journalId, $dateStart = null) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
+    function getReviewerAverage(int $journalId, ?string $dateStart = null) {
+	$rows = DB::select(DB::raw(
             'SELECT AVG(a.ra_count) AS reviewer_count FROM (
                 SELECT COUNT(*) AS ra_count FROM review_assignments ra
                 JOIN submissions s ON (ra.submission_id = s.submission_id)
                 JOIN publications p ON (s.current_publication_id = p.publication_id)
                 JOIN sections sec ON (p.section_id = sec.section_id)
-                WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
-                ' . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : '') . '
+                WHERE s.context_id = ' . ((int) $journalId) . ' AND sec.meta_reviewed = 1 AND s.status = ' . ((int) PKPSubmission::STATUS_PUBLISHED) . '
+                ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY s.submission_id
-            ) a',
-            [$journalId, STATUS_PUBLISHED]
-        )->current();
-        return $row->reviewer_count;
+            ) a'
+	));
+        return $rows[0]->reviewer_count;
     }
 
     /**
      * Get the average peer reviews per published submission in a reviewed section for the journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getDaysToPublicationAverage($journalId, $dateStart = null) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
+    function getDaysToPublicationAverage(int $journalId, ?string $dateStart = null): int
+    {
         $datediff = Capsule::connection() instanceof MySqlConnection
             ? 'DATEDIFF(p.date_published, s.date_submitted)'
             : "EXTRACT(DAY FROM p.date_published - s.date_submitted)";
 
-        $row = $submissionDao->retrieve(
+        $rows = DB::select(DB::raw(
             'SELECT AVG(a.time_to_publish) AS time_to_publish FROM (
                 SELECT ' . $datediff . ' AS time_to_publish FROM review_assignments ra
                 JOIN submissions s ON (ra.submission_id = s.submission_id)
                 JOIN publications p ON (s.current_publication_id = p.publication_id)
                 JOIN sections sec ON (p.section_id = sec.section_id)
-                WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?
-                ' . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : '') . '
+                WHERE s.context_id = ' . ((int) $journalId) . ' AND sec.meta_reviewed = 1 AND s.status = ' . ((int) PKPSubmission::STATUS_PUBLISHED) . '
+                ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY p.publication_id, s.submission_id
-            ) a',
-            [$journalId, STATUS_PUBLISHED]
-        )->current();
-        return $row->time_to_publish;
+            ) a'
+	));
+        return $rows[0]->time_to_publish;
     }
 
     /**
      * Get the number of reviewable submissions in a peer reviewed section for the journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getReviewableSubmissionCount($journalId, $dateStart = null) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
+    function getReviewableSubmissionCount(int $journalId, ?string $dateStart = null): int
+    {
+        $rows = DB::select(DB::raw(
             'SELECT COUNT(*) AS submission_count
             FROM submissions s
             JOIN publications p ON (s.current_publication_id = p.publication_id)
             JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1'
-            . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : ''),
-            [$journalId]
-        )->current();
-        return $row->submission_count;
+            WHERE s.context_id = ' . ((int) $journalId) . ' AND sec.meta_reviewed = 1'
+            . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '')
+	));
+        return $rows[0]->submission_count;
     }
 
     /**
      * Get the number of published submissions with at least one author CI statement in a peer reviewed section for the journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getCompetingInterestsSubmissionCount($journalId, $dateStart = null) {
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
-            'SELECT COUNT(*) AS submission_count
-            FROM submissions s
-            JOIN publications p ON (s.current_publication_id = p.publication_id)
-            JOIN authors a ON (a.publication_id = p.publication_id)
-            JOIN author_settings a_s ON (a_s.author_id = a.author_id AND a_s.setting_name = ? AND a_s.setting_value <> ?)
-            JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?'
-            . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : ''),
-            ['competingInterests', '', $journalId, STATUS_PUBLISHED]
-        )->current();
+    function getCompetingInterestsSubmissionCount(int $journalId, ?string $dateStart = null): int
+    {
+	$row = DB::table('submissions AS s')
+	    ->select([DB::raw('COUNT(*) AS submission_count')])
+	    ->join('publications AS s', 's.current_publication_id', '=', 'p.publication_id')
+	    ->join('authors AS a', 'a.publication_id', '=', 'p.publication_id')
+	    ->join('author_settings AS a_s', fn($qb) => 
+		$qb->where('a_s.author_id', '=', DB::raw('a.author_id'))
+		    ->where('a_s.setting_name', '=', 'competingInterests')
+		    ->where('a_s.setting_value', '<>', '')
+	    )
+	    ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
+	    ->where('s.context_id', $journalId)
+	    ->where('sec.meta_reviewed', 1)
+	    ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
+	    ->get()->first();
         return $row->submission_count;
     }
 
     /**
      * Get the number of published submissions with at least one funding source in a peer reviewed section for the journal.
-     * @param $journalId int
-     * @param $dateStart ?string
      */
-    function getFundedSubmissionCount($journalId, $dateStart = null) {
+    function getFundedSubmissionCount(int $journalId, ?string $dateStart = null): ?int
+    {
         if (!PluginRegistry::getPlugin('generic', 'FundingPlugin')) return null;
-        $submissionDao = DAORegistry::getDAO('SubmissionDAO');
-        $row = $submissionDao->retrieve(
-            'SELECT COUNT(*) AS submission_count
-            FROM submissions s
-            JOIN publications p ON (s.current_publication_id = p.publication_id)
-            JOIN funders f ON (f.submission_id = s.submission_id)
-            JOIN sections sec ON (p.section_id = sec.section_id)
-            WHERE s.context_id = ? AND sec.meta_reviewed = 1 AND s.status = ?'
-            . ($dateStart ? ' AND s.date_submitted >= ' . $submissionDao->dateToDB($dateStart) : '') . '
-            GROUP BY s.submission_id',
-            [$journalId, STATUS_PUBLISHED]
-        )->current();
+        $row = DB::table('submissions AS s')
+	    ->select([DB::raw('COUNT(*) AS submission_count')])
+	    ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
+	    ->join('funders AS f', 'f.submission_id', '=', 's.submission_id')
+	    ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
+	    ->where('s.context_id', $journalId)
+	    ->where('sec.meta_reviewed', 1)
+	    ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
+	    ->when($dateStart, fn($qb) => $qb->where('s.date_submitted', '>=', strtotime($dateStart)))
+	    ->get()->first();
         return $row->submission_count;
     }
 
@@ -213,11 +204,11 @@ class PflPlugin extends GenericPlugin {
         $dateStart = $this->getSetting($journal->getId(), 'dateStart');
 
         // https://github.com/asmecher/pflPlugin/issues/20 Only apply PFL to peer reviewed sections
-        $section = $templateMgr->get_template_vars('section');
+        $section = $templateMgr->getTemplateVars('section');
         if ($section && !$section->getMetaReviewed()) return false;
 
         // Check if the submission came in before a specified start date for inclusion
-        $article = $templateMgr->get_template_vars('article');
+        $article = $templateMgr->getTemplateVars('article');
         $publication = $templateMgr->getTemplateVars('publication');
         if ($dateStart && strtotime($dateStart) > strtotime($article->getDateSubmitted())) return false;
 
@@ -264,23 +255,23 @@ class PflPlugin extends GenericPlugin {
             if (!empty($ciStatement)) $competingInterests[$author->getId()] = $ciStatement;
         }
 
-        $publicationDate = new DateTime($publication->getData('datePublished'));
-        $submissionDate = new DateTime($article->getDateSubmitted());
+        $publicationDate = new \DateTime($publication->getData('datePublished'));
+        $submissionDate = new \DateTime($article->getDateSubmitted());
 
         // Funding
         $pflFundingEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
-	$pflFundersCount = 0;
-	$pflFundersValue = $pflFundersValueUrl = null;
-	if ($pflFundingEnabled) {
-	    $funderDao = DAORegistry::getDAO('FunderDAO');
-	    $funders = $funderDao->getBySubmissionId($article->getId());
-	    $firstFunder = $funders->next();
+        $pflFundersCount = 0;
+        $pflFundersValue = $pflFundersValueUrl = null;
+        if ($pflFundingEnabled) {
+            $funderDao = DAORegistry::getDAO('FunderDAO');
+            $funders = $funderDao->getBySubmissionId($article->getId());
+            $firstFunder = $funders->next();
 
             $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.funders.yes') : __('plugins.generic.pfl.funders.no');
-	    if ($firstFunder) $pflFundersValueUrl = '#funding-data';
-	} else {
-	    $pflFundersValue = __('plugins.generic.pfl.funders.no');
-	}
+            if ($firstFunder) $pflFundersValueUrl = '#funding-data';
+        } else {
+            $pflFundersValue = __('plugins.generic.pfl.funders.no');
+        }
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
@@ -544,7 +535,7 @@ class PflPlugin extends GenericPlugin {
     {
         $authorIndex = 0;
         $publication = $templateMgr->getTemplateVars('publication');
-        $authors = array_values($publication->getData('authors'));
+        $authors = array_values($publication->getData('authors')->toArray());
 
         // Add an ID to the author list
         $startMarkup = '<ul id="author-list" class="authors">';
