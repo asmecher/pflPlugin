@@ -15,6 +15,7 @@ namespace APP\plugins\generic\pflPlugin;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
@@ -24,7 +25,6 @@ use PKP\linkAction\LinkAction;
 use APP\core\Application;
 use PKP\core\JSONMessage;
 use PKP\db\DAORegistry;
-use PKP\cache\CacheManager;
 use PKP\submission\PKPSubmission;
 
 class PflPlugin extends GenericPlugin {
@@ -104,7 +104,7 @@ class PflPlugin extends GenericPlugin {
                 ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY s.submission_id
             ) a'
-	));
+	)->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->reviewer_count;
     }
 
@@ -113,7 +113,7 @@ class PflPlugin extends GenericPlugin {
      */
     function getDaysToPublicationAverage(int $journalId, ?string $dateStart = null): int
     {
-        $datediff = Capsule::connection() instanceof MySqlConnection
+        $datediff = DB::connection() instanceof MySqlConnection
             ? 'DATEDIFF(p.date_published, s.date_submitted)'
             : "EXTRACT(DAY FROM p.date_published - s.date_submitted)";
 
@@ -127,7 +127,7 @@ class PflPlugin extends GenericPlugin {
                 ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY p.publication_id, s.submission_id
             ) a'
-	));
+	)->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->time_to_publish;
     }
 
@@ -143,7 +143,7 @@ class PflPlugin extends GenericPlugin {
             JOIN sections sec ON (p.section_id = sec.section_id)
             WHERE s.context_id = ' . ((int) $journalId) . ' AND sec.meta_reviewed = 1'
             . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '')
-	));
+	)->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->submission_count;
     }
 
@@ -154,7 +154,7 @@ class PflPlugin extends GenericPlugin {
     {
 	$row = DB::table('submissions AS s')
 	    ->select([DB::raw('COUNT(*) AS submission_count')])
-	    ->join('publications AS s', 's.current_publication_id', '=', 'p.publication_id')
+	    ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
 	    ->join('authors AS a', 'a.publication_id', '=', 'p.publication_id')
 	    ->join('author_settings AS a_s', fn($qb) => 
 		$qb->where('a_s.author_id', '=', DB::raw('a.author_id'))
@@ -210,7 +210,7 @@ class PflPlugin extends GenericPlugin {
         // Check if the submission came in before a specified start date for inclusion
         $article = $templateMgr->getTemplateVars('article');
         $publication = $templateMgr->getTemplateVars('publication');
-        if ($dateStart && strtotime($dateStart) > strtotime($article->getDateSubmitted())) return false;
+        if ($dateStart && strtotime($dateStart) > strtotime($article->getData('dateSubmitted'))) return false;
 
         $pflIndexList = [];
         $onlineIssn = urlencode($journal->getSetting('onlineIssn'));
@@ -256,7 +256,7 @@ class PflPlugin extends GenericPlugin {
         }
 
         $publicationDate = new \DateTime($publication->getData('datePublished'));
-        $submissionDate = new \DateTime($article->getDateSubmitted());
+        $submissionDate = new \DateTime($article->getData('dateSubmitted'));
 
         // Funding
         $pflFundingEnabled = (bool) PluginRegistry::getPlugin('generic', 'FundingPlugin');
@@ -393,20 +393,15 @@ class PflPlugin extends GenericPlugin {
         return $actions;
     }
 
-    function getStatistics($journalId) {
-        $cache = CacheManager::getManager()->getCache('pflStats', $journalId, [$this, '_statsCacheMiss']);
-        if (time() - $cache->getCacheTime() > 60 * 60 * 24) {
-            // Cache is older than one day, erase it.
-            $cache->flush();
-        }
-        return $cache->getContents();
+    function getStatistics(int $journalId) {
+        return Cache::remember('pflStats-' . $journalId, 60 * 60 * 24, $this->_statsCacheMiss(...));
     }
 
     /**
      * Callback to fill cache with data, if empty.
-     * @return array
      */
-    function _statsCacheMiss($cache, $cacheId) {
+    function _statsCacheMiss(): array
+    {
         $versionDao = DAORegistry::getDAO('VersionDAO');
         $currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
         $request = Application::get()->getRequest();
@@ -432,7 +427,6 @@ class PflPlugin extends GenericPlugin {
         $client = Application::get()->getHttpClient();
         $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => $queryParams]);
         $data = json_decode($response->getBody(), true);
-        $cache->setEntireCache($data);
         return $data;
     }
 
