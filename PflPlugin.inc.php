@@ -290,7 +290,7 @@ class PflPlugin extends GenericPlugin {
         
         $templateMgr->assign([
             'pflData' => [
-                'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/public",
+                'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl",
                 'labels' => [
                     'publicationFacts' => __('plugins.generic.pfl.publicationFacts'),
                     'metric' => __('plugins.generic.pfl.metric'),
@@ -471,11 +471,11 @@ class PflPlugin extends GenericPlugin {
     public function addPflJsAndCss($templateMgr) {
         $request = Application::get()->getRequest();
 
-        $publicPath = "{$request->getBaseUrl()}/{$this->getPluginPath()}/public/";
+        $pflPath = "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl/";
 
         $templateMgr->addJavaScript(
             'FrontendUiExample',
-            "{$publicPath}js/pfl.js",
+            "{$pflPath}js/pfl.js",
             [
                 'inline' => false,
                 'contexts' => ['frontend'],
@@ -486,7 +486,7 @@ class PflPlugin extends GenericPlugin {
         $style = <<<EOD
                 @font-face {
                     font-family: "PFL Noto Sans";
-                    src: url({$publicPath}font/NotoSans-VariableFont_wdthwght.woff2) format("woff2");
+                    src: url({$pflPath}font/NotoSans-VariableFont_wdthwght.woff2) format("woff2");
                     font-weight: 100 900;
                 }
 
