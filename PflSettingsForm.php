@@ -54,7 +54,7 @@ class PflSettingsForm extends Form {
 
                 $body = json_decode((string) $response->getBody());
                 return $body->total == 1; // A single result should be returned.
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
         }));
@@ -65,11 +65,8 @@ class PflSettingsForm extends Form {
                 // NOTE: Verification explicitly disabled; certificate errors reported on Ubuntu 2023-11-23. Not sure if temporary.
                 $response = $httpClient->request('GET', "https://latindex.org/latindex/exportar/busquedaAvanzada/json/%7B%22idMod%22:%220%22,%22titulo%22:%22%22,%22otrostitulos%22:%22%22,%22issn%22:%22{$onlineIssn}%22,%22tema%22:%220%22,%22subtema%22:%220%22,%22editorial%22:%22%22,%22idioma%22:%220%22,%22aInicio%22:%22%22,%22aFin%22:%22%22,%22region%22:%220%22,%22pais%22:%220%22,%22ciudad%22:%22%22,%22estado%22:%22%22,%22natPub%22:%220%22,%22natOrg%22:%220%22,%22situacion%22:%220%22,%22frecuencia%22:%220%22,%22soporte%22:%22%22,%22arbitrada%22:%22%22,%22acc-abierto%22:%22%22,%22derechos-uso%22:%22%22,%22cob-pub%22:%22%22,%22cobertura%22:%220%22,%22f_unico%22:%22%22,%22send%22:%22Buscar%22%7D", ['headers' => ['Accept' => 'text/json'], 'verify' => false]);
                 if ($response->getStatusCode() != 200) return false;
-
-                $body = json_decode((string) $response->getBody());
-                error_log(print_r($body,true));
                 return count($body) == 1; // A single result should be returned.
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
         }));
@@ -88,7 +85,7 @@ class PflSettingsForm extends Form {
                 $errors = libxml_get_errors();
                 libxml_use_internal_errors($previousErrorSetting);
                 return empty($errors) && !empty($xml->xpath('/NCBICatalogRecord/NLMCatalogRecord/ISSN'));
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
         }));
