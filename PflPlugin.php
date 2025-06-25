@@ -12,7 +12,6 @@
 
 namespace APP\plugins\generic\pflPlugin;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -26,6 +25,7 @@ use APP\core\Application;
 use PKP\core\JSONMessage;
 use PKP\db\DAORegistry;
 use PKP\submission\PKPSubmission;
+use APP\template\TemplateManager;
 
 class PflPlugin extends GenericPlugin {
     /**
@@ -35,10 +35,10 @@ class PflPlugin extends GenericPlugin {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
                 // Display the PFL in the article landing page.
-                Hook::add('Templates::Article::Main', [$this, 'displayArticlePfl']);
+                Hook::add('Templates::Article::Details', $this->displayArticlePfl(...));
 
                 // Add the author CI statements to the author list
-                Hook::add('TemplateManager::display', [$this, 'handleTemplateDisplay']);
+                Hook::add('TemplateManager::display', $this->handleTemplateDisplay(...));
             }
             return true;
         }
@@ -93,8 +93,9 @@ class PflPlugin extends GenericPlugin {
     /**
      * Get the average peer reviews per published submission in a reviewed section for the journal.
      */
-    function getReviewerAverage(int $journalId, ?string $dateStart = null) {
-	$rows = DB::select(DB::raw(
+    function getReviewerAverage(int $journalId, ?string $dateStart = null): float
+        {
+        $rows = DB::select(DB::raw(
             'SELECT AVG(a.ra_count) AS reviewer_count FROM (
                 SELECT COUNT(*) AS ra_count FROM review_assignments ra
                 JOIN submissions s ON (ra.submission_id = s.submission_id)
@@ -104,7 +105,7 @@ class PflPlugin extends GenericPlugin {
                 ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY s.submission_id
             ) a'
-	)->getValue(DB::connection()->getQueryGrammar()));
+        )->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->reviewer_count;
     }
 
@@ -127,7 +128,7 @@ class PflPlugin extends GenericPlugin {
                 ' . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '') . '
                 GROUP BY p.publication_id, s.submission_id
             ) a'
-	)->getValue(DB::connection()->getQueryGrammar()));
+        )->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->time_to_publish;
     }
 
@@ -143,7 +144,7 @@ class PflPlugin extends GenericPlugin {
             JOIN sections sec ON (p.section_id = sec.section_id)
             WHERE s.context_id = ' . ((int) $journalId) . ' AND sec.meta_reviewed = 1'
             . ($dateStart ? ' AND s.date_submitted >= ' . strtotime($dateStart) : '')
-	)->getValue(DB::connection()->getQueryGrammar()));
+        )->getValue(DB::connection()->getQueryGrammar()));
         return $rows[0]->submission_count;
     }
 
@@ -152,20 +153,20 @@ class PflPlugin extends GenericPlugin {
      */
     function getCompetingInterestsSubmissionCount(int $journalId, ?string $dateStart = null): int
     {
-	$row = DB::table('submissions AS s')
-	    ->select([DB::raw('COUNT(*) AS submission_count')])
-	    ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
-	    ->join('authors AS a', 'a.publication_id', '=', 'p.publication_id')
-	    ->join('author_settings AS a_s', fn($qb) => 
-		$qb->where('a_s.author_id', '=', DB::raw('a.author_id'))
-		    ->where('a_s.setting_name', '=', 'competingInterests')
-		    ->where('a_s.setting_value', '<>', '')
-	    )
-	    ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
-	    ->where('s.context_id', $journalId)
-	    ->where('sec.meta_reviewed', 1)
-	    ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
-	    ->get()->first();
+        $row = DB::table('submissions AS s')
+            ->select([DB::raw('COUNT(*) AS submission_count')])
+            ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
+            ->join('authors AS a', 'a.publication_id', '=', 'p.publication_id')
+            ->join('author_settings AS a_s', fn($qb) =>
+                $qb->where('a_s.author_id', '=', DB::raw('a.author_id'))
+                    ->where('a_s.setting_name', '=', 'competingInterests')
+                    ->where('a_s.setting_value', '<>', '')
+            )
+            ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
+            ->where('s.context_id', $journalId)
+            ->where('sec.meta_reviewed', 1)
+            ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
+            ->get()->first();
         return $row->submission_count;
     }
 
@@ -176,24 +177,23 @@ class PflPlugin extends GenericPlugin {
     {
         if (!PluginRegistry::getPlugin('generic', 'FundingPlugin')) return null;
         $row = DB::table('submissions AS s')
-	    ->select([DB::raw('COUNT(*) AS submission_count')])
-	    ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
-	    ->join('funders AS f', 'f.submission_id', '=', 's.submission_id')
-	    ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
-	    ->where('s.context_id', $journalId)
-	    ->where('sec.meta_reviewed', 1)
-	    ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
-	    ->when($dateStart, fn($qb) => $qb->where('s.date_submitted', '>=', strtotime($dateStart)))
-	    ->get()->first();
+            ->select([DB::raw('COUNT(*) AS submission_count')])
+            ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
+            ->join('funders AS f', 'f.submission_id', '=', 's.submission_id')
+            ->join('sections AS sec', 'p.section_id', '=', 'sec.section_id')
+            ->where('s.context_id', $journalId)
+            ->where('sec.meta_reviewed', 1)
+            ->where('s.status', PKPSubmission::STATUS_PUBLISHED)
+            ->when($dateStart, fn($qb) => $qb->where('s.date_submitted', '>=', strtotime($dateStart)))
+            ->get()->first();
         return $row->submission_count;
     }
 
     /**
      * Hook handler to display article PFL
-     * @param $hookName string
-     * @param $args array
      */
-    function displayArticlePfl($hookName, $args) {
+    function displayArticlePfl(string $hookName, array $args): bool
+    {
         $templateMgr =& $args[1];
         $output =& $args[2];
 
@@ -275,10 +275,10 @@ class PflPlugin extends GenericPlugin {
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
-        $pflCompetingInterestsValue = ($competingInterests) 
+        $pflCompetingInterestsValue = ($competingInterests)
             ? __('plugins.generic.pfl.competingInterests.yes')
-            : ($pflCompetingInterestsEnabled 
-                ? __('plugins.generic.pfl.competingInterests.no') 
+            : ($pflCompetingInterestsEnabled
+                ? __('plugins.generic.pfl.competingInterests.no')
                 : __('plugins.generic.pfl.dataAvailability.unsupported'));
 
         // pflIndex as array:
@@ -289,7 +289,7 @@ class PflPlugin extends GenericPlugin {
                 'url' => $url
             ];
         }, array_values($pflIndexList), array_keys($pflIndexList));
-        
+
         $templateMgr->assign([
             'pflData' => [
                 'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl",
@@ -318,8 +318,7 @@ class PflPlugin extends GenericPlugin {
                     'maintainedByPKP' => __('plugins.generic.pfl.maintainedByPKP'),
                     'maintainedPF' => __('plugins.generic.pfl.maintainedPF'),
                     'maintainedBy' => __('plugins.generic.pfl.maintainedBy'),
-                    'maintainedPKP' => __('plugins.generic.pfl.maintainedPKP')
-                    
+                    'maintainedPKP' => __('plugins.generic.pfl.maintainedPKP'),
                 ],
                 'values' => [
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
@@ -346,13 +345,12 @@ class PflPlugin extends GenericPlugin {
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
                     'pflPublisherUrl' => $journal->getData('publisherUrl'),
                 ]
-
             ]
         ]);
-        
+
         $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
 
-        return false;
+        return Hook::CONTINUE;
     }
 
     /**
@@ -360,11 +358,11 @@ class PflPlugin extends GenericPlugin {
      */
     public function getActions($request, $actionArgs) {
 
-    $actions = parent::getActions($request, $actionArgs);
+        $actions = parent::getActions($request, $actionArgs);
 
-    if (!$this->getEnabled()) {
-        return $actions;
-    }
+        if (!$this->getEnabled()) {
+            return $actions;
+        }
 
         $router = $request->getRouter();
         $linkAction = new LinkAction(
@@ -393,41 +391,38 @@ class PflPlugin extends GenericPlugin {
         return $actions;
     }
 
-    function getStatistics(int $journalId) {
-        return Cache::remember('pflStats-' . $journalId, 60 * 60 * 24, $this->_statsCacheMiss(...));
-    }
-
     /**
-     * Callback to fill cache with data, if empty.
+     * Get the statistical data from the upstream PFL dataset, caching as necessary.
      */
-    function _statsCacheMiss(): array
+    function getStatistics(int $journalId): array
     {
-        $versionDao = DAORegistry::getDAO('VersionDAO');
-        $currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
-        $request = Application::get()->getRequest();
-        $journal = $request->getJournal();
-        $dateStart = $this->getSetting($journal->getId(), 'dateStart');
-        $reviewableSubmissionsCount = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
-        $fundedSubmissionsCount = $this->getFundedSubmissionCount($journal->getId(), $dateStart);
-        $acceptanceCount = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
-        $queryParams = [
-            'version' => $currentVersion->getVersionString(),
-            'platform' => 'ojs',
-            'journalUrl' => $request->url(null, 'index'),
-            'pflNumAcceptedClass' => $acceptanceCount,
-            'pflReviewerCountClass' => $this->getReviewerAverage($journal->getId(), $dateStart),
-            'pflCompetingInterestsClass' => $this->getCompetingInterestsSubmissionCount($journal->getId(), $dateStart),
-            'pflDataAvailabilityClass' => 'N/A',
-            'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : $fundedSubmissionsCount,
-            'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId(), $dateStart),
-            'reviewableSubmissionsCount' => $reviewableSubmissionsCount,
-            'issn' => $journal->getSetting('onlineIssn') ?? $journal->getSetting('printIssn'),
-        ];
+        return Cache::remember('pflStats-' . $journalId, 60 * 60 * 24, function() {
+            $versionDao = DAORegistry::getDAO('VersionDAO');
+            $currentVersion = $versionDao->getCurrentVersion('plugins.generic', 'pflPlugin');
+            $request = Application::get()->getRequest();
+            $journal = $request->getJournal();
+            $dateStart = $this->getSetting($journal->getId(), 'dateStart');
+            $reviewableSubmissionsCount = $this->getReviewableSubmissionCount($journal->getId(), $dateStart);
+            $fundedSubmissionsCount = $this->getFundedSubmissionCount($journal->getId(), $dateStart);
+            $acceptanceCount = $this->getPublishedReviewableSubmissionCount($journal->getId(), $dateStart);
+            $queryParams = [
+                'version' => $currentVersion->getVersionString(),
+                'platform' => 'ojs',
+                'journalUrl' => $request->url(null, 'index'),
+                'pflNumAcceptedClass' => $acceptanceCount,
+                'pflReviewerCountClass' => $this->getReviewerAverage($journal->getId(), $dateStart),
+                'pflCompetingInterestsClass' => $this->getCompetingInterestsSubmissionCount($journal->getId(), $dateStart),
+                'pflDataAvailabilityClass' => 'N/A',
+                'pflNumHaveFundersClass' => $fundedSubmissionsCount === null ? 'N/A' : $fundedSubmissionsCount,
+                'pflDaysToPublicationClass' => $this->getDaysToPublicationAverage($journal->getId(), $dateStart),
+                'reviewableSubmissionsCount' => $reviewableSubmissionsCount,
+                'issn' => $journal->getSetting('onlineIssn') ?? $journal->getSetting('printIssn'),
+            ];
 
-        $client = Application::get()->getHttpClient();
-        $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => $queryParams]);
-        $data = json_decode($response->getBody(), true);
-        return $data;
+            $client = Application::get()->getHttpClient();
+            $response = $client->request('GET', 'https://pkp.sfu.ca/ojs/pflStatistics.json', ['query' => $queryParams]);
+            return json_decode($response->getBody(), true);
+        });
     }
 
     /**
@@ -437,12 +432,10 @@ class PflPlugin extends GenericPlugin {
      * @param string $hookName
      * @param array $args
      *
-     * @return bool
-     *
      * @see TemplateManager::display()
      *
      */
-    public function handleTemplateDisplay($hookName, $args)
+    public function handleTemplateDisplay(string $hookName, array $args): bool
     {
         $templateMgr = & $args[0];
         $template = & $args[1];
@@ -451,19 +444,17 @@ class PflPlugin extends GenericPlugin {
         switch ($template) {
             case 'frontend/pages/article.tpl':
                 $this->addPflJsAndCss($templateMgr);
-                $templateMgr->registerFilter('output', [$this, 'authorCiFilter']);
+                $templateMgr->registerFilter('output', $this->authorCiFilter(...));
                 break;
         }
-        return false;
+        return Hook::CONTINUE;
     }
 
-    /*
-    * Add pfl.js and inline css
-    *
-    * @param string $output
-    * @param TemplateManager $templateMgr
-    */  
-    public function addPflJsAndCss($templateMgr) {
+    /**
+     * Add pfl.js and inline css
+     */
+    public function addPflJsAndCss(TemplateManager $templateMgr): void
+    {
         $request = Application::get()->getRequest();
 
         $pflPath = "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl/";
