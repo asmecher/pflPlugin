@@ -12,7 +12,6 @@
 
 namespace APP\plugins\generic\pflPlugin;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +34,7 @@ class PflPlugin extends GenericPlugin {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
                 // Display the PFL in the article landing page.
-                Hook::add('Templates::Article::Main', [$this, 'displayArticlePfl']);
+                Hook::add('Templates::Article::Details', [$this, 'displayArticlePfl']);
 
                 // Add the author CI statements to the author list
                 Hook::add('TemplateManager::display', [$this, 'handleTemplateDisplay']);
@@ -113,7 +112,7 @@ class PflPlugin extends GenericPlugin {
      */
     function getDaysToPublicationAverage(int $journalId, ?string $dateStart = null): int
     {
-        $datediff = Capsule::connection() instanceof MySqlConnection
+        $datediff = DB::connection() instanceof MySqlConnection
             ? 'DATEDIFF(p.date_published, s.date_submitted)'
             : "EXTRACT(DAY FROM p.date_published - s.date_submitted)";
 
@@ -154,7 +153,7 @@ class PflPlugin extends GenericPlugin {
     {
 	$row = DB::table('submissions AS s')
 	    ->select([DB::raw('COUNT(*) AS submission_count')])
-	    ->join('publications AS s', 's.current_publication_id', '=', 'p.publication_id')
+	    ->join('publications AS p', 's.current_publication_id', '=', 'p.publication_id')
 	    ->join('authors AS a', 'a.publication_id', '=', 'p.publication_id')
 	    ->join('author_settings AS a_s', fn($qb) => 
 		$qb->where('a_s.author_id', '=', DB::raw('a.author_id'))
