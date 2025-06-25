@@ -23,7 +23,7 @@ class PflPlugin extends GenericPlugin {
         if (parent::register($category, $path, $mainContextId)) {
             if ($this->getEnabled($mainContextId)) {
                 // Display the PFL in the article landing page.
-                HookRegistry::register('Templates::Article::Main', [$this, 'displayArticlePfl']);
+                HookRegistry::register('Templates::Article::Details', [$this, 'displayArticlePfl']);
 
                 // Add the author CI statements to the author list
                 HookRegistry::register('TemplateManager::display', [$this, 'handleTemplateDisplay']);
