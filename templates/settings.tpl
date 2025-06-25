@@ -49,7 +49,7 @@
 			<ol>
 				<li>
 					{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus"}
-					<ol style="list-style-type: lower-alpha;">
+					<ol style="list-style-type: lower-alpha; padding-left: 2em;">
 						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step1"}</li>
 						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.scopus.step2"}</li>
 						<li>
@@ -61,7 +61,7 @@
 				</li>
 				<li>
 					{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos"}
-					<ol style="list-style-type: lower-alpha;">
+					<ol style="list-style-type: lower-alpha; padding-left: 2em;">
 						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step1"}</li>
 						<li>{translate key="plugins.generic.pflPlugin.settings.indexes.manual.wos.step2"}</li>
 						<li>
