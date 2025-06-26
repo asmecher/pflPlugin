@@ -346,7 +346,7 @@ class PflPlugin extends GenericPlugin {
                     'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
                     'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
                     'pflIndexList' => $pflIndexListTransformed,
-                    'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialTeam'),
+                    'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialMasthead'),
                     'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.dataAvailability.unsupported'),
                     'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
