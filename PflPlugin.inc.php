@@ -318,9 +318,6 @@ class PflPlugin extends GenericPlugin {
                     'informationFooter' => __('plugins.generic.pfl.informationFooter'),
                     'informationIcon' => __('plugins.generic.pfl.informationIcon'),
                     'maintainedByPKP' => __('plugins.generic.pfl.maintainedByPKP'),
-                    'maintainedPF' => __('plugins.generic.pfl.maintainedPF'),
-                    'maintainedBy' => __('plugins.generic.pfl.maintainedBy'),
-                    'maintainedPKP' => __('plugins.generic.pfl.maintainedPKP')
                     
                 ],
                 'values' => [
@@ -343,8 +340,8 @@ class PflPlugin extends GenericPlugin {
                     'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
                     'pflIndexList' => $pflIndexListTransformed,
                     'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialTeam'),
-                    'pflAcademicSociety' => __('plugins.generic.pfl.dataAvailability.unsupported'),
-                    'pflAcademicSocietyUrl' => null,
+                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
                     'pflPublisherUrl' => $journal->getData('publisherUrl'),
                 ]
