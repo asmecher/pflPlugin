@@ -282,6 +282,7 @@ class PflPlugin extends GenericPlugin {
             : ($pflCompetingInterestsEnabled 
                 ? __('plugins.generic.pfl.competingInterests.no') 
                 : __('plugins.generic.pfl.dataAvailability.unsupported'));
+        $pflCompetingInterestsValueUrl = $competingInterests ? '#author-list' : null;
 
         // pflIndex as array:
         $pflIndexListTransformed = array_map(function($item, $url) {
@@ -332,7 +333,7 @@ class PflPlugin extends GenericPlugin {
                     'pflFundersCount' => $pflFundersValueUrl,
                     'pflNumHaveFundersClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumHaveFundersClass']]),
                     'pflCompetingInterestsValue' => $pflCompetingInterestsValue,
-                    'pflCompetingInterestsValueUrl' => '#author-list',
+                    'pflCompetingInterestsValueUrl' => $pflCompetingInterestsValueUrl,
                     'pflCompetingInterestsPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflCompetingInterestsPercentClass']]),
                     'pflAcceptedPercent' => __('plugins.generic.pfl.averagePercentYes', ['num' => $acceptanceRate]),
                     'pflNumAcceptedClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumAcceptedClass']]),
