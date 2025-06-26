@@ -239,11 +239,3 @@ msgstr "Publication facts information page."
 msgid "plugins.generic.pfl.maintainedByPKP"
 msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"
 
-msgid "plugins.generic.pfl.maintainedPF"
-msgstr "PF"
-
-msgid "plugins.generic.pfl.maintainedBy"
-msgstr "is maintained by the"
-
-msgid "plugins.generic.pfl.maintainedPKP"
-msgstr "Public Knowledge Project"
