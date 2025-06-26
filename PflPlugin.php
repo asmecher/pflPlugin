@@ -281,6 +281,16 @@ class PflPlugin extends GenericPlugin {
                 ? __('plugins.generic.pfl.competingInterests.no')
                 : __('plugins.generic.pfl.dataAvailability.unsupported'));
 
+        // Data Availability
+        $pflDataAvailabilityEnabled = $journal->getData('dataAvailability');
+        $dataAvailabilityStatement = $publication->getData('dataAvailability');
+        $pflDataAvailabilityValue = !empty($dataAvailabilityStatement[$publication->getData('locale')])
+            ? __('plugins.generic.pfl.dataAvailability.yes')
+            : ($pflDataAvailabilityEnabled
+                ? __('plugins.generic.pfl.dataAvailability.no')
+                : __('plugins.generic.pfl.dataAvailability.unsupported'));
+        $pflDataAvailabilityValueUrl = !empty($dataAvailabilityStatement[$publication->getData('locale')]) ? '#data-availability-statement' : null;
+
         // pflIndex as array:
         $pflIndexListTransformed = array_map(function($item, $url) {
             return [
@@ -322,8 +332,8 @@ class PflPlugin extends GenericPlugin {
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
                     'pflPeerReviewersUrl' => null, /* */
                     'pflPeerReviewers' => __('plugins.generic.pfl.dataAvailability.unsupported'), // N/A or empty if URL is available
-                    'pflDataAvailabilityValue' => __('plugins.generic.pfl.dataAvailability.unsupported'),
-                    'pflDataAvailabilityValueUrl' => null,
+                    'pflDataAvailabilityValue' => $pflDataAvailabilityValue,
+                    'pflDataAvailabilityValueUrl' => $pflDataAvailabilityValueUrl,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
                     'pflFundersValue' => $pflFundersValue,
                     'pflFundersCount' => $pflFundersValueUrl,
@@ -475,6 +485,11 @@ class PflPlugin extends GenericPlugin {
 
                 #funding-data:target,
                 #author-list:target {
+                    animation: pflflash 1s 1;
+                    -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
+                }
+
+                #data-availability-statement:target {
                     animation: pflflash 1s 1;
                     -webkit-animation: pflflash 1s 1; /* Safari and Chrome */
                 }
