@@ -200,6 +200,9 @@ msgstr "Sí"
 msgid "plugins.generic.pfl.competingInterests.no"
 msgstr "No"
 
+msgid "plugins.generic.pfl.competingInterests.unsupported"
+msgstr "N/D"
+
 msgid "plugins.generic.pfl.averagePercentYes"
 msgstr "{$num}%"
 

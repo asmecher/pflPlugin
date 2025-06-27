@@ -279,7 +279,7 @@ class PflPlugin extends GenericPlugin {
             ? __('plugins.generic.pfl.competingInterests.yes')
             : ($pflCompetingInterestsEnabled
                 ? __('plugins.generic.pfl.competingInterests.no')
-                : __('plugins.generic.pfl.dataAvailability.unsupported'));
+                : __('plugins.generic.pfl.competingInterests.unsupported'));
         $pflCompetingInterestsValueUrl = $competingInterests ? '#author-list' : null;
 
         // Data Availability
