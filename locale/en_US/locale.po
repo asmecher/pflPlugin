@@ -194,6 +194,9 @@ msgstr "{$num}"
 msgid "plugins.generic.pfl.competingInterests"
 msgstr "Competing interests"
 
+msgid "plugins.generic.pfl.competingInterests.unsupported"
+msgstr "N/A"
+
 msgid "plugins.generic.pfl.competingInterests.yes"
 msgstr "Yes"
 
