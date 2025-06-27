@@ -236,6 +236,3 @@ msgstr "To learn about these publication facts, click"
 msgid "plugins.generic.pfl.informationIcon"
 msgstr "Publication facts information page."
 
-msgid "plugins.generic.pfl.maintainedByPKP"
-msgstr "<b>PF</b> is maintained by the <a href=\"https://pkp.sfu.ca\" target=\"_blank\">Public Knowledge Project</a>"
-

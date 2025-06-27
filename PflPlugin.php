@@ -326,7 +326,6 @@ class PflPlugin extends GenericPlugin {
                     'publisher' => __('plugins.generic.pfl.publisher'),
                     'informationFooter' => __('plugins.generic.pfl.informationFooter'),
                     'informationIcon' => __('plugins.generic.pfl.informationIcon'),
-                    'maintainedByPKP' => __('plugins.generic.pfl.maintainedByPKP'),
                 ],
                 'values' => [
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
