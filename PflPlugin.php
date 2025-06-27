@@ -266,29 +266,29 @@ class PflPlugin extends GenericPlugin {
             $funders = $funderDao->getBySubmissionId($article->getId());
             $firstFunder = $funders->next();
 
-            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.funders.yes') : __('plugins.generic.pfl.funders.no');
+            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.yes') : __('plugins.generic.pfl.no');
             if ($firstFunder) $pflFundersValueUrl = '#funding-data';
         } else {
-            $pflFundersValue = __('plugins.generic.pfl.funders.no');
+            $pflFundersValue = __('plugins.generic.pfl.unsupported');
         }
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
         $pflCompetingInterestsValue = ($competingInterests) 
-            ? __('plugins.generic.pfl.competingInterests.yes')
+            ? __('plugins.generic.pfl.yes')
             : ($pflCompetingInterestsEnabled 
-                ? __('plugins.generic.pfl.competingInterests.no') 
-                : __('plugins.generic.pfl.competingInterests.unsupported'));
+                ? __('plugins.generic.pfl.no') 
+                : __('plugins.generic.pfl.unsupported'));
         $pflCompetingInterestsValueUrl = $competingInterests ? '#author-list' : null;
 
         // Data Availability
         $pflDataAvailabilityEnabled = $journal->getData('dataAvailability');
         $dataAvailabilityStatement = $publication->getData('dataAvailability');
         $pflDataAvailabilityValue = !empty($dataAvailabilityStatement[$publication->getData('locale')])
-            ? __('plugins.generic.pfl.dataAvailability.yes')
+            ? __('plugins.generic.pfl.yes')
             : ($pflDataAvailabilityEnabled
-                ? __('plugins.generic.pfl.dataAvailability.no')
-                : __('plugins.generic.pfl.dataAvailability.unsupported'));
+                ? __('plugins.generic.pfl.no')
+                : __('plugins.generic.pfl.unsupported'));
         $pflDataAvailabilityValueUrl = !empty($dataAvailabilityStatement[$publication->getData('locale')]) ? '#data-availability-statement' : null;
 
         // pflIndex as array:
@@ -331,7 +331,7 @@ class PflPlugin extends GenericPlugin {
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
                     'pflPeerReviewersUrl' => null, /* */
-                    'pflPeerReviewers' => __('plugins.generic.pfl.dataAvailability.unsupported'), // N/A or empty if URL is available
+                    'pflPeerReviewers' => __('plugins.generic.pfl.unsupported'), // N/A or empty if URL is available
                     'pflDataAvailabilityValue' => $pflDataAvailabilityValue,
                     'pflDataAvailabilityValueUrl' => $pflDataAvailabilityValueUrl,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
@@ -347,7 +347,7 @@ class PflPlugin extends GenericPlugin {
                     'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
                     'pflIndexList' => $pflIndexListTransformed,
                     'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialTeam'),
-                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.unsupported'),
                     'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
                     'pflPublisherUrl' => $journal->getData('publisherUrl'),

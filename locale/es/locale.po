@@ -194,13 +194,13 @@ msgstr "{$num}"
 msgid "plugins.generic.pfl.competingInterests"
 msgstr "Conflictos de interés"
 
-msgid "plugins.generic.pfl.competingInterests.yes"
+msgid "plugins.generic.pfl.yes"
 msgstr "Sí"
 
-msgid "plugins.generic.pfl.competingInterests.no"
+msgid "plugins.generic.pfl.no"
 msgstr "No"
 
-msgid "plugins.generic.pfl.competingInterests.unsupported"
+msgid "plugins.generic.pfl.unsupported"
 msgstr "N/D"
 
 msgid "plugins.generic.pfl.averagePercentYes"
@@ -212,23 +212,8 @@ msgstr "Declaraciones del autor/a"
 msgid "plugins.generic.pfl.dataAvailability"
 msgstr "Disponibilidad de los datos"
 
-msgid "plugins.generic.pfl.dataAvailability.unsupported"
-msgstr "N/D"
-
-msgid "plugins.generic.pfl.dataAvailability.yes"
-msgstr "Sí"
-
-msgid "plugins.generic.pfl.dataAvailability.no"
-msgstr "No"
-
 msgid "plugins.generic.pfl.funders"
 msgstr "Financiación externa"
-
-msgid "plugins.generic.pfl.funders.yes"
-msgstr "Sí"
-
-msgid "plugins.generic.pfl.funders.no"
-msgstr "No"
 
 msgid "plugins.generic.pfl.numHaveFunders"
 msgstr "{$num}%"
