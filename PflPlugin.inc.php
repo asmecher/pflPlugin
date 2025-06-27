@@ -269,19 +269,19 @@ class PflPlugin extends GenericPlugin {
 	    $funders = $funderDao->getBySubmissionId($article->getId());
 	    $firstFunder = $funders->next();
 
-            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.funders.yes') : __('plugins.generic.pfl.funders.no');
+            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.yes') : __('plugins.generic.pfl.no');
 	    if ($firstFunder) $pflFundersValueUrl = '#funding-data';
 	} else {
-	    $pflFundersValue = __('plugins.generic.pfl.funders.no');
+	    $pflFundersValue = __('plugins.generic.pfl.unsupported');
 	}
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
-        $pflCompetingInterestsValue = ($competingInterests) 
-            ? __('plugins.generic.pfl.competingInterests.yes')
-            : ($pflCompetingInterestsEnabled 
-                ? __('plugins.generic.pfl.competingInterests.no') 
-                : __('plugins.generic.pfl.competingInterests.unsupported'));
+        $pflCompetingInterestsValue = ($competingInterests)
+            ? __('plugins.generic.pfl.yes')
+            : ($pflCompetingInterestsEnabled
+                ? __('plugins.generic.pfl.no')
+                : __('plugins.generic.pfl.unsupported'));
         $pflCompetingInterestsValueUrl = $competingInterests ? '#author-list' : null;
 
         // pflIndex as array:
@@ -292,7 +292,7 @@ class PflPlugin extends GenericPlugin {
                 'url' => $url
             ];
         }, array_values($pflIndexList), array_keys($pflIndexList));
-        
+
         $templateMgr->assign([
             'pflData' => [
                 'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl",
@@ -318,14 +318,13 @@ class PflPlugin extends GenericPlugin {
                     'publisher' => __('plugins.generic.pfl.publisher'),
                     'informationFooter' => __('plugins.generic.pfl.informationFooter'),
                     'informationIcon' => __('plugins.generic.pfl.informationIcon'),
-                    
                 ],
                 'values' => [
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
                     'pflPeerReviewersUrl' => null, /* */
-                    'pflPeerReviewers' => __('plugins.generic.pfl.dataAvailability.unsupported'), // N/A or empty if URL is available
-                    'pflDataAvailabilityValue' => __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflPeerReviewers' => __('plugins.generic.pfl.unsupported'), // N/A or empty if URL is available
+                    'pflDataAvailabilityValue' => __('plugins.generic.pfl.unsupported'),
                     'pflDataAvailabilityValueUrl' => null,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
                     'pflFundersValue' => $pflFundersValue,
@@ -340,7 +339,7 @@ class PflPlugin extends GenericPlugin {
                     'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
                     'pflIndexList' => $pflIndexListTransformed,
                     'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialTeam'),
-                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.dataAvailability.unsupported'),
+                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.unsupported'),
                     'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
                     'pflPublisherUrl' => $journal->getData('publisherUrl'),
@@ -348,7 +347,7 @@ class PflPlugin extends GenericPlugin {
 
             ]
         ]);
-        
+
         $output .= $templateMgr->fetch($this->getTemplateResource('pfl.tpl'));
 
         return false;
@@ -464,11 +463,11 @@ class PflPlugin extends GenericPlugin {
     }
 
     /*
-    * Add pfl.js and inline css
-    *
-    * @param string $output
-    * @param TemplateManager $templateMgr
-    */  
+     * Add pfl.js and inline css
+     *
+     * @param string $output
+     * @param TemplateManager $templateMgr
+     */
     public function addPflJsAndCss($templateMgr) {
         $request = Application::get()->getRequest();
 
