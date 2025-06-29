@@ -11,16 +11,28 @@
 <section class="item pflPlugin">
 
 <publication-facts-label></publication-facts-label>
-<!-- Load the web component JavaScript -->
 <script>
-  // Wait for the component to be defined
-  window.addEventListener("DOMContentLoaded", () => {
-    const pfl = document.querySelector("publication-facts-label");
 
-    if(pfl) {
-      pfl.data = {$pflData|json_encode};
-    }
-  })
+window.addEventListener("DOMContentLoaded", () => {
+  var pflData = {$pflData|json_encode};
+  {literal}
+
+  const localeUrl = pflData.baseUrl + '/locale/' + pflData.locale + '.json';
+  fetch(localeUrl)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(labels) {
+      var pfl = document.querySelector('publication-facts-label');
+      pfl.data = Object.assign({}, pflData, {labels: labels});
+    })
+    .catch(function(err) {
+      console.warn('PFL: failed to load translations', err);
+    });
+  {/literal}
+
+  });
+
 </script>
 
 </section>
