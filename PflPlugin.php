@@ -15,7 +15,7 @@ namespace APP\plugins\generic\pflPlugin;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
-
+use PKP\facades\Locale;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
@@ -267,29 +267,29 @@ class PflPlugin extends GenericPlugin {
             $funders = $funderDao->getBySubmissionId($article->getId());
             $firstFunder = $funders->next();
 
-            $pflFundersValue = $firstFunder ? __('plugins.generic.pfl.yes') : __('plugins.generic.pfl.no');
+            $pflFundersValue = $firstFunder ? 'YES' : 'NO';
             if ($firstFunder) $pflFundersValueUrl = '#funding-data';
         } else {
-            $pflFundersValue = __('plugins.generic.pfl.unsupported');
+            $pflFundersValue = 'NA';
         }
 
         // Competing Interests
         $pflCompetingInterestsEnabled = $journal->getData('requireAuthorCompetingInterests');
         $pflCompetingInterestsValue = ($competingInterests)
-            ? __('plugins.generic.pfl.yes')
+            ? 'YES'
             : ($pflCompetingInterestsEnabled
-                ? __('plugins.generic.pfl.no')
-                : __('plugins.generic.pfl.unsupported'));
+                ? 'NO'
+                : 'NA');
         $pflCompetingInterestsValueUrl = $competingInterests ? '#author-list' : null;
 
         // Data Availability
         $pflDataAvailabilityEnabled = $journal->getData('dataAvailability');
         $dataAvailabilityStatement = $publication->getData('dataAvailability');
         $pflDataAvailabilityValue = !empty($dataAvailabilityStatement[$publication->getData('locale')])
-            ? __('plugins.generic.pfl.yes')
+            ? 'YES'
             : ($pflDataAvailabilityEnabled
-                ? __('plugins.generic.pfl.no')
-                : __('plugins.generic.pfl.unsupported'));
+                ? 'NO'
+                : 'NA');
         $pflDataAvailabilityValueUrl = !empty($dataAvailabilityStatement[$publication->getData('locale')]) ? '#data-availability-statement' : null;
 
         // pflIndex as array:
@@ -304,53 +304,31 @@ class PflPlugin extends GenericPlugin {
         $templateMgr->assign([
             'pflData' => [
                 'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl",
-                'labels' => [
-                    'publicationFacts' => __('plugins.generic.pfl.publicationFacts'),
-                    'metric' => __('plugins.generic.pfl.metric'),
-                    'thisArticle' => __('plugins.generic.pfl.thisArticle'),
-                    'otherArticles' => __('plugins.generic.pfl.otherArticles'),
-                    'peerReviewers' => __('plugins.generic.pfl.peerReviewers'),
-                    'reviewerProfiles' => __('plugins.generic.pfl.reviewerProfiles'),
-                    'authorStatements' => __('plugins.generic.pfl.authorStatements'),
-                    'dataAvailability' => __('plugins.generic.pfl.dataAvailability'),
-                    'funders' => __('plugins.generic.pfl.funders'),
-                    'competingInterests' => __('plugins.generic.pfl.competingInterests'),
-                    'forThisJournal' => __('plugins.generic.pfl.forThisJournal'),
-                    'otherJournals' => __('plugins.generic.pfl.otherJournals'),
-                    'articlesAccepted' => __('plugins.generic.pfl.articlesAccepted'),
-                    'daysToPublication' => __('plugins.generic.pfl.daysToPublication'),
-                    'indexedIn' => __('plugins.generic.pfl.indexedIn'),
-                    'editorAndBoard' => __('plugins.generic.pfl.editorAndBoard'),
-                    'profiles' => __('plugins.generic.pfl.profiles'),
-                    'academicSociety' => __('plugins.generic.pfl.academicSociety'),
-                    'publisher' => __('plugins.generic.pfl.publisher'),
-                    'informationFooter' => __('plugins.generic.pfl.informationFooter'),
-                    'informationIcon' => __('plugins.generic.pfl.informationIcon'),
-                ],
+                'locale' =>  Locale::getLocale(),
                 'values' => [
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
                     'pflPeerReviewersUrl' => null, /* */
-                    'pflPeerReviewers' => __('plugins.generic.pfl.unsupported'), // N/A or empty if URL is available
                     'pflDataAvailabilityValue' => $pflDataAvailabilityValue,
                     'pflDataAvailabilityValueUrl' => $pflDataAvailabilityValueUrl,
-                    'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
+                    'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.percentage', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
                     'pflFundersValue' => $pflFundersValue,
                     'pflFundersCount' => $pflFundersValueUrl,
-                    'pflNumHaveFundersClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumHaveFundersClass']]),
+                    'pflNumHaveFundersClass' => __('plugins.generic.pfl.percentage', ['num' => $statistics['pflNumHaveFundersClass']]),
                     'pflCompetingInterestsValue' => $pflCompetingInterestsValue,
                     'pflCompetingInterestsValueUrl' => $pflCompetingInterestsValueUrl,
-                    'pflCompetingInterestsPercentClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflCompetingInterestsPercentClass']]),
-                    'pflAcceptedPercent' => __('plugins.generic.pfl.averagePercentYes', ['num' => $acceptanceRate]),
-                    'pflNumAcceptedClass' => __('plugins.generic.pfl.averagePercentYes', ['num' => $statistics['pflNumAcceptedClass']]),
+                    'pflCompetingInterestsPercentClass' => __('plugins.generic.pfl.percentage', ['num' => $statistics['pflCompetingInterestsPercentClass']]),
+                    'pflAcceptedPercent' => __('plugins.generic.pfl.percentage', ['num' => $acceptanceRate]),
+                    'pflNumAcceptedClass' => __('plugins.generic.pfl.percentage', ['num' => $statistics['pflNumAcceptedClass']]),
                     'pflDaysToPublication' => $publicationDate->diff($submissionDate)->format('%a'),
                     'pflDaysToPublicationClass' =>  $statistics['pflNumAcceptedClass'],
                     'pflIndexList' => $pflIndexListTransformed,
                     'editorialTeamUrl' => $router->url($request, null, 'about', 'editorialMasthead'),
-                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? __('plugins.generic.pfl.unsupported'),
+                    'pflAcademicSociety' => $this->getSetting($journal->getId(), 'academicSociety') ?? 'NA',
                     'pflAcademicSocietyUrl' => $this->getSetting($journal->getId(), 'academicSocietyUrl'),
                     'pflPublisherName' =>$journal->getData('publisherInstitution'),
                     'pflPublisherUrl' => $journal->getData('publisherUrl'),
+                    'pflInfoUrl' => 'https://pkp.sfu.ca/information-on-pfl/'
                 ]
             ]
         ]);
@@ -508,6 +486,10 @@ class PflPlugin extends GenericPlugin {
 
             EOD;
 
+        $templateMgr->addHeader(
+            'pfl_locale',
+            '<link rel="preload" href="'. $pflPath .'locale/'. Locale::getLocale() .'.json" as="fetch" crossorigin="anonymous">'
+        );
 
         $templateMgr->addStyleSheet(
             'fadeout',
