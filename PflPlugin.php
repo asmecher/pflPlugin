@@ -308,7 +308,6 @@ class PflPlugin extends GenericPlugin {
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
                     'pflPeerReviewersUrl' => null, /* */
-                    'pflPeerReviewers' => 'NA',
                     'pflDataAvailabilityValue' => $pflDataAvailabilityValue,
                     'pflDataAvailabilityValueUrl' => $pflDataAvailabilityValueUrl,
                     'pflDataAvailabilityPercentClass' => __('plugins.generic.pfl.percentage', ['num' => $statistics['pflDataAvailabilityPercentClass']]),
