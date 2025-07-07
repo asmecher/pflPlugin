@@ -48,6 +48,17 @@ class PflPlugin extends GenericPlugin {
         return __('plugins.generic.pfl.description');
     }
 
+    function getLabelLocale() {
+        $localeMap = [
+            'en_US' => 'en',
+            'es_ES' => 'es',
+        ];
+        $locale = AppLocale::getLocale();
+        $locale = $localeMap[$locale] ?? $locale;
+        if (!file_exists(dirname(__FILE__) . "/pfl/locale/$locale.json")) $locale = 'en';
+        return $locale;
+    }
+
     /**
      * Get the number of published reviewable submissions for a given journal.
      * @param $journalId int
@@ -296,7 +307,7 @@ class PflPlugin extends GenericPlugin {
         $templateMgr->assign([
             'pflData' => [
                 'baseUrl' => "{$request->getBaseUrl()}/{$this->getPluginPath()}/pfl",
-                'locale' =>  AppLocale::getLocale(),
+                'locale' => $this->getLabelLocale(),
                 'values' => [
                     'pflReviewerCount' => $this->getReviewerCount($article->getId()),
                     'pflReviewerCountClass' => round($this->getReviewerAverage($journal->getId(), $dateStart), 1),
@@ -490,7 +501,7 @@ class PflPlugin extends GenericPlugin {
 
         $templateMgr->addHeader(
             'pfl_locale', 
-            '<link rel="preload" href="'. $pflPath .'locale/'. AppLocale::getLocale() .'.json" as="fetch" crossorigin="anonymous">'
+            '<link rel="preload" href="'. $pflPath .'locale/' . $this->getLabelLocale() .'.json" as="fetch" crossorigin="anonymous">'
         );
     
 
