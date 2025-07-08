@@ -17,6 +17,111 @@ msgstr "Módulo Publication Facts Label"
 msgid "plugins.generic.pfl.description"
 msgstr "Este módulo agrega un bloque en la barra lateral con estadísticas para indicar a los lectores/as las características de integridad de la revista."
 
+msgid "plugins.generic.pfl.metric"
+msgstr "Métrico"
+
+msgid "plugins.generic.pflPlugin.settings.journal"
+msgstr "Información de la revista"
+
+msgid "plugins.generic.pflPlugin.settings.excludePrior"
+msgstr "Excluir por fecha"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart"
+msgstr "Fecha de inicio"
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.description"
+msgstr "Si su revista no utilizaba el flujo editorial de OJS antes de una fecha concreta, especifíquela aquí para excluir los envíos previos a dicha fecha de la recolección de estadísticas. Publication Facts Label no se mostrará en los envíos anteriores a esta fecha."
+
+msgid "plugins.generic.pflPlugin.settings.dateStart.invalid"
+msgstr "Compruebe que la fecha de inicio especificada es válida."
+
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl"
+msgstr "URL"
+
+msgid "plugins.generic.pflPlugin.settings.academicSocietyUrl.invalid"
+msgstr "La URL de la sociedad académica no es válida. Asegúrese de que la URL esté completa y tenga el formato correcto."
+
+msgid "plugins.generic.pflPlugin.fundingPluginMissing"
+msgstr "Falta el módulo Funding"
+
+msgid "plugins.generic.pflPlugin.fundingPluginMissing.description"
+msgstr "El módulo Funding no está instalado ni activado. Para que Publication Facts Label muestre los datos de financiación, este módulo deberá estar instalado y activo, y cada envío deberá contar con los datos pertinentes. Compruebe la galería de módulos para localizarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes"
+msgstr "Listados de indexación de la revista"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.description"
+msgstr "Bajo el título \"Indexada en\" de Publication Facts Label (PFL), los lectores/as encontrarán hasta cuatro índices en los que aparece la revista. Cuatro de los índices que aparecen a continuación ofrecen una amplia cobertura, mientras que MEDLINE cubre las ciencias de la salud y Latindex abarca Latinoamérica (ver información más abajo). Los índices permiten que su listado de revistas se muestre públicamente (incluso cuando el índice esté cerrado). Dos de los índices pueden comprobarse automáticamente, pero los otros cuatro requieren que busque la revista en el índice y, si la encuentra, la añada a PFL."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic"
+msgstr "Listado automático de índices en PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj"
+msgstr "Directory of Open Access Journals"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.doaj.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en DOAJ. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.scholar"
+msgstr "Google Scholar"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline"
+msgstr "MEDLINE"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.medline.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en MEDLINE. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex"
+msgstr "Latindex"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.automatic.latindex.validationFailed"
+msgstr "No se ha podido verificar la indexación de la revista en Latindex. Asegúrese de que su revista esté indexada y de que el ISSN esté bien configurado en los ajustes de la revista."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual"
+msgstr "Listado manual de índices en PFL"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus"
+msgstr "<strong>Scopus</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Scopus\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.urlInvalid"
+msgstr "La URL de Scopus introducida no es correcta. Lea las instrucciones y vuelva a intentarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step1"
+msgstr "Vaya a la página <a href=\"https://www.scopus.com/sources.uri?zone=TopNavBar&origin=\" target=\"_new\">Fuentes</a> de Scopus y seleccione \"Title\" en el menú desplegable."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step2"
+msgstr "Introduzca el título de la revista y, si está indexada, aparecerá como \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step3"
+msgstr "Haga clic en el título y copie la URL de la página aquí:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.scopus.step4"
+msgstr "Si la revista no está indexada, consulte el <a target=\"_new\" href=\"https://www.elsevier.com/solutions/scopus/how-scopus-works/content/content-policy-and-selection\">proceso</a> que hay que seguir para su inclusión."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos"
+msgstr "<strong>Web of Science</strong> (<a target=\"_new\" href=\"https://en.wikipedia.org/wiki/Web_of_Science\">Info</a>)"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.urlInvalid"
+msgstr "La URL de Web of Science introducida no es correcta. Lea las instrucciones y vuelva a intentarlo."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step1"
+msgstr "Vaya a la página de <a href=\"https://mjl.clarivate.com/search-results\" target=\"_new\">Web of Science</a> e introduzca el nombre de la revista en la caja de búsqueda."
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step2"
+msgstr "Si la revista está indexada en Web of Science aparecerá como \"Result.\""
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step3"
+msgstr "Copie la URL desde \"Share This Journal\" y péguela aquí:"
+
+msgid "plugins.generic.pflPlugin.settings.indexes.manual.wos.step4"
+msgstr "Si la revista no está indexada, consulte el <a target=\"_new\" href=\"https://clarivate.com/products/scientific-and-academic-research/research-discovery-and-workflow-solutions/webofscience-platform/web-of-science-core-collection/editorial-selection-process/\">proceso</a> que hay que seguir para su inclusión."
+
 msgid "plugins.generic.pfl.percentage"
 msgstr "{$num}%"
+
+msgid "plugins.generic.pfl.academicSociety"
+msgstr "Sociedad"
+
+msgid "plugins.generic.pfl.academicSociety.fieldLabel"
+msgstr "Nombre de la sociedad o acrónimo (límite de 18 caracteres incluyendo espacios)"
 
